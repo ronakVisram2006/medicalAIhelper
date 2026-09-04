@@ -1,0 +1,22 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+.logo{
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+}
+.grid1 , .grid2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    text-align: center;
+}
+
+.hero{
+    text-align: center;
+    
+}

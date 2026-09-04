@@ -1,8 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medical AI Helper</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
 <body>
 
     <header class="navbar">
         <div class="logo">Medical AI</div>
 
+        <nav>
+            <a href="#">About</a>
+        </nav>
     </header>
 
 
@@ -17,19 +32,25 @@
             </p>
         </section>
 
+    <div class="grid1">
 
         <section class="upload-section">
 
             <h2>Upload your document</h2>
 
-            <input type="file" id="pdf-upload" accept=".pdf">
+            <input 
+                type="file" 
+                id="pdf-upload" 
+                accept=".pdf"
+            >
 
             <button id="upload-button">
                 Choose PDF
             </button>
 
         </section>
-
+    </div>
+    <div class="grid2">
 
         <section class="chat-section">
 
@@ -37,8 +58,8 @@
 
             <div class="question-box">
 
-                <input
-                    type="text"
+                <input 
+                    type="text" 
                     id="question"
                     placeholder="What would you like to know?"
                 >
@@ -50,6 +71,7 @@
             </div>
 
         </section>
+     </div>
 
 
         <section class="answer-section">
@@ -65,8 +87,8 @@
     </main>
 
 
-
-
     <script src="script.js"></script>
 
 </body>
+
+</html>
