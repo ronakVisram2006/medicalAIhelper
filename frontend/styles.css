@@ -1,15 +1,17 @@
 .navbar {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
     background-color: #f8f9fa;
     padding: 1rem;
-}
+}   
 .logo{
+    grid-column:2;
     font-size: 3rem;
     font-weight: bold;
     text-align: center;
 }
-.grid1 , .grid2{
+.grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -18,5 +20,31 @@
 
 .hero{
     text-align: center;
-    
+}
+
+.answer-section{
+    text-align: center;
+    padding: 1rem;
+}
+
+nav {
+    grid-column: 3;
+    justify-self: end;
+}
+
+nav a {
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+
+.upload-section{
+    background-color: #f8f9fa;
+    padding-top: 11rem;
+    padding-bottom: 11rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 2rem;
+    border-radius: 10%;
 }
