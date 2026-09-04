@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medical AI Helper</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">Medical AI</div>
+            <nav class="nav-links">
+                <a href="#">About</a>
+            </nav>
+    </header>
+
+
+    <main>
+        <section class="hero">
+            <h1>Understand your medical documents.</h1>
+
+            <p>
+                Upload a medical document and ask questions
+                about it in simple, understandable language.
+            </p>
+        </section>
+
+   <div class="grid">
+
+        <section class="upload-section">
+
+            <h2>Upload your document</h2>
+
+            <input 
+                type="file" 
+                id="pdf-upload" 
+                accept=".pdf"
+            >
+
+            <label for="pdf-upload" class="upload-box">
+                <span class="upload-icon">↑</span>
+                <span class="upload-text">Click to upload your PDF</span>
+                <span class="upload-subtext">PDF files only</span>
+            </label>
+
+            <button id="upload-button">
+                Upload PDF
+            </button>
+
+        </section>
+
+        <section class="chat-section">
+
+            <h2>Ask about your document</h2>
+
+            <div class="question-box">
+
+                <input 
+                    type="text" 
+                    id="question"
+                    placeholder="What would you like to know?"
+                >
+
+                <button id="ask-button">
+                    Ask
+                </button>
+
+            </div>
+
+        </section>
+    </div>
+
+        <section class="answer-section">
+
+            <h2>AI Answer</h2>
+
+            <div id="answer">
+                Your answer will appear here.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
