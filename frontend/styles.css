@@ -53,6 +53,49 @@ nav a:hover {
 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
+.upload-section input[type="file"] {
+    display: none;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 180px;
+    width: 100%;
+
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+
+    background-color: #f8fafc;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.upload-box:hover {
+    border-color: #2563eb;
+    background-color: #f1f5ff;
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.upload-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.upload-subtext {
+    margin-top: 0.4rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
 
 .upload-section h2 {
     margin-top: 0;
@@ -61,19 +104,7 @@ nav a:hover {
     font-size: 1.5rem;
 }
 
-.upload-section input[type="file"] {
-    display: block;
-    width: 96%;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
 
-    border: 2px dashed #cbd5e1;
-    border-radius: 12px;
-    background-color: #f8fafc;
-    
-
-    cursor: pointer;
-}
 
 .upload-section button {
     margin-top:4rem;
@@ -96,4 +127,10 @@ nav a:hover {
 .upload-section button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.upload-icon img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
 }
