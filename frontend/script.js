@@ -62,8 +62,8 @@ uploadButton.addEventListener('click', async function() {
 
     const result = await response.json();
         statusIcon.classList.remove("loading");
-        statusIcon.textContent = "✔️";
-        statusText.textContent = "File successfully read";
+        statusIcon.innerHTML = '<img src="images/pdf.png" alt="Success">';
+        statusText.textContent = `Succesfully Uploaded and Read PDF: ${result.filename}`;
 
         const pdfSummary = document.getElementById('pdf-summary');
         pdfSummary.style.display = "block";
@@ -80,6 +80,9 @@ uploadButton.addEventListener('click', async function() {
 
         document.getElementById('summary-words').textContent =
             `Total words: ${totalWords}`;
+
+        document.getElementsByClassName('upload-container')[0].style.display = "none";
+
 
     } catch (error) {
         statusIcon.classList.remove("loading");
