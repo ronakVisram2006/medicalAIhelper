@@ -35,3 +35,22 @@ pdfUpload.addEventListener('change', function() {
 
     
 });
+uploadButton.addEventListener('click', async function() {
+    if (!pdfUpload.files[0]) {
+        alert('Please select a PDF file before uploading.');
+        return;
+    }
+
+    const formData = new FormData();
+
+    formData.append('file', pdfUpload.files[0]);
+
+    const response = fetch("http://127.0.0.1:8000/upload", {
+        method: 'POST',
+        body: formData
+    });
+
+    const result = await response .json();
+
+    console.log(result);
+});
