@@ -45,12 +45,12 @@ uploadButton.addEventListener('click', async function() {
 
     formData.append('file', pdfUpload.files[0]);
 
-    const response = fetch("http://127.0.0.1:8000/upload", {
+    const response = await fetch("http://127.0.0.1:8000/upload", {
         method: 'POST',
         body: formData
     });
 
-    const result = await response .json();
+    const result = await response.json();
 
     console.log(result);
 });
