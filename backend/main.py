@@ -1,4 +1,7 @@
 import fitz  
+import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 import tempfile
@@ -29,7 +32,8 @@ def extract_text_from_pdf(file_path):
 
 DOCUMENT_STORE = {
     "full_text": "",
-    "pages": []
+    "pages": [],
+    "sentences": []
     
 }
 
@@ -39,12 +43,16 @@ async def upload_pdf(file: UploadFile = File(...)):
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
         tmp.write(await file.read())
         tmp_path = tmp.name
-
+        
+    print("starting PDF extraction...")
     pages = extract_text_from_pdf(tmp_path)
+    print("Finished PDF extraction.")
     
     full_text = "\n".join([p["text"] for p in pages])
     DOCUMENT_STORE["full_text"] = full_text
     DOCUMENT_STORE["pages"] = pages
+    sentences = nltk.sent_tokenize(full_text)
+    DOCUMENT_STORE["sentences"] = sentences
     
 
     return {
@@ -61,3 +69,8 @@ def ask_question(payload: dict):
     answer = f"You asked: {question}. I will analyse the document soon."
 
     return {"answer": answer}
+
+
+@app.get("/export_sentences")
+def export_sentences():
+    return DOCUMENT_STORE["sentences"]
