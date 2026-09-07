@@ -41,16 +41,49 @@ uploadButton.addEventListener('click', async function() {
         return;
     }
 
+    const uploadStatus = document.getElementById('upload-status');
+    const statusIcon = document.getElementById('status-icon');
+    const statusText = document.getElementById('status-text');
+
+    uploadStatus.style.display = "block";
+    statusIcon.textContent = "⏳";
+    statusIcon.classList.add("loading");
+    statusText.textContent = "Uploading and reading PDF...";
+
     const formData = new FormData();
 
     formData.append('file', pdfUpload.files[0]);
 
-    const response = await fetch("http://127.0.0.1:8000/upload", {
+    try{
+        const response = await fetch("http://127.0.0.1:8000/upload", {
         method: 'POST',
         body: formData
     });
 
     const result = await response.json();
+        statusIcon.classList.remove("loading");
+        statusIcon.textContent = "✔️";
+        statusText.textContent = "File successfully read";
 
-    console.log(result);
+        const pdfSummary = document.getElementById('pdf-summary');
+        pdfSummary.style.display = "block";
+
+        const pages = result.pages;
+        let totalWords = 0;
+
+        pages.forEach(page => {
+            totalWords += page.text.trim().split(/\s+/).length;
+        });
+
+        document.getElementById('summary-pages').textContent =
+            `Number of pages: ${pages.length}`;
+
+        document.getElementById('summary-words').textContent =
+            `Total words: ${totalWords}`;
+
+    } catch (error) {
+        statusIcon.classList.remove("loading");
+        statusIcon.textContent = "❌";
+        statusText.textContent = "Failed to read PDF";
+    }
 });
