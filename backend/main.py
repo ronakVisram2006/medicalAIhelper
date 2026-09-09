@@ -5,6 +5,8 @@ nltk.download('punkt_tab')
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 import tempfile
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
 
 app = FastAPI()
 
@@ -14,6 +16,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+model_path = "./final_medical_classifier"
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+model = AutoModelForSequenceClassification.from_pretrained(model_path)
+
+DOCUMENT_STORE = {
+    "full_text": "",
+    "pages": [],
+    "sentences": []
+}
 
 def extract_text_from_pdf(file_path):
     doc = fitz.open(file_path)
@@ -30,12 +42,6 @@ def extract_text_from_pdf(file_path):
     return pages
 
 
-DOCUMENT_STORE = {
-    "full_text": "",
-    "pages": [],
-    "sentences": []
-    
-}
 
 
 @app.post("/upload")
@@ -59,6 +65,14 @@ async def upload_pdf(file: UploadFile = File(...)):
         "filename": file.filename,
         "pages": pages
     }
+    
+@app.post("/classify")
+def classify_text(payload: dict):
+    sentence = payload["sentence"]
+    inputs = tokenizer(sentence, return_tensors="pt", truncation=True, padding="max_length", max_length=128)
+    outputs = model(**inputs)
+    predicted_class_id = torch.argmax(outputs.logits, dim=1).item()
+    return {"label": model.config.id2label[predicted_class_id]}
 
 
 @app.post("/ask")
