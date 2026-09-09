@@ -1,6 +1,9 @@
 import pandas as pd
 from datasets import Dataset
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+from transformers import (
+    AutoTokenizer, AutoModelForSequenceClassification,
+    TrainingArguments, Trainer, DataCollatorWithPadding
+)
 import numpy as np
 from sklearn.metrics import classification_report
 
@@ -33,7 +36,7 @@ model_name = "distilbert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 def tokenize(batch):
-    return tokenizer(batch["sentence"], truncation=True, padding="max_length", max_length=128)
+    return tokenizer(batch["sentence"], truncation=True, max_length=64)
 
 dataset = dataset.map(tokenize, batched=True)
 dataset = dataset.remove_columns(["sentence"])
@@ -41,6 +44,8 @@ dataset = dataset.remove_columns(["sentence"])
 dataset = dataset.train_test_split(test_size=0.1)
 train_dataset = dataset["train"]
 test_dataset = dataset["test"]
+
+data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
 model = AutoModelForSequenceClassification.from_pretrained(
     model_name,
@@ -51,18 +56,24 @@ model = AutoModelForSequenceClassification.from_pretrained(
 
 training_args = TrainingArguments(
     output_dir="./model",
-    eval_strategy="epoch",
+    eval_strategy="no",       
     save_strategy="epoch",
     learning_rate=2e-5,
-    per_device_train_batch_size=16,
-    per_device_eval_batch_size=16,
-    num_train_epochs=4,
+    per_device_train_batch_size=32,
+    per_device_eval_batch_size=32,
+    num_train_epochs=2,
     weight_decay=0.01,
 )
 
 def compute_metrics(pred):
     preds = np.argmax(pred.predictions, axis=1)
-    report = classification_report(pred.label_ids, preds, target_names=label_list, output_dict=True)
+    report = classification_report(
+        pred.label_ids, preds,
+        labels=list(range(len(label_list))),
+        target_names=label_list,
+        output_dict=True,
+        zero_division=0,
+    )
     return {"accuracy": report["accuracy"]}
 
 trainer = Trainer(
@@ -70,10 +81,15 @@ trainer = Trainer(
     args=training_args,
     train_dataset=train_dataset,
     eval_dataset=test_dataset,
+    data_collator=data_collator,
     compute_metrics=compute_metrics,
 )
 
 trainer.train()
 
+metrics = trainer.evaluate()
+print("Final eval metrics:", metrics)
+
 trainer.save_model("./final_medical_classifier")
 tokenizer.save_pretrained("./final_medical_classifier")
+print("Model saved to ./final_medical_classifier")
