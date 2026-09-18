@@ -51,25 +51,22 @@ def extract_text_from_pdf(file_path):
 
 @app.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-        tmp.write(await file.read())
-        tmp_path = tmp.name
-        
-    print("starting PDF extraction...")
-    pages = extract_text_from_pdf(tmp_path)
-    print("Finished PDF extraction.")
-    
-    full_text = "\n".join([p["text"] for p in pages])
-    DOCUMENT_STORE["full_text"] = full_text
-    DOCUMENT_STORE["pages"] = pages
-    sentences = nltk.sent_tokenize(full_text)
-    DOCUMENT_STORE["sentences"] = sentences
-    
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+            tmp.write(await file.read())
+            tmp_path = tmp.name
 
-    return {
-        "filename": file.filename,
-        "pages": pages
-    }
+        pages = extract_text_from_pdf(tmp_path)
+        full_text = "\n".join([p["text"] for p in pages])
+        DOCUMENT_STORE["full_text"] = full_text
+        DOCUMENT_STORE["pages"] = pages
+        DOCUMENT_STORE["sentences"] = nltk.sent_tokenize(full_text)
+
+        return {"filename": file.filename, "pages": pages}
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            os.remove(tmp_path)
     
 @app.post("/classify")
 def classify_text(payload: dict):
@@ -100,8 +97,12 @@ def retrieve_relevant_sentences(question: str, top_k: int = 15):
 
     return top if top else sentences[:top_k]
 
+
 @app.post("/ask")
 def ask_question(payload: dict):
+    if not DOCUMENT_STORE["sentences"]:
+        return {"answer": "No document has been uploaded yet. Please upload a PDF first."}
+    
     question = payload["question"]
     text = DOCUMENT_STORE["full_text"]
     relevant_sentences = retrieve_relevant_sentences(question, top_k=15)
