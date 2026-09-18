@@ -7,6 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 import tempfile
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
+import os
+from openai import OpenAI   
+
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
 
 app = FastAPI()
 
@@ -75,13 +80,53 @@ def classify_text(payload: dict):
     return {"label": model.config.id2label[predicted_class_id]}
 
 
+
+
+def retrieve_relevant_sentences(question: str, top_k: int = 15):
+    sentences = DOCUMENT_STORE["sentences"]
+    if not sentences:
+        return []
+
+    q_words = set(question.lower().split())
+    scored = []
+    for s in sentences:
+        s_words = set(s.lower().split())
+        overlap = len(q_words & s_words)
+        if overlap > 0:
+            scored.append((overlap, s))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+    top = [s for _, s in scored[:top_k]]
+
+    return top if top else sentences[:top_k]
+
 @app.post("/ask")
 def ask_question(payload: dict):
     question = payload["question"]
     text = DOCUMENT_STORE["full_text"]
+    relevant_sentences = retrieve_relevant_sentences(question, top_k=15)
+    context = "\n".join(relevant_sentences)
 
-    answer = f"You asked: {question}. I will analyse the document soon."
+    response = client.chat.completions.create(
+        model="gpt-4o", 
+        max_tokens=500,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a medical document assistant. Answer the user's "
+                    "question using ONLY the provided document excerpts. If the "
+                    "answer isn't in the excerpts, say so clearly."
+                ),
+            },
+            {
+                "role": "user",
+                "content": f"Document excerpts:\n{context}\n\nQuestion: {question}",
+            },
+        ],
+    )
 
+    answer = response.choices[0].message.content
     return {"answer": answer}
 
 

@@ -17,6 +17,10 @@ valid_labels = {
     "OTHER", "SYMPTOM", "HISTORY", "MEDICATION_INSTRUCTION",
     "LAB_RESULT", "DIAGNOSIS", "FOLLOW_UP"
 }
+
+print(f"Total rows: {len(df)}")
+print(df['label'].value_counts())
+
 bad_rows = df[~df['label'].isin(valid_labels)]
 if len(bad_rows) > 0:
     print(f"Dropping {len(bad_rows)} rows with unexpected labels:")
@@ -56,13 +60,15 @@ model = AutoModelForSequenceClassification.from_pretrained(
 
 training_args = TrainingArguments(
     output_dir="./model",
-    eval_strategy="no",       
-    save_strategy="no",
+    eval_strategy="epoch",       
+    save_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=32,
     per_device_eval_batch_size=32,
-    num_train_epochs=2,
+    num_train_epochs=5,
     weight_decay=0.01,
+    load_best_model_at_end=True,
+    metric_for_best_model="accuracy",
 )
 
 def compute_metrics(pred):
@@ -84,6 +90,7 @@ trainer = Trainer(
     data_collator=data_collator,
     compute_metrics=compute_metrics,
 )
+
 
 trainer.train()
 
