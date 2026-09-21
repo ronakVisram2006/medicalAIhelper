@@ -4,6 +4,8 @@ const uploadBox = document.querySelector('.upload-box');
 
 const uploadButton = document.getElementById('upload-button');
 
+const askButton = document.getElementById('ask-button');
+
 pdfUpload.addEventListener('change', function() {
 
     const file = pdfUpload.files[0];
@@ -88,5 +90,34 @@ uploadButton.addEventListener('click', async function() {
         statusIcon.classList.remove("loading");
         statusIcon.textContent = "❌";
         statusText.textContent = "Failed to read PDF";
+    }
+});
+askButton.addEventListener('click', async function() {
+
+    const questionInput = document.getElementById('question');
+    const question = questionInput.value;
+
+    if (!question) {
+        alert('Please enter a question.');
+        return;
+    }
+    if (!pdfUpload.files[0]) {
+        alert('Please upload a PDF file before asking a question.');
+        return;
+    }
+    try {
+        const response = await fetch("http://127.0.0.1:8000/ask", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ question })
+        });
+
+        const result = await response.json();
+        document.getElementById('answer').textContent = result.answer;
+    } catch (error) {
+        document.getElementById('answer').textContent = "Failed to get answer";
+
     }
 });

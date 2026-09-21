@@ -1,0 +1,1055 @@
+sentence,label
+"Riverside General Hospital 123 Wellness Ave, Springfield, ST 00000 | (555) 010-2938 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Clinical Consultation Report Patient Name: Jordan A.",OTHER
+"Sample Date of Birth: 04/12/1985 Patient ID: SYN-0001-TEST Sex: Female Date of Visit: September 02, 2026 Attending Physician: Dr. Alex Rivera, MD Department: Internal Medicine Report Date: September 03, 2026",OTHER
+"Chief Complaint Patient presents with a two-week history of intermittent fatigue, mild shortness of breath on exertion, and occasional dizziness.",SYMPTOM
+No chest pain reported.,SYMPTOM
+History of Present Illness The patient is a 41-year-old female with a past medical history of mild hypertension who reports gradual onset of fatigue beginning approximately two weeks ago.,HISTORY
+She notes the fatigue is worse in the afternoons and is accompanied by occasional lightheadedness when standing quickly.,SYMPTOM
+"She denies fever, night sweats, unintentional weight loss, or palpitations.",SYMPTOM
+She has not started any new medications recently and reports no significant changes in diet or sleep.,HISTORY
+"Hypertension, diagnosed 2021, well controlled on medication.",HISTORY
+No prior surgeries.,HISTORY
+No known drug allergies.,HISTORY
+"Lisinopril 10 mg once daily.",MEDICATION_INSTRUCTION
+"Multivitamin 1 tablet once daily.",MEDICATION_INSTRUCTION
+"Blood Pressure 128/82 mmHg.",LAB_RESULT
+"Heart Rate 78 bpm.",LAB_RESULT
+"Respiratory Rate 16 breaths/min.",LAB_RESULT
+"Temperature 98.4 F (36.9 C).",LAB_RESULT
+"Oxygen Saturation 98%.",LAB_RESULT
+"Weight 68 kg.",LAB_RESULT
+"Hemoglobin 10.8 g/dL (LOW).",LAB_RESULT
+"Hematocrit 33% (LOW).",LAB_RESULT
+"White Blood Cell Count 6.8 x10^9/L (Normal).",LAB_RESULT
+"Platelet Count 250 x10^9/L (Normal).",LAB_RESULT
+"Fasting Glucose 92 mg/dL (Normal).",LAB_RESULT
+"TSH 2.1 uIU/mL (Normal).",LAB_RESULT
+"Ferritin 14 ng/mL (LOW).",LAB_RESULT
+"Findings are consistent with mild iron-deficiency anemia.",DIAGNOSIS
+Blood pressure remains within an acceptable range on current antihypertensive therapy.,DIAGNOSIS
+No acute cardiopulmonary findings on exam.,DIAGNOSIS
+Begin oral iron supplementation (ferrous sulfate 325 mg once daily with food).,MEDICATION_INSTRUCTION
+"Recheck hemoglobin, hematocrit, and ferritin in 6 weeks.",FOLLOW_UP
+Continue current hypertension management; recheck blood pressure at next visit.,FOLLOW_UP
+"Advised to increase dietary iron intake (leafy greens, lean red meat, legumes).",MEDICATION_INSTRUCTION
+"Return to clinic sooner if symptoms worsen, or if she experiences chest pain, fainting, or severe shortness of breath.",FOLLOW_UP
+"Follow-up appointment scheduled for October 15, 2026, at 10:30 AM.",FOLLOW_UP
+"Electronically signed by: Dr. Alex Rivera, MD — Internal Medicine Disclaimer: This document is entirely fictional and was generated for the sole purpose of testing document-processing software (e.g., PDF text extraction, sentence tokenization, and question-answering pipelines).",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Heartland Cardiology Associates 900 Ridgeview Parkway, Suite 4B | Lakeside, ST 00000 | Tel: (555) 340-1187 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Cardiology Consultation Report",OTHER
+"Patient Name: Marcus T. Reyes DOB: 11/22/1968 Patient ID: SYN-0002-TEST Sex: Male Date of Visit: August 14, 2026 Attending Physician: Dr. Elena Kowalski, MD Department: Cardiology",OTHER
+Chief Complaint: Patient presents with intermittent exertional chest tightness over the past month.,SYMPTOM
+"He describes the discomfort as a pressure-like sensation across the mid-chest, lasting 2-5 minutes, brought on by climbing stairs or brisk walking.",SYMPTOM
+Symptoms are relieved with rest.,SYMPTOM
+"He denies pain at rest, radiation to the jaw or arm, diaphoresis, or syncope.",SYMPTOM
+"History of Present Illness: Mr. Reyes is a 57-year-old male with a history of hyperlipidemia and a 20-pack-year smoking history, quit 5 years ago.",HISTORY
+"He reports a family history significant for coronary artery disease in his father, who had a myocardial infarction at age 60.",HISTORY
+No prior cardiac catheterization or intervention.,HISTORY
+Currently takes atorvastatin 40 mg nightly and aspirin 81 mg daily.,MEDICATION_INSTRUCTION
+No known drug allergies.,HISTORY
+Vital signs and resting ECG were within normal limits at today's visit.,LAB_RESULT
+Troponin I was undetectable at 0.01 ng/mL.,LAB_RESULT
+"Lipid panel showed LDL of 142 mg/dL and HDL of 38 mg/dL, both outside goal range.",LAB_RESULT
+"Given the pattern of exertional symptoms relieved by rest, findings are concerning for stable angina secondary to underlying coronary artery disease.",DIAGNOSIS
+Hyperlipidemia remains inadequately controlled despite current statin therapy.,DIAGNOSIS
+No evidence of acute coronary syndrome on today's presentation.,DIAGNOSIS
+Increase atorvastatin to 80 mg nightly.,MEDICATION_INSTRUCTION
+"Start sublingual nitroglycerin 0.4 mg as needed for chest discomfort, with instructions on proper use.",MEDICATION_INSTRUCTION
+Schedule an exercise treadmill stress test within the next two weeks to further evaluate for inducible ischemia.,FOLLOW_UP
+Repeat lipid panel in 6-8 weeks to assess response to increased statin dose.,FOLLOW_UP
+"Patient instructed to go to the nearest emergency department immediately if chest pain occurs at rest, lasts longer than 10 minutes, or is accompanied by shortness of breath or diaphoresis.",FOLLOW_UP
+Return to clinic in 3 weeks to review stress test results.,FOLLOW_UP
+"Electronically signed by: Dr. Elena Kowalski, MD — Cardiology. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Sunview Pediatric Associates 45 Birchwood Lane | Millbrook, ST 00000 | Tel: (555) 622-0093 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Pediatric Visit Note",OTHER
+"Patient Name: Ava L. Sample DOB: 02/09/2019 Patient ID: SYN-0003-TEST Sex: Female Date of Visit: July 30, 2026 Attending Physician: Dr. Michael Tran, MD Department: Pediatrics",OTHER
+"Chief Complaint: Parent reports a three-day history of low-grade fever, decreased appetite, and a mild cough.",SYMPTOM
+"Child has been more tired than usual and clingy, but is still drinking fluids normally.",SYMPTOM
+"No vomiting, diarrhea, rash, or difficulty breathing reported.",SYMPTOM
+"History: Ava is a 7-year-old female, previously healthy, up to date on immunizations, with no significant past medical history.",HISTORY
+No known drug allergies. No current daily medications.,HISTORY
+Older sibling at home was recently diagnosed with a viral upper respiratory infection.,HISTORY
+"Temperature 100.9 F, heart rate 102 bpm, respiratory rate 22/min, oxygen saturation 99% on room air.",LAB_RESULT
+Rapid strep test was negative.,LAB_RESULT
+Rapid influenza and COVID-19 antigen tests were both negative.,LAB_RESULT
+Findings are most consistent with a viral upper respiratory infection.,DIAGNOSIS
+No signs of bacterial superinfection or respiratory distress at this time.,DIAGNOSIS
+"Recommend supportive care with rest, fluids, and acetaminophen or ibuprofen as needed for fever, dosed by weight.",MEDICATION_INSTRUCTION
+Saline nasal spray may be used as needed for congestion.,MEDICATION_INSTRUCTION
+"Advise parents to monitor for worsening symptoms including difficulty breathing, persistent high fever, lethargy, or poor fluid intake.",FOLLOW_UP
+Return to clinic or seek urgent care if fever persists beyond 5 days or symptoms significantly worsen.,FOLLOW_UP
+Routine well-child visit already scheduled for next year; no additional follow-up needed if symptoms resolve as expected.,FOLLOW_UP
+"Electronically signed by: Dr. Michael Tran, MD — Pediatrics. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Summit Orthopedic & Sports Medicine 210 Trailhead Drive, Suite 3 | Cedar Falls, ST 00000 | Tel: (555) 771-4420 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Orthopedic Consultation Report",OTHER
+"Patient Name: Devon K. Sample DOB: 06/17/1997 Patient ID: SYN-0004-TEST Sex: Male Date of Visit: June 21, 2026 Attending Physician: Dr. Rachel Osei, MD Department: Orthopedic Surgery",OTHER
+Chief Complaint: Right knee pain and swelling following a twisting injury during a recreational soccer game five days ago.,SYMPTOM
+"Patient reports a popping sensation at the time of injury, followed by immediate swelling and difficulty bearing weight.",SYMPTOM
+He describes intermittent episodes of the knee feeling unstable or 'giving way' since the injury.,SYMPTOM
+Denies numbness or tingling in the lower leg or foot.,SYMPTOM
+"History: No prior injuries to the right knee. No significant past medical history. Works as a warehouse associate, moderately active, plays recreational soccer weekly.",HISTORY
+"Currently taking ibuprofen 400 mg as needed for pain, purchased over the counter.",MEDICATION_INSTRUCTION
+"On exam, moderate effusion of the right knee is noted, with positive anterior drawer and Lachman tests.",LAB_RESULT
+"McMurray test is positive for medial joint line tenderness, raising concern for concurrent meniscal involvement.",LAB_RESULT
+MRI of the right knee obtained today demonstrates a complete tear of the anterior cruciate ligament with an associated medial meniscus tear.,LAB_RESULT
+Findings are consistent with a complete ACL tear with concomitant medial meniscus injury.,DIAGNOSIS
+No evidence of fracture or collateral ligament injury on imaging.,DIAGNOSIS
+Prescribe a hinged knee brace to be worn for support and stability during ambulation.,MEDICATION_INSTRUCTION
+"Continue ibuprofen 400-600 mg every 6-8 hours as needed for pain and swelling, with food.",MEDICATION_INSTRUCTION
+Refer to physical therapy for pre-operative strengthening and range-of-motion exercises.,FOLLOW_UP
+Discussed surgical reconstruction options; patient will consider and follow up to schedule ACL reconstruction surgery.,FOLLOW_UP
+Follow-up appointment in 2 weeks to finalize surgical planning.,FOLLOW_UP
+"Electronically signed by: Dr. Rachel Osei, MD — Orthopedic Surgery. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Clearwater Behavioral Health 77 Aspen Court, Suite 200 | Northfield, ST 00000 | Tel: (555) 483-2210 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Psychiatric Follow-Up Note",OTHER
+"Patient Name: Samira J. Sample DOB: 09/30/1993 Patient ID: SYN-0005-TEST Sex: Female Date of Visit: May 12, 2026 Attending Physician: Dr. Noah Bergstrom, MD Department: Psychiatry",OTHER
+"Chief Complaint: Follow-up for generalized anxiety disorder and major depressive disorder, moderate severity.",OTHER
+"Patient reports improved mood over the past month, with fewer episodes of persistent worry and better sleep quality.",SYMPTOM
+"She continues to experience occasional racing thoughts before bed, though less frequent than at her last visit.",SYMPTOM
+"Denies suicidal ideation, intent, or plan. Denies any recent panic attacks.",SYMPTOM
+History: Diagnosed with generalized anxiety disorder in 2022 and major depressive disorder in 2023.,HISTORY
+No psychiatric hospitalizations. No history of self-harm.,HISTORY
+Engaged in weekly cognitive behavioral therapy with a licensed counselor for the past four months.,HISTORY
+"Currently taking sertraline 100 mg once daily, tolerating well with no significant side effects.",MEDICATION_INSTRUCTION
+"PHQ-9 score today is 7, indicating mild depressive symptoms, improved from a score of 14 three months ago.",LAB_RESULT
+"GAD-7 score today is 6, indicating mild anxiety symptoms, improved from a score of 12 at the prior visit.",LAB_RESULT
+"Overall clinical picture reflects a positive treatment response, with anxiety and depressive symptoms trending toward remission.",DIAGNOSIS
+"No evidence of emerging mania, psychosis, or acute safety concerns at this time.",DIAGNOSIS
+Continue sertraline 100 mg once daily at current dose.,MEDICATION_INSTRUCTION
+Continue weekly cognitive behavioral therapy sessions.,MEDICATION_INSTRUCTION
+Encouraged to maintain consistent sleep schedule and continue journaling as a coping strategy discussed in therapy.,OTHER
+Follow-up psychiatric appointment scheduled in 6 weeks to reassess symptoms and medication response.,FOLLOW_UP
+Patient advised to contact the clinic crisis line or go to the nearest emergency department if suicidal thoughts or safety concerns arise before the next visit.,FOLLOW_UP
+"Electronically signed by: Dr. Noah Bergstrom, MD — Psychiatry. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Coastal Dermatology Group 12 Harborview Street | Bayport, ST 00000 | Tel: (555) 905-6634 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Dermatology Consultation Report",OTHER
+"Patient Name: Wendell P. Sample DOB: 01/05/1961 Patient ID: SYN-0006-TEST Sex: Male Date of Visit: April 18, 2026 Attending Physician: Dr. Lauren Vasquez, MD Department: Dermatology",OTHER
+"Chief Complaint: New pigmented lesion on the upper back, first noticed by patient's spouse approximately six weeks ago.",SYMPTOM
+Patient reports the lesion has appeared to grow slightly and has developed irregular borders since first noticed.,SYMPTOM
+"Denies bleeding, itching, or pain at the site.",SYMPTOM
+History: Patient has fair skin with a history of significant sun exposure from outdoor work over several decades.,HISTORY
+No personal history of skin cancer. Mother had a history of basal cell carcinoma.,HISTORY
+No current medications. No known drug allergies.,HISTORY
+"On dermoscopic examination, the lesion measures 8 mm in diameter with asymmetric shape, irregular borders, and variable pigmentation.",LAB_RESULT
+No palpable regional lymphadenopathy noted on exam.,LAB_RESULT
+"Lesion features raise significant concern for melanoma, and a shave biopsy was performed today for histopathological evaluation.",DIAGNOSIS
+"Pending biopsy results, differential diagnosis includes melanoma versus atypical (dysplastic) nevus.",DIAGNOSIS
+"Biopsy site was closed and patient given standard wound care instructions, including keeping the area clean and dry for 48 hours.",MEDICATION_INSTRUCTION
+Apply petroleum jelly and a bandage daily to the biopsy site until fully healed.,MEDICATION_INSTRUCTION
+Biopsy results expected within 7-10 business days; patient will be contacted by phone with results.,FOLLOW_UP
+Follow-up appointment scheduled in 2 weeks to review pathology results and discuss further management if needed.,FOLLOW_UP
+"Patient counseled on sun protection measures, including daily broad-spectrum sunscreen use and protective clothing.",OTHER
+"Advised to monitor the biopsy site for signs of infection, including increasing redness, warmth, or drainage, and to call the office if these occur.",FOLLOW_UP
+"Electronically signed by: Dr. Lauren Vasquez, MD — Dermatology. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+
+"QuickCare Urgent Clinic 500 Main Street | Fairview, ST 00000 | Tel: (555) 118-7743 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Urgent Care Visit Note",OTHER
+"Patient Name: Priya N. Sample DOB: 03/14/2001 Patient ID: SYN-0007-TEST Sex: Female Date of Visit: March 3, 2026 Attending Physician: Dr. Owen Blake, MD Department: Urgent Care",OTHER
+Chief Complaint: Left ankle pain and mild swelling after rolling her ankle while jogging earlier today.,SYMPTOM
+"Patient reports mild-to-moderate pain, rated 3 out of 10, that improves with rest.",SYMPTOM
+"She is able to bear weight on the ankle, though with some discomfort.",SYMPTOM
+"Denies numbness, tingling, or deformity of the foot or ankle.",SYMPTOM
+History: Healthy young adult with no significant past medical history and no prior ankle injuries.,HISTORY
+No current medications. No known drug allergies.,HISTORY
+Vital signs are within normal limits.,LAB_RESULT
+"On exam, mild swelling and tenderness noted over the lateral malleolus, with no bony tenderness and negative Ottawa ankle rules.",LAB_RESULT
+Full range of motion preserved with mild pain at extremes.,LAB_RESULT
+Findings are consistent with a mild grade 1 lateral ankle sprain.,DIAGNOSIS
+No clinical indication for X-ray at this time given negative Ottawa ankle criteria.,DIAGNOSIS
+"Recommend RICE protocol: rest, ice 15-20 minutes several times daily, compression wrap, and elevation.",MEDICATION_INSTRUCTION
+"Ibuprofen 400 mg every 6-8 hours as needed for pain, with food.",MEDICATION_INSTRUCTION
+Advised to gradually resume weight-bearing activity as tolerated over the next several days.,OTHER
+"Return to clinic if pain worsens, swelling significantly increases, or she is unable to bear weight after 3-4 days.",FOLLOW_UP
+No formal follow-up appointment required; expected to recover fully within 1-2 weeks with home care.,FOLLOW_UP
+"Electronically signed by: Dr. Owen Blake, MD — Urgent Care. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Lakeshore Endocrinology Center 300 Harbor Blvd, Suite 5 | Port Wexley, ST 00000 | Tel: (555) 662-3391 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Endocrinology Consultation Report",OTHER
+"Patient Name: Harold B. Sample DOB: 08/21/1958 Patient ID: SYN-0008-TEST Sex: Male Date of Visit: February 10, 2026 Attending Physician: Dr. Grace Adeyemi, MD Department: Endocrinology",OTHER
+"Chief Complaint: Progressive numbness and tingling in both feet over the past several months, along with poorly controlled blood sugars.",SYMPTOM
+Patient describes a burning sensation in his toes that is worse at night and has begun to affect his sleep.,SYMPTOM
+He also reports occasional blurry vision and increased thirst over recent weeks.,SYMPTOM
+"Denies open wounds, ulcers, or signs of infection on his feet at this time.",SYMPTOM
+"History: Long-standing type 2 diabetes mellitus diagnosed 15 years ago, with historically inconsistent medication adherence and follow-up.",HISTORY
+History of hypertension and obesity. No prior diabetic foot ulcers or amputations.,HISTORY
+Currently taking metformin 1000 mg twice daily and glipizide 5 mg once daily.,MEDICATION_INSTRUCTION
+"HbA1c today is 9.8%, significantly above target, consistent with longstanding poor glycemic control.",LAB_RESULT
+Monofilament testing reveals decreased sensation bilaterally in a stocking distribution over both feet.,LAB_RESULT
+"Urine microalbumin-to-creatinine ratio is elevated at 85 mg/g, indicating early kidney involvement.",LAB_RESULT
+Findings are consistent with diabetic peripheral neuropathy and early diabetic nephropathy secondary to chronically uncontrolled type 2 diabetes.,DIAGNOSIS
+Glycemic control remains significantly suboptimal despite current oral regimen.,DIAGNOSIS
+"Start gabapentin 300 mg at bedtime for neuropathic pain, titrating as tolerated.",MEDICATION_INSTRUCTION
+"Add basal insulin (glargine) 10 units at bedtime, with dose titration instructions provided.",MEDICATION_INSTRUCTION
+Start lisinopril 10 mg daily for renoprotection given early proteinuria.,MEDICATION_INSTRUCTION
+Refer to podiatry for diabetic foot care and ongoing monitoring given peripheral neuropathy.,FOLLOW_UP
+Refer to ophthalmology for a dilated diabetic eye exam given reported visual changes.,FOLLOW_UP
+Recheck HbA1c and repeat kidney function labs in 3 months to assess treatment response.,FOLLOW_UP
+Emphasized importance of consistent medication adherence and home glucose monitoring; patient counseled on warning signs of diabetic foot infection requiring urgent care.,FOLLOW_UP
+"Electronically signed by: Dr. Grace Adeyemi, MD — Endocrinology. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Riverside General Hospital Emergency Department 123 Wellness Ave | Springfield, ST 00000 | Tel: (555) 010-2938 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Emergency Department Note",OTHER
+"Patient Name: Tobias R. Sample DOB: 12/02/2000 Patient ID: SYN-0009-TEST Sex: Male Date of Visit: January 22, 2026 Attending Physician: Dr. Farah Siddiqui, MD Department: Emergency Medicine",OTHER
+Chief Complaint: Severe right lower quadrant abdominal pain that began periumbilically approximately 18 hours ago and migrated to the right lower quadrant.,SYMPTOM
+"Patient reports the pain has progressively worsened, now rated 8 out of 10, and is associated with nausea, vomiting, and subjective fever.",SYMPTOM
+"He describes pain that worsens with movement, coughing, and walking.",SYMPTOM
+"Denies diarrhea, urinary symptoms, or prior similar episodes.",SYMPTOM
+History: Previously healthy young male with no significant past medical or surgical history.,HISTORY
+No current medications. No known drug allergies.,HISTORY
+"Temperature 101.6 F, heart rate 112 bpm, blood pressure 128/78 mmHg, respiratory rate 20/min.",LAB_RESULT
+"White blood cell count is elevated at 15.2 x10^9/L with left shift, consistent with an acute inflammatory process.",LAB_RESULT
+"On exam, marked tenderness and guarding are noted at McBurney's point, with positive rebound tenderness and positive Rovsing's sign.",LAB_RESULT
+"CT abdomen and pelvis with contrast demonstrates a dilated, inflamed appendix measuring 11 mm with surrounding fat stranding, without evidence of perforation.",LAB_RESULT
+"Findings are consistent with acute, uncomplicated appendicitis.",DIAGNOSIS
+"No radiographic evidence of perforation or abscess formation at this time; however, given the severity and duration of symptoms, urgent surgical evaluation is indicated.",DIAGNOSIS
+General surgery consulted emergently and patient is being taken to the operating room for laparoscopic appendectomy.,FOLLOW_UP
+Patient made NPO and started on intravenous fluids and IV piperacillin-tazobactam for broad-spectrum antibiotic coverage prior to surgery.,MEDICATION_INSTRUCTION
+"IV morphine administered for pain control, with close monitoring of vital signs.",MEDICATION_INSTRUCTION
+"Patient and family counseled on the diagnosis, planned surgical intervention, and expected post-operative course.",OTHER
+"Post-operative follow-up with general surgery scheduled within 2 weeks of discharge; patient advised to return immediately for fever, worsening pain, or signs of wound infection.",FOLLOW_UP
+"Electronically signed by: Dr. Farah Siddiqui, MD — Emergency Medicine. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Willowbrook Cancer Center 88 Meridian Way, Suite 6 | Ashgrove, ST 00000 | Tel: (555) 244-9087 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Oncology Consultation Report",OTHER
+"Patient Name: Colette M. Sample DOB: 05/28/1972 Patient ID: SYN-0010-TEST Sex: Female Date of Visit: November 6, 2026 Attending Physician: Dr. Ibrahim Kassab, MD Department: Medical Oncology",OTHER
+"Chief Complaint: New diagnosis of invasive ductal carcinoma of the left breast, referred for oncologic management following recent biopsy.",OTHER
+"Patient reports a palpable lump in the left breast first noticed approximately two months ago, which has not changed significantly in size.",SYMPTOM
+"She denies breast pain, nipple discharge, skin changes, or noticeable weight loss.",SYMPTOM
+Reports significant anxiety and difficulty sleeping since receiving the diagnosis.,SYMPTOM
+History: No significant past medical history. Family history notable for breast cancer in a maternal aunt diagnosed at age 55.,HISTORY
+No prior cancer diagnoses. No current daily medications. No known drug allergies.,HISTORY
+"Core needle biopsy of the left breast mass confirms invasive ductal carcinoma, grade 2, estrogen receptor positive, progesterone receptor positive, HER2-negative.",LAB_RESULT
+"Staging CT chest, abdomen, and pelvis, along with bone scan, show no evidence of distant metastatic disease.",LAB_RESULT
+"Tumor size on imaging is approximately 2.3 cm, with no definite axillary lymphadenopathy identified.",LAB_RESULT
+"Diagnosis is stage II, hormone receptor-positive, HER2-negative invasive ductal carcinoma of the left breast.",DIAGNOSIS
+No evidence of metastatic spread based on current staging workup.,DIAGNOSIS
+"Case presented and discussed at multidisciplinary tumor board; recommendation is for lumpectomy with sentinel lymph node biopsy, followed by adjuvant radiation and endocrine therapy.",FOLLOW_UP
+Referral placed to breast surgical oncology for surgical planning.,FOLLOW_UP
+"Genetic counseling referral placed given family history, to evaluate for hereditary breast cancer syndromes prior to surgery.",FOLLOW_UP
+Start supportive care measures including referral to oncology social work and counseling services to address anxiety and coping.,MEDICATION_INSTRUCTION
+"Extensive discussion held with patient regarding diagnosis, staging, treatment plan, and prognosis; all questions addressed, and patient verbalized understanding.",OTHER
+"Follow-up oncology appointment scheduled in 2 weeks, with surgical consultation to be arranged in the interim.",FOLLOW_UP
+"Electronically signed by: Dr. Ibrahim Kassab, MD — Medical Oncology. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Riverside General Hospital Intensive Care Unit 123 Wellness Ave | Springfield, ST 00000 | Tel: (555) 010-2938 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** ICU Admission Note",OTHER
+"Patient Name: Rosalind F. Sample DOB: 09/09/1949 Patient ID: SYN-0011-TEST Sex: Female Date of Visit: October 1, 2026 Attending Physician: Dr. Daniel Whitcombe, MD Department: Critical Care Medicine",OTHER
+Chief Complaint: Patient transferred from the emergency department in septic shock secondary to suspected urosepsis.,OTHER
+"Family reports patient was found at home confused, lethargic, and febrile, with decreased oral intake over the preceding two days.",SYMPTOM
+"On arrival, patient was found to be hypotensive, tachycardic, and minimally responsive to verbal stimuli.",SYMPTOM
+No reported chest pain; patient unable to reliably communicate additional symptoms due to altered mental status.,SYMPTOM
+"History: 77-year-old female with history of recurrent urinary tract infections, chronic kidney disease stage 3, and hypertension.",HISTORY
+"Lives independently at home; family reports baseline mental status is alert and fully oriented, representing an acute change from baseline.",HISTORY
+Home medications include amlodipine 5 mg daily; no known drug allergies.,HISTORY
+"Initial vital signs: blood pressure 78/46 mmHg, heart rate 128 bpm, temperature 102.9 F, respiratory rate 28/min, oxygen saturation 89% on room air.",LAB_RESULT
+"Lactate is critically elevated at 6.8 mmol/L, and blood cultures were obtained prior to antibiotic administration.",LAB_RESULT
+"Urinalysis is markedly positive for leukocyte esterase, nitrites, and numerous white blood cells, consistent with a urinary source of infection.",LAB_RESULT
+"Creatinine is elevated at 2.4 mg/dL, above the patient's known baseline, indicating acute kidney injury superimposed on chronic kidney disease.",LAB_RESULT
+"Clinical picture is consistent with septic shock secondary to urosepsis, complicated by acute kidney injury and altered mental status.",DIAGNOSIS
+Patient meets criteria for severe sepsis with hemodynamic instability requiring immediate critical care intervention.,DIAGNOSIS
+Initiated aggressive intravenous fluid resuscitation and started broad-spectrum antibiotics with IV piperacillin-tazobactam after cultures obtained.,MEDICATION_INSTRUCTION
+"Norepinephrine infusion started for persistent hypotension despite adequate fluid resuscitation, titrated to maintain mean arterial pressure above 65 mmHg.",MEDICATION_INSTRUCTION
+Patient placed on continuous cardiac and hemodynamic monitoring in the intensive care unit; nephrology consulted given acute kidney injury.,FOLLOW_UP
+"Family updated on critical condition, guarded prognosis, and plan of care; goals-of-care discussion to be revisited within 24-48 hours depending on clinical trajectory.",FOLLOW_UP
+"Frequent reassessment of vital signs, urine output, and laboratory trends planned, with escalation of care if hemodynamic instability persists.",FOLLOW_UP
+"Electronically signed by: Dr. Daniel Whitcombe, MD — Critical Care Medicine. Disclaimer: This document is entirely fictional and generated solely for software testing purposes.",OTHER
+"It does not describe a real patient, provider, or clinical encounter, and must not be used for any clinical, diagnostic, or decision-making purpose.",OTHER
+,
+"Pinehollow Family Medicine 14 Cedar St | Pinehollow, ST 00000 | (555) 302-8814 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY ***",OTHER
+"SOAP NOTE — Patient: Benjamin Okafor-Lee | DOB: 1990-04-19 | MRN: SYN-1001-TEST | Visit Date: 2026-02-11 | Provider: Dr. Wendy Castillo, MD",OTHER
+"S: Patient reports 3 days of sore throat, low energy, and a runny nose.",SYMPTOM
+S: No fever measured at home. Denies difficulty swallowing or breathing.,SYMPTOM
+S: PMH: seasonal allergies. No regular medications besides occasional loratadine.,HISTORY
+"O: Temp 99.1F, HR 70, BP 116/74, RR 14, SpO2 99%.",LAB_RESULT
+"O: Oropharynx mildly erythematous, no exudate. Tonsils not enlarged. Lungs clear.",LAB_RESULT
+O: Rapid strep test negative.,LAB_RESULT
+"A: Viral upper respiratory infection, mild.",DIAGNOSIS
+A: No evidence of streptococcal pharyngitis or lower respiratory involvement.,DIAGNOSIS
+"P: Supportive care — rest, fluids, honey/lozenges for throat comfort.",MEDICATION_INSTRUCTION
+P: Acetaminophen 500 mg every 6 hours as needed for discomfort.,MEDICATION_INSTRUCTION
+P: Return if symptoms persist beyond 10 days or fever develops.,FOLLOW_UP
+P: No follow-up visit needed unless symptoms worsen.,FOLLOW_UP
+"Signed: Dr. Wendy Castillo, MD. This is a fictional document for software testing only and does not represent a real patient or encounter.",OTHER
+,
+"Mercy Ridge Medical Center 700 Ridge Rd | Cliffhaven, ST 00000 | (555) 771-2200 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** DISCHARGE SUMMARY",OTHER
+"Patient: Marisol Duarte-Vance | DOB: 1965-11-02 | MRN: SYN-1002-TEST | Admit Date: 2026-03-01 | Discharge Date: 2026-03-05 | Attending: Dr. Kwame Asante, MD",OTHER
+Reason for Admission: Elective laparoscopic cholecystectomy for symptomatic gallstones.,OTHER
+"Pre-op, patient reported recurrent right upper quadrant pain after fatty meals, ongoing for several months.",SYMPTOM
+"PMH: Hypertension, well controlled. No prior abdominal surgeries.",HISTORY
+Home medications: amlodipine 5 mg daily.,MEDICATION_INSTRUCTION
+Hospital Course: Surgery performed without complication; patient recovered well post-operatively with adequate pain control and return of bowel function by post-op day 2.,OTHER
+"Post-op labs unremarkable; hemoglobin stable at 12.8 g/dL, white count normalized to 8.1 x10^9/L by discharge.",LAB_RESULT
+"Discharge Diagnosis: Symptomatic cholelithiasis, status post uncomplicated laparoscopic cholecystectomy.",DIAGNOSIS
+Discharge Medications: Acetaminophen 500 mg every 6 hours as needed for pain; continue home amlodipine 5 mg daily.,MEDICATION_INSTRUCTION
+"Activity: Light activity only for one week, no heavy lifting greater than 10 lbs for 2 weeks.",OTHER
+Follow-up with general surgery in 2 weeks for wound check.,FOLLOW_UP
+"Return to ED for fever, worsening abdominal pain, or signs of wound infection.",FOLLOW_UP
+"Dictated by: Dr. Kwame Asante, MD. Fictional record generated for software testing purposes only; not a real patient.",OTHER
+,
+"Crestline Neurology Partners 220 Crestline Ave, Suite 9 | Havenport, ST 00000 | (555) 490-1123 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY ***",OTHER
+"Dear Dr. Fennimore, Thank you for referring Ms. Odalys Reyes-Marsh (DOB 1979-06-30, MRN SYN-1003-TEST) for evaluation of recurrent headaches.",OTHER
+"The patient describes throbbing, unilateral headaches occurring roughly twice weekly, associated with light sensitivity and occasional nausea.",SYMPTOM
+Episodes typically last 4-6 hours and are somewhat relieved by resting in a dark room.,SYMPTOM
+"She denies visual aura, weakness, numbness, or speech difficulty.",SYMPTOM
+"Past medical history is notable only for well-controlled hypothyroidism, on levothyroxine 75 mcg daily.",HISTORY
+"Neurological examination today was entirely unremarkable, including cranial nerves, strength, sensation, and coordination.",LAB_RESULT
+"Based on the clinical history and normal exam, this presentation is most consistent with migraine without aura.",DIAGNOSIS
+No red-flag features suggestive of secondary headache disorder were identified.,DIAGNOSIS
+"I have started sumatriptan 50 mg as needed at headache onset, with instructions not to exceed 200 mg in 24 hours.",MEDICATION_INSTRUCTION
+Also recommended a headache diary to identify potential triggers.,OTHER
+"I will see her again in 6 weeks to assess treatment response, and will pursue MRI imaging if symptoms atypically evolve.",FOLLOW_UP
+Thank you again for this referral; please do not hesitate to contact me with questions.,OTHER
+"Sincerely, Dr. Anaya Bhatt, MD, Neurology. This is a fictional letter created for software testing only.",OTHER
+,
+VirtuCare Telehealth Services *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Telehealth Visit Summary,OTHER
+"Patient: Deshawn Ellery Pruitt | DOB: 1996-01-08 | Member ID: SYN-1004-TEST | Visit: Video call, 2026-04-22 | Provider: Dr. Lindsey Okafor, NP",OTHER
+Patient called in regarding a rash on his forearm that started two days ago after a hiking trip.,SYMPTOM
+"Describes it as red, slightly raised, and mildly itchy, not painful.",SYMPTOM
+"No fever, no difficulty breathing, no facial or lip swelling reported.",SYMPTOM
+No known allergies. Not currently on any medications.,HISTORY
+"Patient shared photos of the rash via the app; appears consistent with contact dermatitis, likely from plant exposure during the hike.",LAB_RESULT
+"Assessment: Mild contact dermatitis, likely poison ivy or similar plant exposure.",DIAGNOSIS
+No systemic allergic reaction identified at this time.,DIAGNOSIS
+Recommended over-the-counter hydrocortisone 1% cream applied twice daily to affected area.,MEDICATION_INSTRUCTION
+Oral diphenhydramine 25 mg at bedtime as needed for itching.,MEDICATION_INSTRUCTION
+"Advised to seek in-person or emergency care immediately if swelling spreads, breathing becomes difficult, or rash worsens significantly.",FOLLOW_UP
+No follow-up visit needed unless rash fails to improve within a week.,FOLLOW_UP
+"Note generated by Dr. Lindsey Okafor, NP. Fictional telehealth encounter for software testing only.",OTHER
+,
+St. Aldric Regional Hospital — ED Nursing Triage Note *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY ***,OTHER
+Pt: Ingrid Solberg-Aames | DOB 1988-09-15 | MRN SYN-1005-TEST | Triage time 03:12 | RN: J. Halvorsen,OTHER
+"Pt c/o L flank pain x 6 hrs, sudden onset, radiating to groin. Pain 9/10.",SYMPTOM
+"+ nausea, 1 episode vomiting. No fever reported by pt.",SYMPTOM
+Denies hematuria noted visually. Denies dysuria.,SYMPTOM
+"Hx kidney stones x1, 2019, passed spontaneously. No current meds. NKDA.",HISTORY
+"VS: T 98.6F, HR 104, BP 142/88, RR 18, SpO2 98% RA.",LAB_RESULT
+"Pt visibly uncomfortable, unable to sit still, guarding L flank.",LAB_RESULT
+Urinalysis pending. CT KUB ordered per ED physician.,LAB_RESULT
+"Working diagnosis per ED physician: suspected nephrolithiasis, left side.",DIAGNOSIS
+"IV access obtained, NS bolus started. IV ketorolac 30 mg given for pain.",MEDICATION_INSTRUCTION
+Pt to remain NPO pending CT results and physician reassessment.,FOLLOW_UP
+Reassess pain and vitals q30min per protocol.,FOLLOW_UP
+Note entered by RN J. Halvorsen. Fictional triage note for software testing purposes only.,OTHER
+,
+"Beacon Hill Diagnostic Imaging 40 Beacon Hill Rd | Wexford, ST 00000 | (555) 833-7712 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** RADIOLOGY REPORT",OTHER
+"Patient: Everett Thackeray Combs | DOB: 1955-02-27 | MRN: SYN-1006-TEST | Exam: MRI Lumbar Spine w/o contrast | Date: 2026-05-09 | Ordering Physician: Dr. Renata Voss, MD",OTHER
+"Clinical History: Chronic lower back pain with radiation into the left leg, worsening over the past 3 months.",SYMPTOM
+Technique: Standard multiplanar MRI sequences of the lumbar spine were obtained without intravenous contrast.,OTHER
+Findings: There is a moderate broad-based disc herniation at L4-L5 with mild-to-moderate left neural foraminal narrowing.,LAB_RESULT
+Findings: Mild disc bulge noted at L5-S1 without significant canal or foraminal stenosis.,LAB_RESULT
+"Findings: No acute fracture, spondylolisthesis, or marrow signal abnormality identified.",LAB_RESULT
+"Impression: Moderate L4-L5 disc herniation with left-sided foraminal narrowing, correlating with reported left leg radicular symptoms.",DIAGNOSIS
+"Impression: Mild L5-S1 disc bulge, likely not clinically significant at this time.",DIAGNOSIS
+Recommend clinical correlation and consideration of physical therapy or pain management referral given imaging findings.,FOLLOW_UP
+Repeat imaging recommended only if symptoms significantly progress or fail conservative management.,FOLLOW_UP
+"Electronically signed by: Dr. Priscilla Nkemdirim, MD, Radiology. Fictional report for software testing purposes only.",OTHER
+,
+"ProMotion Physical Therapy 18 Wellness Loop | Danforth, ST 00000 | (555) 209-6634 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** PT Progress Note",OTHER
+"Patient: Rosalinda Fitch-Amaro | DOB: 1982-07-11 | MRN: SYN-1007-TEST | Visit 6 of 12 | Date: 2026-06-03 | Therapist: J. Marchetti, PT, DPT",OTHER
+Patient reports right shoulder pain has decreased from 6/10 to 3/10 since starting therapy 3 weeks ago.,SYMPTOM
+"Still notes some discomfort with overhead reaching, particularly at end range.",SYMPTOM
+"Dx: Right shoulder impingement syndrome, being treated conservatively.",HISTORY
+"Active range of motion improved to 150 degrees flexion, up from 110 degrees at initial evaluation.",LAB_RESULT
+"Manual muscle testing shows improved rotator cuff strength, now 4/5, previously 3/5.",LAB_RESULT
+Patient demonstrating good progress toward functional goals; impingement symptoms trending toward resolution.,DIAGNOSIS
+"Continue current home exercise program: pendulum stretches, resistance band external rotation, 3 sets of 15 daily.",MEDICATION_INSTRUCTION
+Progressing to include scapular stabilization exercises this session.,MEDICATION_INSTRUCTION
+"Plan to continue therapy twice weekly for 3 more weeks, followed by re-evaluation.",FOLLOW_UP
+Discussed possible transition to independent home program if progress continues at current rate.,FOLLOW_UP
+"Note by J. Marchetti, PT, DPT. Fictional therapy record created for software testing only.",OTHER
+,
+"Willowmere Women's Health 55 Willowmere Dr | Ashton Falls, ST 00000 | (555) 617-4482 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Prenatal Visit Note",OTHER
+"Patient: Chiamaka Osei-Baffour | DOB: 1994-10-04 | MRN: SYN-1008-TEST | Gestational Age: 28 weeks 3 days | Date: 2026-07-14 | Provider: Dr. Simone Vantour, MD",OTHER
+"Patient reports good fetal movement, denies vaginal bleeding, leakage of fluid, or contractions.",SYMPTOM
+"Notes mild swelling in ankles by end of day, no headaches or visual changes.",SYMPTOM
+"History: G2P1, uncomplicated pregnancy to date. Prior vaginal delivery without complications.",HISTORY
+Prenatal vitamins taken daily. No known drug allergies.,MEDICATION_INSTRUCTION
+"Blood pressure 118/74 mmHg, weight gain appropriate for gestational age, fundal height measures 28 cm consistent with dates.",LAB_RESULT
+"Fetal heart rate 148 bpm, reassuring. Urine dip negative for protein and glucose.",LAB_RESULT
+Glucose challenge test performed today; results pending.,LAB_RESULT
+Pregnancy progressing normally at 28 weeks with no current concerns identified.,DIAGNOSIS
+Discussed normal third-trimester symptoms including mild ankle edema and Braxton Hicks contractions.,OTHER
+"Return in 2 weeks for routine follow-up; sooner if decreased fetal movement, bleeding, fluid leakage, or severe headache occurs.",FOLLOW_UP
+Glucose challenge results to be communicated by phone within 3-5 business days.,FOLLOW_UP
+"Signed: Dr. Simone Vantour, MD. Fictional prenatal note for software testing purposes only.",OTHER
+,
+"Copperfield Digestive Health Institute 900 Copperfield Blvd | Rivermont, ST 00000 | (555) 388-9021 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** ENDOSCOPY PROCEDURE REPORT",OTHER
+"Patient: Aldous Kimathi Rourke | DOB: 1970-03-22 | MRN: SYN-1009-TEST | Procedure: Upper Endoscopy (EGD) | Date: 2026-08-02 | Endoscopist: Dr. Farrukh Iqbal, MD",OTHER
+Indication: Chronic epigastric pain and heartburn unresponsive to over-the-counter antacids for the past 2 months.,SYMPTOM
+"Patient also reports occasional regurgitation, worse after large meals and when lying down.",SYMPTOM
+"History: No prior endoscopic procedures. Takes omeprazole 20 mg daily, self-initiated with minimal relief.",HISTORY
+Procedure performed under conscious sedation without complication.,OTHER
+"Findings: Moderate erosive esophagitis noted in the distal esophagus, LA Grade B.",LAB_RESULT
+Findings: Small hiatal hernia identified. Stomach and duodenum otherwise grossly normal in appearance.,LAB_RESULT
+"Biopsies obtained from the distal esophagus to rule out Barrett's esophagus, sent for pathology.",LAB_RESULT
+"Impression: Moderate erosive esophagitis with small hiatal hernia, consistent with gastroesophageal reflux disease.",DIAGNOSIS
+"Increase omeprazole to 40 mg once daily, taken 30-60 minutes before breakfast.",MEDICATION_INSTRUCTION
+"Counseled on lifestyle modifications including weight management, avoiding late meals, and head-of-bed elevation.",MEDICATION_INSTRUCTION
+Follow-up in clinic in 8 weeks to assess symptom response; biopsy results to be discussed once available.,FOLLOW_UP
+Repeat endoscopy recommended in 1 year to reassess healing given erosive findings.,FOLLOW_UP
+"Electronically signed by: Dr. Farrukh Iqbal, MD, Gastroenterology. Fictional procedure report for software testing only.",OTHER
+,
+"Northgate Stroke & Neuroscience Center 1 Northgate Plaza | Ferngate, ST 00000 | (555) 995-2140 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Neurology Consultation — Stroke Alert",OTHER
+"Patient: Petronella Aguirre-Dahl | DOB: 1951-12-19 | MRN: SYN-1010-TEST | Date: 2026-01-15, 09:40 | Consulting Neurologist: Dr. Tobias Kwan, MD",OTHER
+"Patient's husband reports sudden onset right-sided facial droop, slurred speech, and right arm weakness beginning approximately 45 minutes prior to arrival.",SYMPTOM
+Symptoms have not improved since onset. Last known well time confirmed at 08:55.,SYMPTOM
+"No reported headache, seizure activity, or loss of consciousness.",SYMPTOM
+"History: Atrial fibrillation, not on anticoagulation per family report. Hypertension, diet-controlled.",HISTORY
+"NIH Stroke Scale score calculated at 11, indicating moderate stroke severity.",LAB_RESULT
+"Blood pressure 178/96 mmHg, glucose 118 mg/dL, no evidence of hemorrhage on non-contrast CT head.",LAB_RESULT
+CT angiogram reveals a large vessel occlusion of the left middle cerebral artery.,LAB_RESULT
+"Clinical and radiographic findings are consistent with acute ischemic stroke secondary to left MCA large vessel occlusion, likely cardioembolic given history of atrial fibrillation.",DIAGNOSIS
+Patient meets criteria for both IV thrombolysis and mechanical thrombectomy given time window and occlusion location.,DIAGNOSIS
+IV tPA administered emergently per weight-based protocol after confirming no contraindications.,MEDICATION_INSTRUCTION
+Patient emergently transferred to interventional radiology for mechanical thrombectomy.,FOLLOW_UP
+"Family updated on diagnosis, treatment administered, and guarded prognosis pending thrombectomy outcome.",FOLLOW_UP
+Close neurological monitoring and post-thrombectomy stroke unit admission planned.,FOLLOW_UP
+"Electronically signed by: Dr. Tobias Kwan, MD, Neurology. Fictional stroke alert note for software testing purposes only.",OTHER
+,
+"Silverpine Ear, Nose & Throat Clinic 62 Silverpine Rd | Oakmere, ST 00000 | (555) 704-3315 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** ENT Visit Note",OTHER
+"Patient: Yusuf Abernathy-Cole | DOB: 1985-05-30 | MRN: SYN-1011-TEST | Date: 2026-02-27 | Provider: Dr. Camille Rousseau, MD",OTHER
+"Patient presents with recurrent sinus pressure, nasal congestion, and thick nasal discharge for the past 10 days.",SYMPTOM
+Reports associated facial pain over the cheeks that worsens when bending forward.,SYMPTOM
+"Denies fever, dental pain, or visual changes.",SYMPTOM
+History: Occasional seasonal allergies. No prior sinus surgery. No known drug allergies.,HISTORY
+"Nasal endoscopy reveals purulent discharge in the middle meatus bilaterally, with mucosal edema.",LAB_RESULT
+Tenderness noted to palpation over bilateral maxillary sinuses.,LAB_RESULT
+Findings are consistent with acute bacterial sinusitis given duration and purulent discharge.,DIAGNOSIS
+No evidence of orbital or intracranial complication on today's exam.,DIAGNOSIS
+Start amoxicillin-clavulanate 875 mg twice daily for 10 days.,MEDICATION_INSTRUCTION
+Saline nasal rinses twice daily and intranasal fluticasone once daily to reduce mucosal inflammation.,MEDICATION_INSTRUCTION
+"Return to clinic if symptoms do not improve within 72 hours of starting antibiotics, or sooner if facial swelling, vision changes, or severe headache develop.",FOLLOW_UP
+Follow-up visit in 2 weeks if symptoms persist despite treatment.,FOLLOW_UP
+"Signed: Dr. Camille Rousseau, MD. Fictional ENT note created for software testing purposes only.",OTHER
+,
+"Amberfield Rheumatology Clinic 305 Amberfield Way | Larkspur, ST 00000 | (555) 522-6690 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Rheumatology Follow-Up Note",OTHER
+"Patient: Beatrix Solenne Achebe | DOB: 1976-08-08 | MRN: SYN-1012-TEST | Date: 2026-03-19 | Provider: Dr. Manuel Ortega-Kwan, MD",OTHER
+"Patient reports joint pain and morning stiffness in her hands and wrists, lasting about 45 minutes after waking, slightly improved from prior visit.",SYMPTOM
+"Notes occasional fatigue but denies fever, rash, or new joint swelling since last visit.",SYMPTOM
+"History: Rheumatoid arthritis, diagnosed 2023, currently on methotrexate therapy.",HISTORY
+Currently taking methotrexate 15 mg once weekly with folic acid 1 mg daily.,MEDICATION_INSTRUCTION
+"Exam reveals mild synovitis of the bilateral MCP joints, improved compared to prior visit; no active synovitis in wrists today.",LAB_RESULT
+"Inflammatory markers show ESR 22 mm/hr and CRP 8 mg/L, both improved from previous values of 38 and 15 respectively.",LAB_RESULT
+Liver function tests and complete blood count remain within normal limits on current methotrexate dose.,LAB_RESULT
+"Disease activity is trending toward improved control on current methotrexate regimen, though not yet in full remission.",DIAGNOSIS
+Continue methotrexate 15 mg weekly with folic acid supplementation at current dose.,MEDICATION_INSTRUCTION
+Repeat labs including CBC and liver function in 8 weeks to continue monitoring medication safety.,FOLLOW_UP
+Follow-up visit in 3 months to reassess disease activity and consider treatment adjustment if needed.,FOLLOW_UP
+"Signed: Dr. Manuel Ortega-Kwan, MD. Fictional rheumatology note for software testing purposes only.",OTHER
+,
+"Restwell Sleep Diagnostics Center 12 Restwell Terrace | Dunmore, ST 00000 | (555) 288-4471 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Sleep Study Report",OTHER
+"Patient: Corbin Alistair Whitmore | DOB: 1980-06-25 | MRN: SYN-1013-TEST | Study Date: 2026-04-05 | Reviewing Physician: Dr. Naomi Kessler, MD",OTHER
+"Patient referred for evaluation of loud snoring, witnessed pauses in breathing during sleep, and excessive daytime sleepiness.",SYMPTOM
+Spouse reports patient gasps awake occasionally during the night.,SYMPTOM
+"Epworth Sleepiness Scale score is 15, indicating significant excessive daytime sleepiness.",LAB_RESULT
+Overnight polysomnography demonstrates an apnea-hypopnea index of 28 events per hour.,LAB_RESULT
+Lowest recorded oxygen saturation during the study was 84%.,LAB_RESULT
+Findings are consistent with moderate-to-severe obstructive sleep apnea.,DIAGNOSIS
+No evidence of central sleep apnea or significant periodic limb movements noted on the study.,DIAGNOSIS
+"Recommend initiation of continuous positive airway pressure (CPAP) therapy, with in-lab or auto-titration to determine optimal pressure settings.",MEDICATION_INSTRUCTION
+Counseled on weight management and avoidance of alcohol before bedtime to reduce apnea severity.,OTHER
+Follow-up in 6 weeks after CPAP initiation to assess adherence and symptom improvement.,FOLLOW_UP
+Repeat sleep study may be considered in the future if symptoms persist despite adequate CPAP compliance.,FOLLOW_UP
+"Electronically signed by: Dr. Naomi Kessler, MD, Sleep Medicine. Fictional report for software testing purposes only.",OTHER
+,
+"Riverbend Kidney & Dialysis Center 88 Riverbend Loop | Marlowe, ST 00000 | (555) 640-9927 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Dialysis Progress Note",OTHER
+"Patient: Temperance Idowu Larkspur | DOB: 1961-01-17 | MRN: SYN-1014-TEST | Date: 2026-09-01 | Nephrologist: Dr. Julian Ferreira, MD",OTHER
+Patient with end-stage renal disease on hemodialysis three times weekly reports increased fatigue and mild shortness of breath since last session.,SYMPTOM
+Reports some interdialytic weight gain due to difficulty following fluid restriction over the holiday weekend.,SYMPTOM
+"Denies chest pain, but notes mild ankle swelling has returned.",SYMPTOM
+"History: ESRD secondary to longstanding diabetic nephropathy, on hemodialysis for 3 years via AV fistula.",HISTORY
+"Pre-dialysis weight today is 4.2 kg above dry weight, blood pressure 168/94 mmHg.",LAB_RESULT
+"Potassium is elevated at 6.1 mmol/L, and phosphorus is elevated at 6.8 mg/dL despite current binder regimen.",LAB_RESULT
+"Hemoglobin is 9.8 g/dL, stable on current erythropoiesis-stimulating agent dosing.",LAB_RESULT
+"Findings indicate volume overload and electrolyte derangement related to dietary and fluid nonadherence, in the setting of ESRD on hemodialysis.",DIAGNOSIS
+Ultrafiltration goal increased for today's session to address volume overload; extended dialysis session ordered.,MEDICATION_INSTRUCTION
+Continue sevelamer 800 mg with meals for phosphorus control; reinforced counseling on fluid and dietary restriction.,MEDICATION_INSTRUCTION
+Extensive dietary counseling provided regarding potassium and fluid restriction; renal dietitian referral reinforced.,FOLLOW_UP
+Continue routine hemodialysis schedule three times weekly; recheck electrolytes at next session.,FOLLOW_UP
+"Electronically signed by: Dr. Julian Ferreira, MD, Nephrology. Fictional dialysis note for software testing purposes only.",OTHER
+,
+"Willow Grove Hospice & Palliative Care 200 Willow Grove Ln | Ashcombe, ST 00000 | (555) 415-2287 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Palliative Care Visit Note",OTHER
+"Patient: Augustina Ferro Whitlock | DOB: 1938-04-02 | MRN: SYN-1015-TEST | Date: 2026-05-20 | Provider: Dr. Harriet Suleiman, MD",OTHER
+Patient has advanced metastatic pancreatic cancer with declining functional status over the past month.,OTHER
+"Family reports increasing fatigue, poor appetite, and intermittent abdominal pain, currently rated 4 out of 10 on current regimen.",SYMPTOM
+"Patient reports feeling generally comfortable today, though sleeping more than usual.",SYMPTOM
+No nausea currently. Denies shortness of breath at rest.,SYMPTOM
+"History: Metastatic pancreatic adenocarcinoma, diagnosed 8 months ago, now transitioned to comfort-focused care per patient and family wishes.",HISTORY
+Currently on extended-release morphine 15 mg twice daily with oxycodone 5 mg as needed for breakthrough pain.,MEDICATION_INSTRUCTION
+"Vital signs today: blood pressure 102/64 mmHg, heart rate 88 bpm, oxygen saturation 94% on room air.",LAB_RESULT
+Overall clinical trajectory consistent with expected disease progression in the context of terminal illness.,DIAGNOSIS
+"Pain currently reasonably controlled on present regimen, though may require titration as disease progresses.",DIAGNOSIS
+Increase breakthrough oxycodone availability slightly given reports of increasing pain episodes; continue current long-acting morphine dose.,MEDICATION_INSTRUCTION
+"Extensive discussion held with patient and family regarding goals of care, symptom management, and hospice support services.",OTHER
+"Hospice team to continue home visits twice weekly, with as-needed visits available for symptom changes.",FOLLOW_UP
+Family provided with 24-hour hospice support line information for urgent symptom concerns.,FOLLOW_UP
+"Electronically signed by: Dr. Harriet Suleiman, MD, Palliative Care. Fictional note for software testing purposes only; not a real patient.",OTHER
+,
+"Fernbrook Internal Medicine Associates 210 Fernbrook Ave | Castlewood, ST 00000 | (555) 331-8820 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** New Patient Intake Note",OTHER
+"Patient: Wilhelmina Osgood-Farrow | DOB: 1963-02-14 | MRN: SYN-2001-TEST | Date: 2026-01-08 | Provider: Dr. Reginald Ashcombe, MD",OTHER
+Patient establishing care after relocating from out of state; here today primarily to transfer records and review history.,OTHER
+"Past Medical History: Hypertension diagnosed 2010, well controlled. Type 2 diabetes diagnosed 2015. Hypothyroidism diagnosed 2018.",HISTORY
+"Past Medical History: Osteoarthritis of both knees, managed conservatively. History of kidney stones, last episode in 2020, resolved spontaneously.",HISTORY
+"Past Surgical History: Appendectomy in 1998. Cesarean section x2, in 2001 and 2004. Cholecystectomy in 2016.",HISTORY
+"Family History: Mother had breast cancer diagnosed at age 68, currently in remission. Father had a myocardial infarction at age 70.",HISTORY
+Family History: Maternal grandmother had type 2 diabetes. No known family history of colon cancer or other hereditary syndromes.,HISTORY
+"Social History: Former smoker, quit 10 years ago after a 15-pack-year history. Drinks alcohol socially, roughly 2-3 drinks per week.",HISTORY
+"Social History: Works as a high school teacher. Married, lives with spouse. Exercises approximately 3 times weekly, mostly walking.",HISTORY
+Medication History: Previously tried lisinopril for hypertension but discontinued due to persistent cough; switched to losartan with good tolerance.,HISTORY
+"Allergy History: Reports penicillin allergy in childhood, described as hives; no history of anaphylaxis.",HISTORY
+Immunization History: Up to date on influenza and COVID-19 vaccinations per patient report; tetanus booster in 2022.,HISTORY
+"Current Medications: Losartan 50 mg daily, metformin 1000 mg twice daily, levothyroxine 75 mcg daily.",MEDICATION_INSTRUCTION
+Today's vital signs are within normal limits and stable.,LAB_RESULT
+No acute concerns identified today; primary purpose of visit was history review and care transfer.,DIAGNOSIS
+Plan to obtain outside records from prior primary care provider to confirm details of surgical and immunization history.,FOLLOW_UP
+Follow-up visit scheduled in 4 weeks to establish routine chronic disease management and order baseline labs.,FOLLOW_UP
+"Signed: Dr. Reginald Ashcombe, MD. Fictional intake note created for software testing purposes only.",OTHER
+,
+"Ashgate Surgical Center 77 Ashgate Pkwy | Marlow Heights, ST 00000 | (555) 460-1183 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Pre-Operative History and Physical",OTHER
+"Patient: Cormac Delacroix-Whitby | DOB: 1957-09-09 | MRN: SYN-2002-TEST | Date: 2026-02-19 | Surgeon: Dr. Adaeze Nwosu, MD",OTHER
+Scheduled Procedure: Right total knee arthroplasty for advanced osteoarthritis.,OTHER
+"History of Present Illness: Progressive right knee pain and stiffness over the past 5 years, now significantly limiting mobility and quality of life despite conservative management.",HISTORY
+Past Medical History: Coronary artery disease status post stent placement in 2019. Hypertension. Hyperlipidemia. Gastroesophageal reflux disease.,HISTORY
+"Past Surgical History: Coronary stent placement 2019. Left hip replacement in 2015, uncomplicated recovery.",HISTORY
+Family History: Father had osteoarthritis requiring bilateral knee replacements. No family history of bleeding disorders.,HISTORY
+"Social History: Retired construction worker. Non-smoker for 20 years, previously smoked 1 pack per day for 15 years. Denies alcohol or recreational drug use.",HISTORY
+Anesthesia History: Previous general anesthesia without complication during prior hip replacement and stent procedure.,HISTORY
+Allergy History: No known drug allergies. Denies latex sensitivity.,HISTORY
+"Current Medications: Aspirin 81 mg daily, atorvastatin 40 mg daily, metoprolol 25 mg twice daily, omeprazole 20 mg daily.",MEDICATION_INSTRUCTION
+"Physical exam reveals significant crepitus and reduced range of motion of the right knee, with varus deformity noted.",LAB_RESULT
+Pre-operative labs and EKG reviewed and within acceptable limits for surgical clearance.,LAB_RESULT
+Patient cleared for surgery from a cardiac standpoint given stable coronary disease and reassuring recent cardiology workup.,DIAGNOSIS
+"Diagnosis: Severe right knee osteoarthritis, surgical candidate.",DIAGNOSIS
+Aspirin to be held 5 days prior to surgery per surgical protocol; metoprolol to be continued through the morning of surgery.,MEDICATION_INSTRUCTION
+Surgery scheduled for 2026-03-04; pre-admission testing and anesthesia consultation to occur one week prior.,FOLLOW_UP
+Post-operative follow-up appointment already scheduled for 2 weeks after surgery.,FOLLOW_UP
+"Signed: Dr. Adaeze Nwosu, MD. Fictional pre-operative note for software testing purposes only.",OTHER
+,
+"Brightwater Family Practice 30 Brightwater Ln | Elmsworth, ST 00000 | (555) 274-6602 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Annual Wellness Visit Note",OTHER
+"Patient: Isolde Marchetti-Nkrumah | DOB: 1991-11-27 | MRN: SYN-2003-TEST | Date: 2026-04-01 | Provider: Dr. Bartholomew Quill, MD",OTHER
+Patient here for routine annual physical exam; feels well overall with no specific complaints today.,SYMPTOM
+"Past Medical History: Mild intermittent asthma since childhood, well controlled, rarely uses rescue inhaler.",HISTORY
+"Past Medical History: Iron deficiency anemia in her twenties, resolved with supplementation, no recurrence since.",HISTORY
+Past Surgical History: Tonsillectomy at age 8. No other surgeries.,HISTORY
+"Gynecologic History: Regular menstrual cycles. Last Pap smear 2 years ago, normal. Not currently sexually active.",HISTORY
+Family History: Mother alive and healthy. Father has type 2 diabetes and hypertension. One sibling with asthma.,HISTORY
+"Social History: Works remotely as a graphic designer. Non-smoker, denies illicit drug use, drinks alcohol rarely.",HISTORY
+"Social History: Follows a mostly plant-based diet, exercises 4-5 times weekly including running and yoga.",HISTORY
+Immunization History: Up to date on all routine vaccinations including HPV series completed in her teens.,HISTORY
+"Current Medications: Albuterol inhaler as needed, used approximately once monthly. Multivitamin daily.",MEDICATION_INSTRUCTION
+No known drug allergies.,HISTORY
+Vital signs and physical exam today are unremarkable and within normal limits.,LAB_RESULT
+"Routine bloodwork including CBC, metabolic panel, and lipid panel ordered as part of preventive screening.",LAB_RESULT
+"Overall health assessment is excellent, with no new concerns identified today.",DIAGNOSIS
+Discussed age-appropriate cancer screening guidelines and recommended scheduling a Pap smear given it has been 2 years.,FOLLOW_UP
+"Routine follow-up in 1 year for next annual wellness visit, sooner if any new symptoms arise.",FOLLOW_UP
+"Signed: Dr. Bartholomew Quill, MD. Fictional wellness visit note for software testing purposes only.",OTHER
+,
+"Harborlight Recovery & Wellness Center 14 Harborlight Way | Northbrook, ST 00000 | (555) 812-4470 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Addiction Medicine Intake Note",OTHER
+"Patient: Desmond Achterberg-Ruiz | DOB: 1989-06-13 | MRN: SYN-2004-TEST | Date: 2026-05-06 | Provider: Dr. Ingrid Solstad, MD",OTHER
+"Patient self-referred for evaluation and treatment of opioid use disorder, motivated to begin medication-assisted treatment.",OTHER
+"Substance Use History: Reports opioid use beginning approximately 6 years ago following a prescription for post-surgical pain, progressing to non-prescribed use over time.",HISTORY
+"Substance Use History: Last use was 2 days ago. Denies current use of alcohol, benzodiazepines, or stimulants.",HISTORY
+"Substance Use History: One prior attempt at outpatient detox 2 years ago, relapsed within 3 months.",HISTORY
+"Past Medical History: Chronic lower back pain following a workplace injury in 2018, the original source of opioid prescription.",HISTORY
+"Past Medical History: Hepatitis C diagnosed 3 years ago, currently untreated.",HISTORY
+Family History: Father with history of alcohol use disorder. No family history of major psychiatric illness reported.,HISTORY
+"Social History: Currently unemployed, previously worked in warehouse logistics. Lives with a supportive sibling.",HISTORY
+"Psychiatric History: No prior psychiatric hospitalizations. Reports symptoms of anxiety, not currently treated.",HISTORY
+"Patient reports mild withdrawal symptoms today including muscle aches, anxiety, and nausea, consistent with early opioid withdrawal.",SYMPTOM
+"Clinical Opiate Withdrawal Scale score today is 9, indicating mild withdrawal.",LAB_RESULT
+"Urine drug screen today is positive for opioids, negative for other substances tested.",LAB_RESULT
+"Assessment: Opioid use disorder, moderate severity, currently in early withdrawal.",DIAGNOSIS
+"Initiate buprenorphine-naloxone induction today per standard protocol, starting with 4 mg/1 mg.",MEDICATION_INSTRUCTION
+Provided referral for hepatitis C treatment evaluation given active untreated infection.,FOLLOW_UP
+Return to clinic in 3 days for induction follow-up and dose adjustment as needed.,FOLLOW_UP
+"Signed: Dr. Ingrid Solstad, MD. Fictional addiction medicine note for software testing purposes only.",OTHER
+,
+"Helix Point Genetic Counseling Services 5 Helix Point Dr | Cambermere, ST 00000 | (555) 907-2231 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Genetic Counseling Consultation Note",OTHER
+"Patient: Seraphina Oduya-Lindqvist | DOB: 1986-03-03 | MRN: SYN-2005-TEST | Date: 2026-06-17 | Counselor: Dr. Petra Alderman, MS, CGC",OTHER
+Patient referred for genetic counseling given significant family history of breast and ovarian cancer.,OTHER
+Family History: Mother diagnosed with breast cancer at age 42. Maternal aunt diagnosed with ovarian cancer at age 50.,HISTORY
+"Family History: Maternal grandmother diagnosed with breast cancer at age 45, deceased. No known genetic testing performed in family previously.",HISTORY
+Family History: Paternal side notable for colon cancer in a paternal uncle at age 58; no known hereditary syndrome identified.,HISTORY
+Past Medical History: Patient herself has no personal history of cancer. Generally healthy with no chronic conditions.,HISTORY
+"Past Surgical History: None. Reproductive History: G0P0, has not yet had children, family planning in progress.",HISTORY
+"Social History: Non-smoker, minimal alcohol use. Works as a software engineer.",HISTORY
+"Detailed three-generation pedigree constructed during visit, reviewed in depth with patient given multiple affected relatives.",HISTORY
+"Given the pattern of early-onset breast and ovarian cancer across multiple generations, hereditary breast and ovarian cancer syndrome is a significant consideration.",DIAGNOSIS
+Recommend multigene panel testing including BRCA1 and BRCA2 given family history pattern.,LAB_RESULT
+"Extensive discussion held regarding implications of genetic testing results, including potential impact on screening, prevention, and family planning.",OTHER
+Blood sample obtained today and sent to laboratory for genetic panel testing.,LAB_RESULT
+Results expected within 3-4 weeks; patient will be contacted to schedule results disclosure appointment.,FOLLOW_UP
+Recommended patient encourage at-risk relatives to consider genetic counseling and testing as well.,FOLLOW_UP
+"Signed: Dr. Petra Alderman, MS, CGC. Fictional genetic counseling note for software testing purposes only.",OTHER
+,
+"Cascade Pulmonary & Sleep Associates 400 Cascade Blvd, Suite 2 | Windmere, ST 00000 | (555) 512-7734 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Pulmonology Clinic Note",OTHER
+"Patient: Alistair Bramwell Quaye | DOB: 1954-08-19 | MRN: SYN-3001-TEST | Date: 2026-01-27 | Provider: Dr. Yolanda Espinosa, MD",OTHER
+"Patient reports worsening shortness of breath over the past 5 days, now occurring with minimal exertion such as walking to the mailbox.",SYMPTOM
+"Increased cough productive of thick yellow sputum, a change from his usual clear sputum.",SYMPTOM
+"Reports using rescue inhaler up to 6 times daily, more than his usual 1-2 times.",SYMPTOM
+"Denies fever, chest pain, or hemoptysis.",SYMPTOM
+"History: Chronic obstructive pulmonary disease, GOLD stage III, diagnosed 2017. 40-pack-year smoking history, quit in 2018.",HISTORY
+"History: Two prior COPD exacerbations requiring oral steroids in the past year, no prior hospitalizations.",HISTORY
+Current maintenance medications include tiotropium once daily and fluticasone-salmeterol twice daily.,MEDICATION_INSTRUCTION
+"Oxygen saturation is 89% on room air, down from baseline of 94%.",LAB_RESULT
+Lung exam reveals diffuse expiratory wheezing and prolonged expiratory phase bilaterally.,LAB_RESULT
+"Chest X-ray shows hyperinflation without focal consolidation, no evidence of pneumonia.",LAB_RESULT
+"Assessment: Acute COPD exacerbation, likely triggered by respiratory infection given change in sputum character.",DIAGNOSIS
+No radiographic evidence of pneumonia; exacerbation appears bronchitic rather than pneumonic in nature.,DIAGNOSIS
+Start prednisone 40 mg daily for 5 days.,MEDICATION_INSTRUCTION
+"Start azithromycin 500 mg on day one, then 250 mg daily for 4 more days.",MEDICATION_INSTRUCTION
+Increase albuterol nebulizer treatments to every 4 hours as needed while symptomatic.,MEDICATION_INSTRUCTION
+Supplemental oxygen 2L via nasal cannula prescribed for home use while oxygen saturation remains below 90%.,MEDICATION_INSTRUCTION
+"Instructed to seek emergency care immediately if breathing significantly worsens, oxygen saturation drops further, or confusion develops.",FOLLOW_UP
+Follow-up appointment in 1 week to reassess symptoms and oxygen requirement.,FOLLOW_UP
+"Signed: Dr. Yolanda Espinosa, MD, Pulmonology. Fictional clinic note created for software testing purposes only.",OTHER
+,
+"Meridian Infectious Disease Consultants 88 Meridian Row | Castellan, ST 00000 | (555) 673-2298 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Infectious Disease Consultation",OTHER
+"Patient: Genevieve Toussaint-Okonkwo | DOB: 1969-05-04 | MRN: SYN-3002-TEST | Date: 2026-02-15 | Consultant: Dr. Hassan Wexford, MD",OTHER
+"Patient presents with 3 days of worsening redness, warmth, and swelling of the right lower leg.",SYMPTOM
+Reports fever up to 101.8 F at home and chills overnight.,SYMPTOM
+"Describes increasing pain at the site, now rated 7 out of 10, limiting ambulation.",SYMPTOM
+"History: Type 2 diabetes mellitus, moderately controlled. Chronic venous insufficiency of bilateral lower extremities.",HISTORY
+"History: No prior episodes of cellulitis. No recent trauma recalled, though small skin break noted near the ankle.",HISTORY
+"Temperature 101.4 F, heart rate 104 bpm, blood pressure 128/80 mmHg.",LAB_RESULT
+"Right lower leg shows well-demarcated erythema extending from the ankle to mid-shin, warm to touch, with mild edema.",LAB_RESULT
+White blood cell count elevated at 14.1 x10^9/L. Blood cultures drawn prior to antibiotics.,LAB_RESULT
+"Assessment: Moderate-to-severe cellulitis of the right lower extremity, likely streptococcal or staphylococcal in origin.",DIAGNOSIS
+"Given systemic symptoms including fever and elevated white count, admission for IV antibiotics is warranted rather than outpatient oral therapy.",DIAGNOSIS
+"Start IV vancomycin, dosed by weight and renal function, to cover for possible MRSA given severity.",MEDICATION_INSTRUCTION
+Elevate affected leg and mark borders of erythema to monitor for progression or improvement.,MEDICATION_INSTRUCTION
+Acetaminophen 650 mg every 6 hours as needed for fever and pain.,MEDICATION_INSTRUCTION
+Plan to transition to oral antibiotics once afebrile for 24-48 hours and clinical improvement noted.,FOLLOW_UP
+Daily reassessment of leg appearance and vital signs during admission.,FOLLOW_UP
+"Signed: Dr. Hassan Wexford, MD, Infectious Disease. Fictional consultation note for software testing purposes only.",OTHER
+,
+"Stonebridge Urology Group 15 Stonebridge Ct | Fairhaven, ST 00000 | (555) 228-4471 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Urology Clinic Note",OTHER
+"Patient: Percival Attah-Lindqvist | DOB: 1975-10-30 | MRN: SYN-3003-TEST | Date: 2026-03-22 | Provider: Dr. Rosalind Meng, MD",OTHER
+"Patient referred following ED visit for right-sided flank pain, found to have a ureteral stone on CT imaging.",OTHER
+Patient reports pain has improved somewhat since the ED visit but still notes intermittent dull ache and occasional blood-tinged urine.,SYMPTOM
+Denies fever or chills since the initial ED visit; urinating normally without significant burning.,SYMPTOM
+"History: One prior kidney stone episode 5 years ago, passed spontaneously without intervention.",HISTORY
+"History: No history of chronic kidney disease. Drinks minimal water daily, roughly 2 cups, by his own report.",HISTORY
+Currently taking tamsulosin 0.4 mg daily as prescribed at ED discharge to aid stone passage.,MEDICATION_INSTRUCTION
+CT imaging from ED visit shows a 6 mm stone in the right distal ureter without significant hydronephrosis.,LAB_RESULT
+"Urinalysis today shows microscopic hematuria, no evidence of active infection.",LAB_RESULT
+"Assessment: Right distal ureteral stone, 6 mm, currently being managed with medical expulsive therapy.",DIAGNOSIS
+"Given stone size and lack of current infection or significant obstruction, continued conservative management is reasonable at this time.",DIAGNOSIS
+Continue tamsulosin 0.4 mg daily until stone passage confirmed.,MEDICATION_INSTRUCTION
+Ibuprofen 400-600 mg every 6-8 hours as needed for breakthrough pain.,MEDICATION_INSTRUCTION
+Counseled on importance of increasing fluid intake to at least 2-3 liters daily to promote stone passage and prevent future stones.,MEDICATION_INSTRUCTION
+"Instructed to strain urine to catch the stone if passed, and to seek urgent care for fever, worsening pain, or inability to urinate.",FOLLOW_UP
+Follow-up in 2 weeks with repeat imaging if stone has not passed by then; will discuss lithotripsy if needed at that time.,FOLLOW_UP
+"Signed: Dr. Rosalind Meng, MD, Urology. Fictional clinic note created for software testing purposes only.",OTHER
+,
+"Clarion Allergy & Immunology Center 60 Clarion St, Suite 3 | Thistlewood, ST 00000 | (555) 384-9012 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Allergy/Immunology Consultation Letter",OTHER
+"Dear Dr. Hargrove, Thank you for referring Mr. Emeka Falworth-Stavros (DOB 1998-12-01, MRN SYN-3004-TEST) following his recent anaphylactic reaction.",OTHER
+"The patient describes developing lip swelling, hives over his chest and arms, throat tightness, and lightheadedness within minutes of eating at a restaurant two weeks ago.",SYMPTOM
+"He reports the meal contained shellfish, which he had eaten previously without issue, though he notes possible cross-contamination with peanuts was mentioned by staff.",SYMPTOM
+"Symptoms progressed rapidly and he was treated with intramuscular epinephrine by EMS, with resolution of symptoms en route to the hospital.",SYMPTOM
+History: No prior known food allergies. No history of asthma or eczema. Family history of peanut allergy in a younger sibling.,HISTORY
+History: No previous anaphylactic episodes prior to this event.,HISTORY
+"Skin prick testing performed today shows strong positive reactions to peanut and shellfish, with wheal sizes significantly larger than histamine control.",LAB_RESULT
+"Serum tryptase drawn shortly after the reaction was elevated, supporting a diagnosis of anaphylaxis.",LAB_RESULT
+"Assessment: Anaphylaxis due to food allergy, most consistent with peanut and/or shellfish exposure based on testing and reaction history.",DIAGNOSIS
+"Given the severity of this reaction, this patient is at high risk for future life-threatening reactions with re-exposure.",DIAGNOSIS
+"Prescribed two epinephrine auto-injectors, with detailed instruction on proper use and importance of carrying them at all times.",MEDICATION_INSTRUCTION
+"Provided a written anaphylaxis action plan and counseled extensively on strict avoidance of peanuts and shellfish, including cross-contamination risks.",MEDICATION_INSTRUCTION
+"Recommended cetirizine 10 mg daily may be used for mild allergic symptoms, but does not replace epinephrine for anaphylaxis.",MEDICATION_INSTRUCTION
+Will see the patient again in 6 months to reassess and consider extended allergen panel testing.,FOLLOW_UP
+"Strongly advised immediate emergency department evaluation after any future use of epinephrine, even if symptoms improve.",FOLLOW_UP
+"Sincerely, Dr. Odalys Ferreira, MD, Allergy and Immunology. Fictional letter created for software testing purposes only.",OTHER
+,
+"Ironwood Cardiac Care 500 Ironwood Dr | Bellhaven, ST 00000 | (555) 741-8823 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Cardiology SOAP Note",OTHER
+"Patient: Florence Adaeze Whitcombe | DOB: 1960-04-16 | MRN: SYN-3005-TEST | Date: 2026-04-09 | Provider: Dr. Sebastian Larue, MD",OTHER
+"S: Patient reports sudden onset heart racing and palpitations starting this morning, associated with mild shortness of breath and fatigue.",SYMPTOM
+"S: Denies chest pain, syncope, or lightheadedness. No prior episodes like this before.",SYMPTOM
+"S: PMH: Hypertension, well controlled. No prior cardiac history or arrhythmias.",HISTORY
+S: Currently takes amlodipine 5 mg daily for blood pressure.,MEDICATION_INSTRUCTION
+"O: Heart rate irregularly irregular at 138 bpm, blood pressure 122/78 mmHg, oxygen saturation 97%.",LAB_RESULT
+"O: EKG confirms atrial fibrillation with rapid ventricular response, no ST-segment changes noted.",LAB_RESULT
+"O: Thyroid function tests and electrolytes within normal limits, ruling out common secondary causes.",LAB_RESULT
+A: New-onset atrial fibrillation with rapid ventricular response.,DIAGNOSIS
+"A: CHA2DS2-VASc score calculated at 3, indicating elevated stroke risk warranting anticoagulation.",DIAGNOSIS
+A: No evidence of acute coronary syndrome or structural cause identified on today's workup.,DIAGNOSIS
+P: Start metoprolol 25 mg twice daily for rate control.,MEDICATION_INSTRUCTION
+P: Start apixaban 5 mg twice daily for stroke prevention given elevated CHA2DS2-VASc score.,MEDICATION_INSTRUCTION
+P: Order outpatient echocardiogram to evaluate cardiac structure and function.,MEDICATION_INSTRUCTION
+P: Return to clinic in 1 week to assess heart rate control and medication tolerance.,FOLLOW_UP
+"P: Instructed to seek emergency care for chest pain, severe shortness of breath, fainting, or signs of stroke.",FOLLOW_UP
+"Signed: Dr. Sebastian Larue, MD, Cardiology. Fictional SOAP note created for software testing purposes only.",OTHER
+,
+"Copperleaf Gastroenterology Clinic 22 Copperleaf Ave | Dunwich Falls, ST 00000 | (555) 396-1187 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Gastroenterology Follow-Up Note",OTHER
+"Patient: Rutherford Aiyegbeni Cole | DOB: 1993-07-08 | MRN: SYN-3006-TEST | Date: 2026-05-25 | Provider: Dr. Miriam Halvorsen, MD",OTHER
+"Patient reports increased abdominal cramping and 6-8 loose bowel movements daily over the past 2 weeks, with occasional blood noted in stool.",SYMPTOM
+Also notes new mild joint pain in his knees and increased fatigue over the same period.,SYMPTOM
+"Denies fever, though reports decreased appetite and roughly 4 lb unintentional weight loss.",SYMPTOM
+"History: Crohn's disease diagnosed 4 years ago, previously well controlled on maintenance therapy.",HISTORY
+"History: One prior flare requiring hospitalization 2 years ago, resolved with steroid therapy at that time.",HISTORY
+"Currently on maintenance azathioprine 100 mg daily, with reported good adherence.",MEDICATION_INSTRUCTION
+"C-reactive protein is elevated at 42 mg/L, and fecal calprotectin is markedly elevated at 850 mcg/g.",LAB_RESULT
+"Hemoglobin is mildly decreased at 11.2 g/dL, likely reflecting chronic blood loss and inflammation.",LAB_RESULT
+"Assessment: Moderate Crohn's disease flare, with associated extraintestinal joint symptoms and mild anemia.",DIAGNOSIS
+Current maintenance therapy appears insufficient to control disease activity at this time.,DIAGNOSIS
+Start prednisone 40 mg daily with a planned taper over the next 6-8 weeks to induce remission.,MEDICATION_INSTRUCTION
+Plan to transition from azathioprine to a biologic agent given inadequate control on current regimen; prior authorization being submitted for adalimumab.,MEDICATION_INSTRUCTION
+Iron studies ordered to further evaluate anemia and guide potential supplementation.,LAB_RESULT
+Follow-up in 2 weeks to assess steroid response and finalize biologic therapy initiation.,FOLLOW_UP
+"Instructed to call clinic or seek urgent care for worsening bleeding, severe abdominal pain, or high fever.",FOLLOW_UP
+"Signed: Dr. Miriam Halvorsen, MD, Gastroenterology. Fictional follow-up note created for software testing purposes only.",OTHER
+,
+"Graystone Orthopedic Hospital 900 Graystone Way | Elderfield, ST 00000 | (555) 655-2093 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** DISCHARGE SUMMARY",OTHER
+"Patient: Millicent Farrow-Odusanya | DOB: 1942-09-21 | MRN: SYN-3007-TEST | Admit: 2026-06-01 | Discharge: 2026-06-06 | Surgeon: Dr. Callum Whitmarsh, MD",OTHER
+"Reason for Admission: Right hip fracture sustained after a fall at home, requiring surgical fixation.",OTHER
+"On presentation, patient reported severe right hip pain and inability to bear weight following the fall, with visible leg shortening and external rotation.",SYMPTOM
+"History: Osteoporosis, diagnosed 2020, on treatment. Atrial fibrillation on anticoagulation. Mild cognitive impairment at baseline per family.",HISTORY
+History: Lives alone prior to admission with family checking in daily; ambulated independently with a cane at baseline.,HISTORY
+Home medications prior to admission included apixaban 5 mg twice daily and alendronate 70 mg weekly.,MEDICATION_INSTRUCTION
+X-ray confirmed a displaced right intertrochanteric femur fracture.,LAB_RESULT
+Anticoagulation was reversed pre-operatively given need for urgent surgical fixation; hemoglobin post-op stable at 10.4 g/dL.,LAB_RESULT
+"Hospital Course: Patient underwent open reduction and internal fixation of the right hip without complication, tolerated procedure well.",OTHER
+"Post-operatively, patient progressed with physical therapy, advancing from bed-to-chair to walker-assisted ambulation by discharge.",LAB_RESULT
+"Discharge Diagnosis: Right intertrochanteric hip fracture, status post open reduction and internal fixation.",DIAGNOSIS
+"Secondary diagnosis: Osteoporosis, contributing factor to fracture, will require ongoing management.",DIAGNOSIS
+Resume apixaban 5 mg twice daily 48 hours post-operatively per surgical clearance.,MEDICATION_INSTRUCTION
+Continue alendronate 70 mg weekly; start calcium 1200 mg and vitamin D 800 units daily for bone health.,MEDICATION_INSTRUCTION
+"Oxycodone 5 mg every 6 hours as needed for post-surgical pain, with plan to wean as tolerated.",MEDICATION_INSTRUCTION
+Discharge to skilled nursing facility for continued physical therapy and rehabilitation given baseline mobility needs.,FOLLOW_UP
+Follow-up with orthopedic surgery in 2 weeks for wound check and X-ray; primary care follow-up within 1 week of facility discharge.,FOLLOW_UP
+"Dictated by: Dr. Callum Whitmarsh, MD. Fictional discharge summary created for software testing purposes only.",OTHER
+,
+"Lantern Hill Psychiatric Associates 33 Lantern Hill Rd | Ashworth, ST 00000 | (555) 209-7734 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Psychiatric Medication Management Note",OTHER
+"Patient: Thaddeus Okwuosa-Reyes | DOB: 1982-02-25 | MRN: SYN-3008-TEST | Date: 2026-07-08 | Provider: Dr. Anneliese Grunwald, MD",OTHER
+"Patient reports a recent period of decreased need for sleep, racing thoughts, and increased spending over the past 10 days, consistent with hypomanic symptoms.",SYMPTOM
+Also notes increased irritability and difficulty focusing at work during this period.,SYMPTOM
+"Denies psychotic symptoms, suicidal ideation, or risk-taking behavior beyond increased spending.",SYMPTOM
+"History: Bipolar I disorder, diagnosed 2015, with prior manic episode requiring hospitalization in 2016.",HISTORY
+History: Generally stable for the past 2 years on current medication regimen prior to this episode.,HISTORY
+Currently taking lithium 900 mg daily and quetiapine 100 mg at bedtime.,MEDICATION_INSTRUCTION
+"Lithium level drawn today is 0.5 mEq/L, below therapeutic range, likely contributing to breakthrough symptoms.",LAB_RESULT
+Thyroid function and renal function remain within normal limits on current lithium therapy.,LAB_RESULT
+Assessment: Breakthrough hypomanic episode in the context of subtherapeutic lithium level.,DIAGNOSIS
+Overall bipolar disorder remains without evidence of full manic or depressive episode at this time.,DIAGNOSIS
+"Increase lithium to 1200 mg daily, with repeat level to be checked in 1 week.",MEDICATION_INSTRUCTION
+Temporarily increase quetiapine to 150 mg at bedtime to help with sleep and mood stabilization.,MEDICATION_INSTRUCTION
+Discussed importance of consistent medication adherence and avoiding sleep disruption as a mood trigger.,OTHER
+Repeat lithium level and basic metabolic panel in 1 week to confirm therapeutic dosing.,FOLLOW_UP
+Follow-up appointment in 2 weeks to reassess mood symptoms and medication tolerance.,FOLLOW_UP
+"Signed: Dr. Anneliese Grunwald, MD, Psychiatry. Fictional medication management note for software testing purposes only.",OTHER
+,
+"Brightpath Children's Hospital Emergency Department 5 Brightpath Cir | Rosemont, ST 00000 | (555) 480-6621 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Pediatric Emergency Note",OTHER
+"Patient: Nadia Oyelaran-Fitzgerald | DOB: 2017-03-11 | MRN: SYN-3009-TEST | Date: 2026-08-19 | Attending: Dr. Julian Marchetti, MD",OTHER
+"Parent reports 2 days of worsening cough and wheezing, with increased work of breathing over the past several hours despite home rescue inhaler use.",SYMPTOM
+Child has been using albuterol inhaler every 2 hours at home without significant improvement prior to arrival.,SYMPTOM
+Parent notes child has been unable to complete full sentences due to breathlessness in the past hour.,SYMPTOM
+"History: Persistent asthma, diagnosed at age 3, with 2 prior ED visits and 1 hospitalization for exacerbations.",HISTORY
+History: Known trigger includes upper respiratory infections; up to date on maintenance inhaled corticosteroid therapy at home.,HISTORY
+Home medications include fluticasone inhaler twice daily and albuterol as needed.,MEDICATION_INSTRUCTION
+"Respiratory rate 38/min, oxygen saturation 91% on room air, heart rate 132 bpm.",LAB_RESULT
+Exam reveals significant intercostal and subcostal retractions with diffuse expiratory wheezing bilaterally.,LAB_RESULT
+Peak flow measurement is 45% of predicted personal best.,LAB_RESULT
+"Assessment: Moderate-to-severe asthma exacerbation, not adequately responding to home rescue therapy.",DIAGNOSIS
+No signs of pneumonia or foreign body aspiration on exam; presentation consistent with typical asthma trigger pattern.,DIAGNOSIS
+Administer continuous albuterol nebulizer treatment combined with ipratropium bromide.,MEDICATION_INSTRUCTION
+Start oral dexamethasone 0.6 mg/kg for anti-inflammatory effect.,MEDICATION_INSTRUCTION
+Supplemental oxygen via nasal cannula to maintain saturation above 94%.,MEDICATION_INSTRUCTION
+Plan to reassess respiratory status after nebulizer treatments; admission to be considered if inadequate improvement.,FOLLOW_UP
+Family given detailed asthma action plan and instructed on escalation of home therapy for future exacerbations.,FOLLOW_UP
+"Signed: Dr. Julian Marchetti, MD, Pediatric Emergency Medicine. Fictional ED note for software testing purposes only.",OTHER
+,
+"Meadowlight Endocrine Specialists 18 Meadowlight Dr | Ashvale, ST 00000 | (555) 823-1140 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Endocrinology Consultation Note",OTHER
+"Patient: Cassian Delgado-Whitfield | DOB: 1988-11-15 | MRN: SYN-3010-TEST | Date: 2026-09-02 | Provider: Dr. Rosamund Iheanacho, MD",OTHER
+Patient referred after a thyroid nodule was incidentally noted on a neck CT performed for an unrelated reason.,OTHER
+"Patient reports no symptoms of hyperthyroidism or hypothyroidism, and has not noticed any neck swelling, difficulty swallowing, or voice changes himself.",SYMPTOM
+History: No personal history of thyroid disease or radiation exposure. No family history of thyroid cancer.,HISTORY
+History: No current medications. No known drug allergies.,HISTORY
+"Thyroid function tests today are normal, with TSH 2.1 mIU/L, consistent with euthyroid status.",LAB_RESULT
+"Neck ultrasound shows a 1.4 cm solid nodule in the right thyroid lobe with some irregular margins, without suspicious lymph nodes.",LAB_RESULT
+"Physical exam reveals a palpable, non-tender nodule in the right thyroid lobe without cervical lymphadenopathy.",LAB_RESULT
+"Assessment: Thyroid nodule with sonographic features of intermediate suspicion, warranting further tissue evaluation.",DIAGNOSIS
+"Thyroid function is currently normal, and there is no clinical evidence of malignant spread at this time.",DIAGNOSIS
+Recommend fine-needle aspiration biopsy of the right thyroid nodule to determine cytologic characteristics.,MEDICATION_INSTRUCTION
+No medication changes needed at this time given normal thyroid function.,MEDICATION_INSTRUCTION
+Biopsy scheduled for next week; results expected within 5-7 business days.,FOLLOW_UP
+"Follow-up visit scheduled in 3 weeks to review biopsy results and determine further management, which may include surgical referral depending on findings.",FOLLOW_UP
+"Signed: Dr. Rosamund Iheanacho, MD, Endocrinology. Fictional consultation note for software testing purposes only.",OTHER
+,
+"Meridian Autoimmune & Rheumatology Institute 240 Meridian Crossing | Ashford Bend, ST 00000 | (555) 918-2245 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Rheumatology Consultation — Complex Case",OTHER
+"Patient: Ophelia Marchetti-Adeyemi | DOB: 1991-03-17 | MRN: SYN-4001-TEST | Date: 2026-01-14 | Provider: Dr. Ezekiel Vantongeren, MD",OTHER
+"Patient presents with a constellation of symptoms over the past 6 weeks including a malar rash that worsens with sun exposure, symmetric polyarthralgia affecting the hands and knees, and pleuritic chest pain that worsens with deep inspiration.",SYMPTOM
+"She additionally reports new-onset lower extremity edema, frothy urine, and unintentional 8-pound weight loss, raising concern for renal and systemic involvement rather than isolated musculoskeletal disease.",SYMPTOM
+"Low-grade fevers have been intermittently documented at home, ranging from 99.5 to 100.8 F, alongside profound fatigue disproportionate to her activity level.",SYMPTOM
+"She also describes patchy hair thinning and painless oral ulcers noted over the past month, which she initially attributed to stress.",SYMPTOM
+"History: Systemic lupus erythematosus diagnosed 3 years ago, previously well controlled on hydroxychloroquine monotherapy with no prior renal involvement.",HISTORY
+"History: One prior flare 18 months ago involving joints and skin only, managed with a short steroid course without long-term sequelae.",HISTORY
+"Currently taking hydroxychloroquine 200 mg twice daily, with reportedly consistent adherence.",MEDICATION_INSTRUCTION
+"Urinalysis today reveals 3+ proteinuria with red blood cell casts, and spot urine protein-to-creatinine ratio is markedly elevated at 4.2 mg/mg.",LAB_RESULT
+"Complement levels are significantly depressed, with C3 of 42 mg/dL and C4 of 6 mg/dL, alongside a markedly elevated anti-dsDNA titer.",LAB_RESULT
+"Complete blood count reveals mild leukopenia and thrombocytopenia, consistent with active hematologic involvement of her underlying disease.",LAB_RESULT
+"Assessment: Severe lupus flare with likely lupus nephritis given proteinuria, hematuria, and depressed complement levels, in addition to hematologic and mucocutaneous involvement.",DIAGNOSIS
+"The combination of renal, hematologic, and constitutional findings represents a significant escalation from her prior joint- and skin-limited disease pattern, warranting urgent nephrology co-management and likely renal biopsy.",DIAGNOSIS
+Initiate high-dose oral prednisone 60 mg daily while urgent renal biopsy and further immunosuppressive planning are arranged.,MEDICATION_INSTRUCTION
+Continue hydroxychloroquine 200 mg twice daily; plan to add mycophenolate mofetil pending renal biopsy results to confirm nephritis class.,MEDICATION_INSTRUCTION
+Urgent nephrology referral placed today for expedited renal biopsy given rapidly progressive proteinuria and active urinary sediment.,FOLLOW_UP
+"Close monitoring of blood pressure, renal function, and complete blood counts arranged with labs twice weekly until disease activity stabilizes.",FOLLOW_UP
+"Signed: Dr. Ezekiel Vantongeren, MD, Rheumatology. Fictional complex case note for software testing purposes only.",OTHER
+,
+"Cardinal Point Heart Failure & Transplant Center 501 Cardinal Point Dr | Ellsworth Harbor, ST 00000 | (555) 402-8871 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Advanced Heart Failure Consultation",OTHER
+"Patient: Reginald Achterberg Kowalczyk | DOB: 1958-08-02 | MRN: SYN-4002-TEST | Date: 2026-02-03 | Provider: Dr. Naledi Mokoena, MD",OTHER
+"Patient presents with progressive dyspnea on exertion that has advanced over the past month from being able to walk several blocks to now becoming breathless after only a few steps, accompanied by orthopnea requiring three pillows to sleep.",SYMPTOM
+"He also reports paroxysmal nocturnal dyspnea occurring several times weekly, significant bilateral lower extremity and now scrotal edema, and a 12-pound weight gain over the past 10 days despite reported adherence to fluid restriction.",SYMPTOM
+"Additionally notes early satiety, right upper quadrant discomfort, and worsening abdominal distension, findings concerning for hepatic congestion secondary to right-sided heart failure.",SYMPTOM
+"He describes intermittent lightheadedness with standing, raising concern for either over-diuresis or evolving cardiogenic component to his presentation.",SYMPTOM
+"History: Ischemic cardiomyopathy with left ventricular ejection fraction of 25% on last echocardiogram, chronic kidney disease stage 3b, and atrial fibrillation on anticoagulation.",HISTORY
+"History: Two prior heart failure hospitalizations in the past year, most recently requiring inotropic support, now being evaluated for advanced therapies including possible left ventricular assist device candidacy.",HISTORY
+"Home medications include furosemide 80 mg twice daily, sacubitril-valsartan 97/103 mg twice daily, carvedilol 25 mg twice daily, spironolactone 25 mg daily, and apixaban 5 mg twice daily.",MEDICATION_INSTRUCTION
+"BNP is markedly elevated at 2450 pg/mL, and basic metabolic panel reveals worsening renal function with creatinine rising to 2.1 mg/dL from a baseline of 1.6 mg/dL, consistent with cardiorenal syndrome.",LAB_RESULT
+"Chest X-ray demonstrates bilateral pleural effusions and pulmonary vascular congestion, while bedside ultrasound confirms a dilated, minimally collapsible inferior vena cava consistent with significant volume overload.",LAB_RESULT
+"Liver function tests show mild transaminitis and elevated bilirubin, patterns consistent with congestive hepatopathy rather than primary hepatic disease.",LAB_RESULT
+"Assessment: Acute decompensated heart failure with cardiorenal syndrome and evidence of hepatic congestion, occurring in the setting of severe underlying ischemic cardiomyopathy.",DIAGNOSIS
+"The combination of worsening renal function despite volume overload suggests a component of diuretic resistance, and the overall trajectory raises concern for advancing to stage D heart failure requiring evaluation for durable mechanical circulatory support.",DIAGNOSIS
+"Admit for IV diuresis with furosemide drip, targeting net negative fluid balance of 1.5-2 liters daily while closely monitoring renal function and electrolytes.",MEDICATION_INSTRUCTION
+Hold sacubitril-valsartan temporarily given borderline blood pressures and worsening renal function; will reassess for reintroduction once euvolemic.,MEDICATION_INSTRUCTION
+Formal advanced heart failure and transplant/LVAD evaluation initiated given recurrent hospitalizations and declining functional status despite guideline-directed medical therapy.,FOLLOW_UP
+"Daily weights, strict intake/output monitoring, and daily basic metabolic panel planned throughout admission with close cardiology and nephrology co-management.",FOLLOW_UP
+"Signed: Dr. Naledi Mokoena, MD, Advanced Heart Failure and Transplant Cardiology. Fictional complex consultation for software testing purposes only.",OTHER
+,
+"Ashcombe University Medical Center Intensive Care Unit 1 University Plaza | Ashcombe City, ST 00000 | (555) 774-3320 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Critical Care / Infectious Disease Joint Note",OTHER
+"Patient: Bartholomew Idris Featherstone | DOB: 1971-01-29 | MRN: SYN-4003-TEST | Date: 2026-03-11 | Providers: Dr. Amara Chukwu, MD (Critical Care), Dr. Soren Vikander, MD (Infectious Disease)",OTHER
+"Patient was admitted three days ago for community-acquired pneumonia and has since developed worsening confusion, new-onset jaundice, decreased urine output, and diffuse petechial rash concerning for evolving multi-organ dysfunction.",SYMPTOM
+"Nursing staff report the patient has become increasingly difficult to arouse over the past 12 hours, with intermittent periods of agitation alternating with lethargy, and family notes this represents a significant change from his baseline mental status.",SYMPTOM
+"He is now requiring increasing vasopressor support to maintain adequate blood pressure despite ongoing aggressive fluid resuscitation, and oxygen requirements have escalated from nasal cannula to high-flow support overnight.",SYMPTOM
+"Bedside examination reveals scattered ecchymoses at prior venipuncture sites, oozing from his peripheral IV site, and new bibasilar crackles suggestive of evolving acute respiratory distress syndrome.",SYMPTOM
+"History: Poorly controlled type 2 diabetes mellitus and chronic alcohol use disorder, both of which likely contributed to delayed presentation and impaired immune response.",HISTORY
+History: No prior ICU admissions. Family reports patient had been managing symptoms at home for approximately 5 days prior to presentation due to reluctance to seek care.,HISTORY
+"Currently on broad-spectrum IV antibiotics including vancomycin and piperacillin-tazobactam, initiated on admission and now being reassessed given clinical deterioration.",MEDICATION_INSTRUCTION
+"Repeat labs show worsening thrombocytopenia to 42,000/uL, prolonged PT/INR to 1.9, and elevated D-dimer, findings highly concerning for disseminated intravascular coagulation.",LAB_RESULT
+"Creatinine has risen sharply to 3.4 mg/dL from an admission value of 1.1 mg/dL, and urine output has fallen to less than 20 mL/hour over the past 6 hours, consistent with acute kidney injury superimposed on sepsis.",LAB_RESULT
+"Bilirubin is now elevated at 4.8 mg/dL with rising liver enzymes, and lactate remains critically elevated at 8.2 mmol/L despite resuscitation efforts, reflecting ongoing tissue hypoperfusion.",LAB_RESULT
+"Blood cultures from admission are now growing gram-negative rods in multiple bottles, pending speciation and susceptibilities.",LAB_RESULT
+"Assessment: Septic shock complicated by evolving multi-organ dysfunction syndrome, including acute kidney injury, hepatic dysfunction, disseminated intravascular coagulation, and acute respiratory distress syndrome, superimposed on the initial pneumonia.",DIAGNOSIS
+"This represents significant clinical deterioration despite appropriate initial antimicrobial therapy and fluid resuscitation, raising concern for either an inadequately covered or resistant organism, an undrained source, or an evolving secondary process.",DIAGNOSIS
+"Broaden antimicrobial coverage to include meropenem while awaiting culture speciation, and obtain source-control imaging including CT chest and abdomen to evaluate for occult abscess or empyema.",MEDICATION_INSTRUCTION
+"Initiate norepinephrine and vasopressin combination therapy for refractory shock, with plan for stress-dose hydrocortisone given vasopressor-dependent shock physiology.",MEDICATION_INSTRUCTION
+Nephrology consulted for likely initiation of continuous renal replacement therapy given oliguric acute kidney injury with evolving metabolic derangement.,FOLLOW_UP
+"Family meeting held to discuss critical illness, guarded prognosis, and goals of care given rapid multi-system deterioration; will reassess trajectory over next 24 hours.",FOLLOW_UP
+"Signed: Dr. Amara Chukwu, MD and Dr. Soren Vikander, MD. Fictional joint critical care/ID note for software testing purposes only.",OTHER
+,
+"Willowmere Comprehensive Cancer Institute 700 Willowmere Pkwy | Ashvale Heights, ST 00000 | (555) 663-9910 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Medical Oncology Complex Case Consultation",OTHER
+"Patient: Cordelia Anwuli Fitzsimmons | DOB: 1966-05-19 | MRN: SYN-4004-TEST | Date: 2026-04-06 | Provider: Dr. Tobias Alaric Mensah, MD",OTHER
+"Patient presents with a 3-month history of progressive dry cough, unintentional 18-pound weight loss, and new-onset proximal muscle weakness making it difficult to rise from a seated position or climb stairs.",SYMPTOM
+"She additionally describes new confusion and word-finding difficulty noted by family over the past 2 weeks, along with intermittent nausea and constipation that has been increasingly difficult to manage.",SYMPTOM
+"She reports a persistent dull ache in her mid-back that has not responded to over-the-counter analgesics, along with recent onset of drooping of her right eyelid noticed by her daughter.",SYMPTOM
+"History: 35-pack-year smoking history, quit 4 years ago. No prior cancer diagnosis. No significant other past medical history reported.",HISTORY
+Chest CT reveals a 4.8 cm spiculated left upper lobe mass with associated mediastinal lymphadenopathy and multiple bilateral pulmonary nodules concerning for metastatic disease.,LAB_RESULT
+"MRI brain performed given cognitive changes reveals several small enhancing lesions in the frontal and parietal lobes, consistent with brain metastases.",LAB_RESULT
+"Serum calcium is significantly elevated at 13.2 mg/dL, and additional workup reveals hyponatremia with serum sodium of 122 mEq/L alongside inappropriately concentrated urine, raising concern for paraneoplastic syndromes of malignancy.",LAB_RESULT
+"CT-guided biopsy of the lung mass confirms small cell lung carcinoma, and given the constellation of proximal muscle weakness and ptosis, Lambert-Eaton myasthenic syndrome is also suspected as a paraneoplastic phenomenon.",LAB_RESULT
+"Assessment: Extensive-stage small cell lung cancer with brain metastases, complicated by two distinct paraneoplastic syndromes — hypercalcemia of malignancy and probable Lambert-Eaton myasthenic syndrome — alongside syndrome of inappropriate antidiuretic hormone secretion causing hyponatremia.",DIAGNOSIS
+"The combination of neurologic, endocrine, and neuromuscular paraneoplastic findings substantially complicates both symptom management and treatment sequencing, and requires close multidisciplinary coordination between oncology, neurology, and palliative care.",DIAGNOSIS
+"Begin IV isotonic saline and zoledronic acid for management of severe hypercalcemia, with close monitoring of renal function and calcium levels.",MEDICATION_INSTRUCTION
+Initiate fluid restriction for SIADH-related hyponatremia while further correction strategy is determined in conjunction with nephrology.,MEDICATION_INSTRUCTION
+"Plan to initiate combination chemotherapy with carboplatin and etoposide once metabolic derangements are stabilized, alongside whole-brain radiation therapy for brain metastases.",MEDICATION_INSTRUCTION
+"Neurology consulted for further evaluation and confirmatory testing of suspected Lambert-Eaton myasthenic syndrome, including antibody testing and electromyography.",FOLLOW_UP
+"Extensive family meeting held to discuss diagnosis, prognosis, and treatment goals given the complexity and stage of disease; palliative care involved from time of diagnosis for symptom management and goals-of-care support.",FOLLOW_UP
+"Signed: Dr. Tobias Alaric Mensah, MD, Medical Oncology. Fictional complex oncology consultation for software testing purposes only.",OTHER
+,
+"Cortexa Comprehensive Epilepsy Center 88 Cortexa Blvd | New Alderton, ST 00000 | (555) 512-4487 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Epilepsy Monitoring Unit Consultation",OTHER
+"Patient: Persephone Nkiruka Havelock | DOB: 2001-10-08 | MRN: SYN-4005-TEST | Date: 2026-05-14 | Provider: Dr. Alaric Fennimore-Osei, MD",OTHER
+"Patient reports her seizure frequency has escalated from roughly twice monthly to now occurring 3-4 times weekly over the past 2 months, despite therapeutic drug levels on her current three-drug antiepileptic regimen.",SYMPTOM
+"She describes a consistent aura of rising epigastric discomfort followed by a sensation of déjà vu, after which witnesses report she becomes unresponsive with lip smacking and right hand automatisms lasting 60-90 seconds.",SYMPTOM
+"Following events, she experiences a prolonged postictal period of 20-30 minutes with word-finding difficulty and confusion, and has recently begun to have breakthrough nocturnal convulsive seizures with tongue biting, a new pattern for her.",SYMPTOM
+"She also reports significant depressive symptoms and cognitive slowing that she attributes to both the seizures themselves and cumulative medication side effects, significantly impacting her ability to continue her university coursework.",SYMPTOM
+"History: Focal epilepsy with impaired awareness, onset at age 14 following a febrile illness in childhood; has failed adequate trials of levetiracetam, lamotrigine, and now lacosamide in combination.",HISTORY
+"History: No prior epilepsy surgery evaluation. Family history notable for a maternal cousin with epilepsy, though no clear genetic syndrome identified previously.",HISTORY
+"Currently on lacosamide 200 mg twice daily, lamotrigine 300 mg twice daily, and clobazam 10 mg twice daily, with reported good adherence and confirmed therapeutic levels on recent labs.",MEDICATION_INSTRUCTION
+"Continuous video EEG monitoring during this admission captured three clinical seizures, all with ictal onset localized to the right anterior temporal region, concordant with her reported aura semiology.",LAB_RESULT
+"MRI brain with epilepsy protocol reveals right mesial temporal sclerosis, correlating well with EEG localization and clinical seizure semiology.",LAB_RESULT
+"Neuropsychological testing performed during admission demonstrates mild verbal memory impairment, consistent with the lateralization of her epileptogenic focus.",LAB_RESULT
+"Assessment: Drug-resistant focal epilepsy with impaired awareness, now meeting formal criteria for medically refractory epilepsy given failure of three appropriately dosed antiseizure medications, with strong concordant localization to the right mesial temporal region.",DIAGNOSIS
+"Given the concordance of semiology, EEG localization, and MRI findings of mesial temporal sclerosis, this patient is an excellent candidate for consideration of epilepsy surgery, which offers substantially higher seizure-freedom rates than continued medication trials alone.",DIAGNOSIS
+Continue current three-drug regimen while surgical workup proceeds; will avoid further medication changes that could confound surgical planning data.,MEDICATION_INSTRUCTION
+Refer to epilepsy surgery multidisciplinary conference for discussion of right temporal lobectomy versus laser interstitial thermal therapy as potential surgical options.,FOLLOW_UP
+Additional PET scan and possible intracranial monitoring to be arranged depending on surgical conference recommendations; psychiatry referral placed to address comorbid depressive symptoms.,FOLLOW_UP
+"Signed: Dr. Alaric Fennimore-Osei, MD, Epilepsy and Neurophysiology. Fictional complex epilepsy consultation for software testing purposes only.",OTHER
+,
+"Solaris Endocrine & Metabolic Institute 12 Solaris Terrace | Brightmoor, ST 00000 | (555) 220-6631 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Endocrinology Complex Consultation",OTHER
+"Patient: Maximilian Okonkwo-Bergstrand | DOB: 1979-12-24 | MRN: SYN-4006-TEST | Date: 2026-06-09 | Provider: Dr. Wilhelmina Achterberg, MD",OTHER
+"Patient presents with a roughly 18-month history of gradual central weight gain despite no significant change in diet, accompanied by new purple striae across his abdomen and proximal thighs, easy bruising, and noticeably thinning skin.",SYMPTOM
+"He additionally reports new-onset difficulty controlling blood pressure despite escalating antihypertensive therapy, progressive proximal muscle weakness affecting his ability to climb stairs, and new facial rounding noted by his family.",SYMPTOM
+"He describes significant mood lability, including episodes of tearfulness and irritability that are out of character for him, along with new difficulty with short-term memory and concentration at work.",SYMPTOM
+"His wife additionally notes a change in his sleep pattern with early morning awakening, and he has developed new-onset erectile dysfunction over the past several months.",SYMPTOM
+"History: Hypertension previously well controlled on a single agent, now requiring three antihypertensive medications for adequate control over the past year. New diagnosis of type 2 diabetes made 6 months ago.",HISTORY
+"History: No exogenous corticosteroid use reported, including no recent joint injections, topical steroids, or over-the-counter supplements, which is an important negative given the differential under consideration.",HISTORY
+"Overnight low-dose dexamethasone suppression test shows failure to suppress cortisol, with morning cortisol remaining elevated at 18 mcg/dL.",LAB_RESULT
+"Twenty-four hour urinary free cortisol is markedly elevated at 3.5 times the upper limit of normal on two separate collections, and late-night salivary cortisol is also elevated, together confirming a diagnosis of endogenous Cushing's syndrome.",LAB_RESULT
+"ACTH level is inappropriately normal-to-elevated at 65 pg/mL, suggesting an ACTH-dependent process rather than an adrenal source, and pituitary MRI reveals a 7 mm hypoenhancing lesion suggestive of a corticotroph microadenoma.",LAB_RESULT
+"Assessment: ACTH-dependent Cushing's syndrome, most consistent with Cushing's disease given pituitary MRI findings, though paraneoplastic ectopic ACTH secretion remains a consideration requiring further localization given the imaging findings alone are not definitive.",DIAGNOSIS
+"Given the constellation of hypertension, new diabetes, characteristic cutaneous findings, and biochemically confirmed hypercortisolism, this represents a well-established but complex endocrinopathy requiring surgical planning alongside careful management of downstream metabolic complications.",DIAGNOSIS
+"Referral placed to neurosurgery for consideration of transsphenoidal pituitary adenoma resection, pending inferior petrosal sinus sampling to confirm pituitary source over ectopic ACTH production.",FOLLOW_UP
+"Continue current antihypertensive and diabetes medications with close monitoring, as both are expected to improve significantly following successful treatment of the underlying hypercortisolism.",MEDICATION_INSTRUCTION
+Start spironolactone 25 mg daily for additional blood pressure control and to help address early hypokalemia noted on recent labs.,MEDICATION_INSTRUCTION
+Bone density scan ordered given chronic hypercortisolism's known association with osteoporosis; ophthalmology referral placed to formally assess visual fields given pituitary lesion proximity to the optic chiasm.,FOLLOW_UP
+"Signed: Dr. Wilhelmina Achterberg, MD, Endocrinology. Fictional complex endocrine consultation for software testing purposes only.",OTHER
+,
+"Alderwood Pulmonary & Critical Care Associates 66 Alderwood Cir | Fenmore, ST 00000 | (555) 337-1298 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Interstitial Lung Disease Consultation",OTHER
+"Patient: Cassiopeia Halloran-Iyer | DOB: 1965-07-03 | MRN: SYN-4007-TEST | Date: 2026-07-21 | Provider: Dr. Desmond Achebe-Larsson, MD",OTHER
+"Patient presents with a progressive dry, nonproductive cough and exertional dyspnea over the past year, now limiting her to less than one block of walking, along with new digital changes concerning for possible underlying connective tissue disease.",SYMPTOM
+"She reports color changes in her fingers when exposed to cold, progressing through white, blue, and red phases, along with new joint pain in her hands and difficulty opening jars due to skin tightness over her fingers.",SYMPTOM
+"She additionally notes increasing fatigue, difficulty swallowing solid foods over recent months, and new heartburn symptoms that are worse when lying flat, raising concern for esophageal dysmotility.",SYMPTOM
+"On further questioning, she reports subtle skin thickening over her forearms that she initially attributed to dry skin, and family has commented on a change in her facial appearance with reduced ability to fully open her mouth.",SYMPTOM
+"History: No significant prior pulmonary history. No occupational exposures to asbestos, silica, or significant environmental antigens identified on detailed exposure history.",HISTORY
+"High-resolution CT chest demonstrates bibasilar reticular opacities with traction bronchiectasis and minimal honeycombing, a pattern most consistent with nonspecific interstitial pneumonia rather than usual interstitial pneumonia.",LAB_RESULT
+"Pulmonary function testing reveals a restrictive pattern with FVC at 58% predicted and significantly reduced diffusion capacity at 41% predicted, indicating substantial functional impairment.",LAB_RESULT
+"Autoimmune serologic workup reveals a strongly positive anti-Scl-70 antibody and positive antinuclear antibody with a nucleolar pattern, alongside nailfold capillaroscopy demonstrating capillary dropout and dilated loops.",LAB_RESULT
+"Assessment: Systemic sclerosis-associated interstitial lung disease, with the pulmonary presentation being the initial and most clinically significant manifestation, occurring alongside Raynaud phenomenon, sclerodactyly, and esophageal dysmotility consistent with limited or possibly diffuse cutaneous systemic sclerosis.",DIAGNOSIS
+"The degree of pulmonary function impairment combined with radiographic findings places her at meaningful risk for progressive fibrotic decline, and this systemic diagnosis significantly changes both prognosis and treatment approach compared to an isolated idiopathic interstitial pneumonia.",DIAGNOSIS
+"Initiate mycophenolate mofetil, titrating to a target dose of 1500 mg twice daily, given evidence supporting its use for scleroderma-associated interstitial lung disease.",MEDICATION_INSTRUCTION
+"Start nifedipine extended-release 30 mg daily for Raynaud phenomenon symptom management, along with omeprazole 40 mg daily for esophageal reflux and dysmotility symptoms.",MEDICATION_INSTRUCTION
+"Rheumatology co-management arranged given confirmed systemic sclerosis diagnosis, with plans for coordinated monitoring of skin, renal, cardiac, and pulmonary involvement.",FOLLOW_UP
+Repeat pulmonary function testing and high-resolution CT planned in 4-6 months to assess treatment response and disease trajectory.,FOLLOW_UP
+"Signed: Dr. Desmond Achebe-Larsson, MD, Pulmonology. Fictional complex ILD consultation for software testing purposes only.",OTHER
+,
+"Ravensworth Digestive Health Institute 44 Ravensworth Way | Kestrelbrook, ST 00000 | (555) 590-3387 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Gastroenterology Complex Inpatient Note",OTHER
+"Patient: Ignatius Barbary Solheim | DOB: 1974-02-11 | MRN: SYN-4008-TEST | Date: 2026-08-04 | Provider: Dr. Chiamaka Vosloo, MD",OTHER
+"Patient presents on hospital day 4 for severe acute pancreatitis, with initial presentation notable for sudden-onset severe epigastric pain radiating to the back, associated with persistent vomiting, and now developing worsening abdominal distension and new-onset fever.",SYMPTOM
+"Over the past 24 hours, he has developed increasing shortness of breath with oxygen requirements escalating from room air to 4L nasal cannula, along with decreased urine output despite adequate intravenous fluid administration.",SYMPTOM
+"Nursing reports his abdomen has become progressively more distended and tense, and he is now reporting significantly worsened pain despite escalating opioid analgesia, raising concern for evolving abdominal compartment syndrome or infected necrosis.",SYMPTOM
+"He additionally reports new confusion intermittently overnight per family, and has developed a low-grade tremor, findings that in this context raise concern for both worsening critical illness and possible alcohol withdrawal given his history.",SYMPTOM
+"History: Chronic heavy alcohol use, admitted history of consuming approximately 8-10 drinks daily for the past decade, with this admission representing his first episode of pancreatitis.",HISTORY
+"History: No prior gallstone disease identified on admission ultrasound, supporting alcohol as the most likely etiology of this pancreatitis episode.",HISTORY
+"Initial lipase on admission was markedly elevated at 2400 U/L, and repeat CT abdomen with contrast on hospital day 3 demonstrates greater than 30% pancreatic necrosis with peripancreatic fluid collections, consistent with severe necrotizing pancreatitis.",LAB_RESULT
+"Today's labs show a rising white blood cell count to 22,000/uL with new bandemia, procalcitonin markedly elevated at 8.4 ng/mL, and blood cultures were sent given concern for infected pancreatic necrosis.",LAB_RESULT
+"Creatinine has risen to 2.6 mg/dL from an admission baseline of 0.9 mg/dL, and arterial blood gas reveals evolving hypoxemia with a widened A-a gradient, together suggesting progression toward multi-organ dysfunction.",LAB_RESULT
+"Assessment: Severe necrotizing acute pancreatitis, now complicated by suspected infected pancreatic necrosis, acute kidney injury, and evolving hypoxemic respiratory failure, meeting criteria for severe disease per revised Atlanta classification.",DIAGNOSIS
+"The clinical trajectory over the past 24 hours, including new fever, rising inflammatory markers, and organ dysfunction, is highly concerning for infected necrosis superimposed on his underlying severe pancreatitis, requiring urgent interventional radiology and surgical input.",DIAGNOSIS
+Broaden antibiotic coverage to carbapenem therapy given high suspicion for infected necrosis pending culture data and interventional radiology-guided sampling of the fluid collection.,MEDICATION_INSTRUCTION
+"Transfer to intensive care unit for closer hemodynamic monitoring, escalating respiratory support as needed, and initiation of CIWA-protocol benzodiazepine dosing given concern for evolving alcohol withdrawal.",MEDICATION_INSTRUCTION
+Interventional radiology and surgery jointly consulted regarding timing and approach for possible percutaneous drainage versus later necrosectomy depending on clinical trajectory and culture results.,FOLLOW_UP
+"Family updated regarding significant clinical deterioration, need for ICU-level care, and overall guarded prognosis given the severity and complications of this pancreatitis episode.",FOLLOW_UP
+"Signed: Dr. Chiamaka Vosloo, MD, Gastroenterology. Fictional complex inpatient note for software testing purposes only.",OTHER
+,
+"Haventree Behavioral Health & Trauma Recovery Center 300 Haventree Ln | Ridgemont Falls, ST 00000 | (555) 288-7742 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Psychiatry Complex Case Consultation",OTHER
+"Patient: Rosalind Achieng Delacroix | DOB: 1984-09-27 | MRN: SYN-4009-TEST | Date: 2026-09-05 | Provider: Dr. Bertrand Okonkwo-Halloway, MD",OTHER
+"Patient presents with a two-year history of persistent depressed mood, anhedonia, and profound fatigue that has failed to adequately respond despite sequential adequate trials of three different antidepressant classes over the past 18 months.",SYMPTOM
+"She additionally reports intrusive memories and nightmares related to a motor vehicle accident three years ago, hypervigilance when driving or riding as a passenger, and avoidance of highways that has significantly limited her ability to work and maintain social connections.",SYMPTOM
+"She describes frequent dissociative episodes during periods of stress, during which she reports feeling detached from her body and losing track of time, sometimes for up to an hour, which has become increasingly frequent over recent months.",SYMPTOM
+"She endorses passive thoughts of not wanting to be alive, occurring intermittently, but firmly denies active suicidal ideation, intent, or plan, and reports strong protective factors including her relationship with her two children.",SYMPTOM
+"She also reports significant sleep disturbance with both difficulty falling asleep due to hypervigilance and frequent nightmare-related awakenings, contributing further to her daytime fatigue and cognitive fog.",SYMPTOM
+"History: Major depressive disorder, recurrent, diagnosed 6 years ago. Post-traumatic stress disorder diagnosed 2 years ago following a motor vehicle accident with subsequent hospitalization.",HISTORY
+"History: Previously failed adequate trials of sertraline, venlafaxine, and bupropion, each discontinued due to either lack of efficacy or intolerable side effects; has engaged in trauma-focused therapy for the past year with partial benefit.",HISTORY
+"Currently taking mirtazapine 30 mg at bedtime and prazosin 2 mg at bedtime for nightmares, with modest improvement in sleep but persistent core depressive and PTSD symptoms.",MEDICATION_INSTRUCTION
+"PHQ-9 score today is 19, indicating moderately severe depression, and PCL-5 score is 52, indicating significant PTSD symptom burden, both essentially unchanged from assessments 3 months ago despite ongoing treatment.",LAB_RESULT
+"Assessment: Treatment-resistant major depressive disorder with significant comorbid post-traumatic stress disorder, including dissociative features, representing a complex presentation given the interplay between mood, trauma-related, and dissociative symptom domains.",DIAGNOSIS
+The combination of treatment resistance across multiple medication classes and the prominent trauma and dissociative features suggests this case would benefit significantly from evaluation for interventional options alongside continued specialized trauma therapy.,DIAGNOSIS
+Refer for evaluation for esketamine or IV ketamine therapy given documented treatment-resistant depression per standard criteria of inadequate response to multiple adequate antidepressant trials.,MEDICATION_INSTRUCTION
+"Continue mirtazapine 30 mg at bedtime and prazosin, with plan to increase prazosin to 4 mg at bedtime given ongoing nightmares; continue trauma-focused cognitive behavioral therapy at current frequency.",MEDICATION_INSTRUCTION
+Safety plan reviewed and updated in detail given passive suicidal ideation; patient provided with crisis line information and agreed to contact the clinic or crisis services immediately if thoughts intensify.,FOLLOW_UP
+Follow-up appointment scheduled in 2 weeks to reassess safety and finalize referral for interventional depression treatment; continue weekly individual trauma therapy in the interim.,FOLLOW_UP
+"Signed: Dr. Bertrand Okonkwo-Halloway, MD, Psychiatry. Fictional complex psychiatric consultation for software testing purposes only.",OTHER
+,
+"Silverstream Kidney Institute 900 Silverstream Rd | Elmbridge, ST 00000 | (555) 445-2298 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Nephrology Complex Consultation",OTHER
+"Patient: Evangelina Adaeze Thistlewood | DOB: 1996-06-30 | MRN: SYN-4010-TEST | Date: 2026-09-08 | Provider: Dr. Konstantin Oyelaran, MD",OTHER
+"Patient presents with a one-month history of progressive lower extremity and periorbital swelling, most pronounced upon waking, along with frothy urine that she initially attributed to dehydration.",SYMPTOM
+"She has also noticed a 14-pound weight gain over the past three weeks despite no change in diet, along with new-onset shortness of breath when lying flat and abdominal distension suggestive of developing ascites.",SYMPTOM
+"She reports fatigue and decreased appetite, along with a recent episode of calf pain and swelling that was concerning enough that she sought emergency evaluation, raising concern for a thrombotic complication.",SYMPTOM
+"She denies gross hematuria, dysuria, or recent upper respiratory or skin infections preceding these symptoms, which is a relevant negative in narrowing the differential for her presentation.",SYMPTOM
+History: No significant past medical history. No family history of kidney disease. Not currently on any regular medications and no recent new medication or supplement exposures.,HISTORY
+"Urinalysis reveals 4+ proteinuria without significant hematuria, and 24-hour urine collection confirms nephrotic-range proteinuria at 6.8 grams per day.",LAB_RESULT
+"Serum albumin is significantly decreased at 1.8 g/dL, total cholesterol is markedly elevated at 340 mg/dL, and creatinine remains preserved at 0.9 mg/dL, a pattern consistent with classic nephrotic syndrome with preserved renal function.",LAB_RESULT
+"Lower extremity Doppler ultrasound performed given her calf symptoms confirms an acute deep vein thrombosis of the left popliteal vein, a recognized complication of nephrotic syndrome due to urinary loss of anticoagulant proteins.",LAB_RESULT
+Kidney biopsy performed given the severity of proteinuria and diagnostic uncertainty reveals findings consistent with minimal change disease on light and electron microscopy.,LAB_RESULT
+"Assessment: Nephrotic syndrome secondary to minimal change disease, now complicated by an acute deep vein thrombosis, a well-recognized but serious complication related to the hypercoagulable state of significant proteinuria and hypoalbuminemia.",DIAGNOSIS
+"The combination of severe hypoalbuminemia, marked proteinuria, and a new thrombotic event represents a more complex presentation than uncomplicated minimal change disease, requiring careful balancing of anticoagulation needs alongside immunosuppressive treatment.",DIAGNOSIS
+Initiate high-dose oral prednisone 1 mg/kg daily for treatment of minimal change disease per standard induction protocol.,MEDICATION_INSTRUCTION
+"Start therapeutic anticoagulation with apixaban for treatment of the confirmed deep vein thrombosis, with careful monitoring given fluctuating renal function and volume status.",MEDICATION_INSTRUCTION
+"Start furosemide 40 mg daily for symptomatic management of edema, along with careful sodium restriction counseling.",MEDICATION_INSTRUCTION
+"Close outpatient monitoring arranged with weekly labs including albumin, renal function, and urine protein to assess treatment response over the coming month.",FOLLOW_UP
+"Extensive counseling provided regarding signs of infection given upcoming immunosuppression, as well as signs of recurrent or extending thrombosis requiring urgent evaluation.",FOLLOW_UP
+"Signed: Dr. Konstantin Oyelaran, MD, Nephrology. Fictional complex nephrology consultation for software testing purposes only.",OTHER
+,
+"Ashworth Hematology & Bone Marrow Center 15 Ashworth Cres | Blackfriar Junction, ST 00000 | (555) 720-1156 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Hematology Complex Consultation",OTHER
+"Patient: Cassius Nnamdi Ravensworth | DOB: 1962-04-04 | MRN: SYN-4011-TEST | Date: 2026-01-30 | Provider: Dr. Marguerite Solberg-Achterberg, MD",OTHER
+"Patient presents with a 6-week history of progressively worsening fatigue and exertional dyspnea, along with new easy bruising over his arms and legs and two episodes of prolonged bleeding from minor cuts that were unusual for him.",SYMPTOM
+"He additionally reports recurrent low-grade fevers over the past two weeks without an identifiable source, night sweats requiring him to change his sheets on several occasions, and a sore throat that has not improved with a recent course of antibiotics.",SYMPTOM
+"He notes new bone pain, particularly in his lower back and legs, that is present even at rest and has been progressively worsening, along with a 10-pound unintentional weight loss over the past two months.",SYMPTOM
+"His wife has noted he appears increasingly pale, and he reports new-onset lightheadedness with standing that has led to two near-fall episodes at home in the past week.",SYMPTOM
+"History: No significant past medical history. No known exposure to radiation, benzene, or other marrow-toxic substances identified on detailed occupational and environmental history.",HISTORY
+"Complete blood count reveals pancytopenia with hemoglobin of 7.2 g/dL, platelet count of 18,000/uL, and white blood cell count of 1.8 x10^9/L with severe neutropenia, findings that together warrant urgent further evaluation.",LAB_RESULT
+"Peripheral blood smear demonstrates numerous circulating blasts with occasional Auer rods visualized, a finding with significant diagnostic implications for the underlying process.",LAB_RESULT
+"Bone marrow biopsy performed today reveals a hypercellular marrow with greater than 20% myeloblasts, confirming a diagnosis of acute myeloid leukemia; cytogenetic and molecular studies are pending to further characterize risk stratification.",LAB_RESULT
+"Coagulation studies reveal mild prolongation of PT and low fibrinogen, raising concern for early disseminated intravascular coagulation, which is a recognized complication particularly associated with certain AML subtypes.",LAB_RESULT
+"Assessment: Newly diagnosed acute myeloid leukemia, presenting with pancytopenia, circulating blasts, and early signs of coagulopathy, the latter raising specific concern for the acute promyelocytic leukemia subtype pending confirmatory cytogenetics.",DIAGNOSIS
+"Given the combination of severe cytopenias, active bleeding risk, and possible coagulopathy, this presentation requires urgent inpatient management with close monitoring while definitive subtype characterization and treatment planning proceed.",DIAGNOSIS
+Admit for urgent initiation of induction chemotherapy pending final cytogenetic results; empiric consideration of all-trans retinoic acid to be discussed urgently with the team given coagulopathy concerning for possible APL.,MEDICATION_INSTRUCTION
+"Transfuse platelets and packed red blood cells per current counts and clinical bleeding risk, with plans for close monitoring of coagulation parameters and fibrinogen given DIC concern.",MEDICATION_INSTRUCTION
+"Broad-spectrum antibiotics initiated empirically given neutropenic fever, with blood cultures drawn from peripheral and central sources prior to first antibiotic dose.",MEDICATION_INSTRUCTION
+"Extensive discussion held with patient and family regarding diagnosis, urgency of treatment initiation, and overall treatment plan and expected hospital course.",FOLLOW_UP
+"Close daily monitoring of complete blood counts, coagulation studies, and clinical bleeding status planned throughout induction chemotherapy admission.",FOLLOW_UP
+"Signed: Dr. Marguerite Solberg-Achterberg, MD, Hematology-Oncology. Fictional complex hematology consultation for software testing purposes only.",OTHER
+,
+"Ironbridge Regional Trauma Center 1 Ironbridge Plaza | Steelcross, ST 00000 | (555) 880-2214 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Trauma Surgery Admission Note",OTHER
+"Patient: Alaric Devonshire-Nnamdi | DOB: 1993-08-16 | MRN: SYN-4012-TEST | Date: 2026-02-27 | Trauma Surgeon: Dr. Odalys Kimathi, MD",OTHER
+"Patient presents as a level 1 trauma activation following a high-speed motorcycle collision, arriving hemodynamically borderline with a Glasgow Coma Scale of 13 and multiple obvious sites of injury on primary survey.",SYMPTOM
+"Primary survey reveals significant chest wall tenderness with paradoxical movement on the left side concerning for flail chest, diminished breath sounds on the left, and visible deformity of the left femur with an open wound overlying the fracture site.",SYMPTOM
+"Patient is complaining of severe abdominal pain with voluntary guarding on exam, and becomes progressively more tachycardic and hypotensive during the secondary survey, raising concern for ongoing intra-abdominal hemorrhage.",SYMPTOM
+"He additionally has a large scalp laceration with active bleeding, and is intermittently confused and combative, making thorough neurologic assessment challenging and further raising concern for traumatic brain injury.",SYMPTOM
+History: No significant past medical history obtainable at this time given patient's altered mental status; helmet use at time of collision unknown per EMS report.,HISTORY
+"FAST exam performed in the trauma bay is positive for free fluid in the perihepatic and pelvic spaces, strongly suggestive of intra-abdominal hemorrhage requiring urgent surgical intervention.",LAB_RESULT
+"CT imaging obtained after initial stabilization reveals a grade IV splenic laceration with active contrast extravasation, a left femoral shaft fracture, three left-sided rib fractures with an associated pneumothorax, and a small subdural hematoma without significant midline shift.",LAB_RESULT
+"Initial hemoglobin is 8.9 g/dL and trending downward on repeat testing, alongside a rising lactate of 5.2 mmol/L, both consistent with ongoing hemorrhage and evolving hemorrhagic shock physiology.",LAB_RESULT
+"Assessment: Polytrauma with grade IV splenic laceration and active extravasation causing hemorrhagic shock, open left femur fracture, flail chest with pneumothorax, scalp laceration, and traumatic subdural hematoma, representing a multi-system life-threatening injury pattern.",DIAGNOSIS
+"Given active extravasation and hemodynamic instability, this patient requires immediate operative intervention for hemorrhage control, with simultaneous management of thoracic, orthopedic, and neurologic injuries in a coordinated multidisciplinary fashion.",DIAGNOSIS
+Activate massive transfusion protocol and proceed emergently to the operating room for exploratory laparotomy and likely splenectomy given active hemorrhage on imaging.,MEDICATION_INSTRUCTION
+Left chest tube placed for pneumothorax with immediate improvement in breath sounds and oxygenation; orthopedic surgery consulted emergently for external fixation of the open femur fracture.,MEDICATION_INSTRUCTION
+"Neurosurgery consulted regarding the subdural hematoma, recommending non-operative management for now with serial neurologic checks and repeat imaging given absence of significant midline shift.",FOLLOW_UP
+Family notified of critical condition and multiple life-threatening injuries; will provide updates throughout the operative course and anticipate ICU admission postoperatively given severity of injuries.,FOLLOW_UP
+"Signed: Dr. Odalys Kimathi, MD, Trauma Surgery. Fictional trauma admission note for software testing purposes only.",OTHER
+,
+"Meadowbrook Maternal-Fetal Medicine Center 200 Meadowbrook Ln | Ashcourt, ST 00000 | (555) 664-2287 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Obstetric Complex Delivery Note",OTHER
+"Patient: Temperance Adaeze Winslow-Ojo | DOB: 1995-01-22 | MRN: SYN-4013-TEST | Date: 2026-03-15 | Provider: Dr. Fionnuala Bergstrom, MD",OTHER
+"Patient presented at 37 weeks gestation with new-onset severe headache unresponsive to acetaminophen, visual disturbances described as seeing spots, and right upper quadrant abdominal pain, prompting urgent evaluation for preeclampsia with severe features.",SYMPTOM
+"On admission, blood pressure was significantly elevated at 172/114 mmHg, and she additionally reported rapidly worsening facial and hand swelling over the preceding 48 hours.",SYMPTOM
+"Following induction of labor and vaginal delivery of a healthy infant, the patient developed heavy vaginal bleeding within the first hour postpartum, with visibly boggy uterine tone on exam and continued brisk bleeding despite initial uterine massage.",SYMPTOM
+"She became progressively tachycardic and lightheaded, with blood pressure trending downward from her admission hypertensive values, concerning for evolving hemorrhagic shock superimposed on her hypertensive disorder of pregnancy.",SYMPTOM
+"History: Nulliparous prior to this delivery. No chronic hypertension prior to this pregnancy; first prenatal blood pressures were within normal limits, with elevation noted starting around 34 weeks gestation.",HISTORY
+"Labs on admission revealed elevated liver enzymes with AST of 145 U/L and ALT of 132 U/L, platelet count of 89,000/uL, and elevated uric acid, together meeting criteria for HELLP syndrome as a severe feature of her preeclampsia.",LAB_RESULT
+"Estimated postpartum blood loss is approximately 1800 mL, and repeat hemoglobin has dropped to 7.4 g/dL from a pre-delivery value of 10.8 g/dL, confirming significant postpartum hemorrhage.",LAB_RESULT
+"Coagulation studies drawn during the hemorrhage show a mildly prolonged PT and decreasing fibrinogen, raising concern for early consumptive coagulopathy in the setting of both HELLP syndrome and ongoing hemorrhage.",LAB_RESULT
+"Assessment: Severe preeclampsia complicated by HELLP syndrome, with subsequent postpartum hemorrhage due to uterine atony, now further complicated by evolving coagulopathy — a combination representing significant maternal morbidity risk requiring urgent, coordinated management.",DIAGNOSIS
+The overlapping physiology of HELLP-associated thrombocytopenia and coagulopathy with acute hemorrhagic blood loss substantially increases the complexity and risk of this postpartum course compared to either complication occurring in isolation.,DIAGNOSIS
+"Administer IV magnesium sulfate for seizure prophylaxis per severe preeclampsia protocol, with close monitoring for signs of magnesium toxicity given renal considerations.",MEDICATION_INSTRUCTION
+"Initiate uterotonic therapy with IV oxytocin, followed by methylergonovine and carboprost given inadequate response to initial uterine massage and oxytocin alone.",MEDICATION_INSTRUCTION
+"Transfuse packed red blood cells and fresh frozen plasma per massive transfusion protocol given ongoing hemorrhage, low platelet count, and evolving coagulopathy.",MEDICATION_INSTRUCTION
+"Close ICU-level monitoring arranged postpartum given the combination of severe preeclampsia with HELLP syndrome and significant hemorrhage, with plan for serial labs and blood pressure checks.",FOLLOW_UP
+Extensive discussion held with patient and family regarding the serious nature of her postpartum complications and the plan for close monitoring over the coming 24-48 hours.,FOLLOW_UP
+"Signed: Dr. Fionnuala Bergstrom, MD, Maternal-Fetal Medicine. Fictional complex obstetric note for software testing purposes only.",OTHER
+,
+"Silverleaf Geriatric Medicine Center 40 Silverleaf Ave | Autumnfield, ST 00000 | (555) 210-4478 *** SYNTHETIC / FICTIONAL SAMPLE DOCUMENT — FOR SOFTWARE TESTING ONLY *** Geriatric Medicine Complex Consultation",OTHER
+"Patient: Cornelius Adebayo Winterbourne | DOB: 1937-11-30 | MRN: SYN-4014-TEST | Date: 2026-04-18 | Provider: Dr. Anaïs Featherstonhaugh, MD",OTHER
+"Patient was brought in by his daughter due to a two-week history of fluctuating confusion, at times unable to recognize familiar family members, alternating with periods of relative clarity, along with new difficulty managing his own medications.",SYMPTOM
+"Daughter reports he has become increasingly unsteady on his feet with two recent near-falls, along with new daytime somnolence and difficulty staying awake during conversations that is markedly different from his baseline alertness.",SYMPTOM
+"He has also developed decreased appetite and mild urinary incontinence over the same period, and his daughter notes he seems to be talking to people who are not present on several occasions.",SYMPTOM
+"On review, he denies pain but is a poor historian throughout the visit due to his fluctuating attention and cognition, making collateral history from his daughter essential to this evaluation.",SYMPTOM
+"History: Hypertension, atrial fibrillation, chronic kidney disease stage 3, benign prostatic hyperplasia, chronic insomnia, and osteoarthritis, with care previously managed across four different specialists without a clear coordinating primary provider.",HISTORY
+"History: No prior episodes of delirium or diagnosed dementia, though daughter notes some mild forgetfulness over the past year that had not previously affected his daily functioning.",HISTORY
+"Medication reconciliation reveals a current regimen of eleven medications, including diltiazem, warfarin, tamsulosin, zolpidem, diphenhydramine-containing sleep aid, oxybutynin, and a recently added gabapentin for osteoarthritis-related nerve pain.",MEDICATION_INSTRUCTION
+"Notably, the combination of zolpidem, diphenhydramine, oxybutynin, and gabapentin represents significant cumulative anticholinergic and sedative burden, a well-recognized and common contributor to delirium in older adults.",MEDICATION_INSTRUCTION
+"Urinalysis reveals evidence of a urinary tract infection with positive leukocyte esterase and nitrites, and basic metabolic panel shows mild hyponatremia with sodium of 129 mEq/L, both plausible contributing factors to his acute presentation.",LAB_RESULT
+"Renal function shows creatinine of 1.9 mg/dL, above his documented baseline of 1.4 mg/dL, raising concern for medication accumulation given multiple renally-cleared medications in his current regimen.",LAB_RESULT
+"Assessment: Multifactorial delirium, likely precipitated by a combination of urinary tract infection, hyponatremia, acute kidney injury affecting medication clearance, and significant cumulative sedative and anticholinergic medication burden.",DIAGNOSIS
+"This represents a classic but complex geriatric presentation in which several simultaneously contributing factors, rather than a single clear cause, must each be addressed to achieve meaningful cognitive recovery.",DIAGNOSIS
+"Discontinue diphenhydramine-containing sleep aid, oxybutynin, and gabapentin given their significant contribution to anticholinergic and sedative burden; plan alternative non-pharmacologic approaches for sleep and osteoarthritis pain.",MEDICATION_INSTRUCTION
+"Start appropriate antibiotic therapy for the urinary tract infection based on local susceptibility patterns, adjusted for his renal function.",MEDICATION_INSTRUCTION
+Comprehensive medication reconciliation and deprescribing plan to be coordinated with all four specialists to consolidate his care under a single primary geriatric provider going forward.,FOLLOW_UP
+Close outpatient follow-up in one week to reassess cognitive status and confirm resolution of delirium once contributing factors are addressed; daughter educated extensively on delirium recognition and prevention strategies.,FOLLOW_UP
+"Signed: Dr. Anaïs Featherstonhaugh, MD, Geriatric Medicine. Fictional complex geriatric consultation for software testing purposes only.",OTHER
+,
+
+
