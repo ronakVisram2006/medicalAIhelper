@@ -10,6 +10,11 @@ import torch
 import os
 from openai import OpenAI
 
+import numpy as np
+from sentence_transformers import SentenceTransformer
+
+embedder = SentenceTransformer('all-MiniLM-L6-v2')
+
 client = OpenAI(
     api_key=os.environ["GROQ_API_KEY"],
     base_url="https://api.groq.com/openai/v1"
@@ -32,7 +37,8 @@ DOCUMENT_STORE = {
     "full_text": "",
     "pages": [],
     "sentences": [],
-    "labeled_sentences": []  
+    "labeled_sentences": [],
+    "sentence_embeddings": None,
 }
 
 
@@ -66,13 +72,19 @@ async def upload_pdf(file: UploadFile = File(...)):
         full_text = "\n".join([p["text"] for p in pages])
         DOCUMENT_STORE["full_text"] = full_text
         DOCUMENT_STORE["pages"] = pages
-        DOCUMENT_STORE["sentences"] = nltk.sent_tokenize(full_text)
+        sentences = nltk.sent_tokenize(full_text)
+        DOCUMENT_STORE["sentences"] = sentences
 
         labeled = []
-        for s in DOCUMENT_STORE["sentences"]:
+        for s in sentences:
             label = classify_sentence(s)
             labeled.append({"sentence": s, "label": label})
         DOCUMENT_STORE["labeled_sentences"] = labeled
+
+        if sentences:
+            DOCUMENT_STORE["sentence_embeddings"] = embedder.encode(sentences)
+        else:
+            DOCUMENT_STORE["sentence_embeddings"] = None
 
         return {"filename": file.filename, "pages": pages}
     finally:
@@ -87,9 +99,8 @@ def classify_text(payload: dict):
     return {"label": label}
 
 
-
 LABEL_KEYWORDS = {
-    "MEDICATION_INSTRUCTION": ["medication", "medicine", "drug", "dose", "dosage", "prescription", "taking", "mg", "pills"],
+    "MEDICATION_INSTRUCTION": ["medication", "medicine", "drug", "dose", "dosage", "prescription", "taking", "mg", "pills", "cholesterol"],
     "DIAGNOSIS": ["diagnosis", "condition", "diagnosed", "wrong", "assessment", "disease"],
     "SYMPTOM": ["symptom", "feeling", "experiencing", "complain", "pain", "issue"],
     "FOLLOW_UP": ["follow-up", "follow up", "next appointment", "return", "when should", "plan"],
@@ -107,30 +118,32 @@ def guess_label(question: str):
 
 
 def retrieve_relevant_sentences(question: str, top_k: int = 15):
+    sentences = DOCUMENT_STORE["sentences"]
     labeled = DOCUMENT_STORE["labeled_sentences"]
-    if not labeled:
+    all_embeddings = DOCUMENT_STORE["sentence_embeddings"]
+
+    if not sentences or all_embeddings is None:
         return []
 
     guessed_label = guess_label(question)
 
     if guessed_label:
-        pool = [item["sentence"] for item in labeled if item["label"] == guessed_label]
-        if not pool:  
-            pool = [item["sentence"] for item in labeled]
+        indices = [i for i, item in enumerate(labeled) if item["label"] == guessed_label]
+        if not indices:
+            indices = list(range(len(sentences)))
     else:
-        pool = [item["sentence"] for item in labeled]
+        indices = list(range(len(sentences)))
 
-    q_words = set(question.lower().split())
-    scored = []
-    for s in pool:
-        overlap = len(q_words & set(s.lower().split()))
-        if overlap > 0:
-            scored.append((overlap, s))
+    pool_sentences = [sentences[i] for i in indices]
+    pool_embeddings = all_embeddings[indices]
 
-    scored.sort(key=lambda x: x[0], reverse=True)
-    top = [s for _, s in scored[:top_k]]
+    question_embedding = embedder.encode([question])[0]
+    similarities = np.dot(pool_embeddings, question_embedding) / (
+        np.linalg.norm(pool_embeddings, axis=1) * np.linalg.norm(question_embedding) + 1e-8
+    )
 
-    return top if top else pool[:top_k]
+    top_indices = np.argsort(similarities)[::-1][:top_k] 
+    return [pool_sentences[i] for i in top_indices]
 
 
 @app.post("/ask")
