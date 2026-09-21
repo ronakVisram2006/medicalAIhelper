@@ -1,0 +1,1 @@
+curl.exe https://api.groq.com/openai/v1/models -H "Authorization: Bearer $env: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"

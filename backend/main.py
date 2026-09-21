@@ -10,7 +10,10 @@ import torch
 import os
 from openai import OpenAI   
 
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+client = OpenAI(
+    api_key=os.environ["GROQ_API_KEY"],
+    base_url="https://api.groq.com/openai/v1"
+)
 
 
 app = FastAPI()
@@ -29,7 +32,8 @@ model = AutoModelForSequenceClassification.from_pretrained(model_path)
 DOCUMENT_STORE = {
     "full_text": "",
     "pages": [],
-    "sentences": []
+    "sentences": [],
+    "labeled_sentences": [] 
 }
 
 def extract_text_from_pdf(file_path):
@@ -62,6 +66,16 @@ async def upload_pdf(file: UploadFile = File(...)):
         DOCUMENT_STORE["full_text"] = full_text
         DOCUMENT_STORE["pages"] = pages
         DOCUMENT_STORE["sentences"] = nltk.sent_tokenize(full_text)
+        
+        labeled = []
+        for s in DOCUMENT_STORE["sentences"]:
+            inputs = tokenizer(s, return_tensors="pt", truncation=True, padding="max_length", max_length=128)
+            with torch.no_grad():
+                outputs = model(**inputs)
+            predicted_class_id = torch.argmax(outputs.logits, dim=1).item()
+            label = model.config.id2label[predicted_class_id]
+            labeled.append({"sentence": s, "label": label})
+        DOCUMENT_STORE["labeled_sentences"] = labeled
 
         return {"filename": file.filename, "pages": pages}
     finally:
@@ -109,7 +123,7 @@ def ask_question(payload: dict):
     context = "\n".join(relevant_sentences)
 
     response = client.chat.completions.create(
-        model="gpt-4o", 
+        model="openai/gpt-oss-20b",
         max_tokens=500,
         messages=[
             {
@@ -129,6 +143,19 @@ def ask_question(payload: dict):
 
     answer = response.choices[0].message.content
     return {"answer": answer}
+
+@app.get("/classify_document")
+def classify_document():
+    sentences = DOCUMENT_STORE["sentences"]
+    results = []
+    for s in sentences:
+        inputs = tokenizer(s, return_tensors="pt", truncation=True, padding="max_length", max_length=128)
+        with torch.no_grad():
+            outputs = model(**inputs)
+        predicted_class_id = torch.argmax(outputs.logits, dim=1).item()
+        label = model.config.id2label[predicted_class_id]
+        results.append({"sentence": s, "label": label})
+    return {"classified": results}
 
 
 @app.get("/export_sentences")
