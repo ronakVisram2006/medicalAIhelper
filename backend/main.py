@@ -46,7 +46,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model_path = "./final_medical_classifier"
+model_path = "OXRON2/medical-note-classifier"
+
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 

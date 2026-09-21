@@ -56,8 +56,38 @@ nav a:hover {
 }
 
 .answer-section {
+    
+    background: radial-gradient(
+        ellipse 141.42% 107.32% at 0% 0%,
+        rgba(66, 66, 66, 0.603) 20%,
+        rgba(65, 65, 65, 0.35) 55%,
+        rgba(0, 0, 0, 0.25) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 0 0 1.25rem 1.25rem;
+    padding: 3rem 2rem 4rem;
+    margin-left: 15%;
+    margin-right: 15%;
     text-align: center;
-    padding: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#answer {
+    white-space: pre-wrap;   
+}
+
+#answer.loading {
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .upload-section {

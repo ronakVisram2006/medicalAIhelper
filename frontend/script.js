@@ -6,6 +6,8 @@ const uploadButton = document.getElementById('upload-button');
 
 const askButton = document.getElementById('ask-button');
 
+const summariseDocument = document.getElementById('summarise-button');
+
 pdfUpload.addEventListener('change', function() {
 
     const file = pdfUpload.files[0];
@@ -119,5 +121,28 @@ askButton.addEventListener('click', async function() {
     } catch (error) {
         document.getElementById('answer').textContent = "Failed to get answer";
 
+    }
+});
+
+
+summariseDocument.addEventListener('click', async function() {
+    if (!pdfUpload.files[0]) {
+        alert('Please upload a PDF file before summarising.');
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/summarise", {
+            method: 'POST'
+        });
+
+        const result = await response.json();
+
+        document.getElementById('answer').textContent = result.answer;
+
+    } catch (error) {
+        console.error(error);
+        document.getElementById('answer').textContent =
+            "Failed to summarise document";
     }
 });
