@@ -102,6 +102,37 @@ uploadButton.addEventListener('click', async function() {
 });
 
 
+
+function highlightFlags(html) {
+    return html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function(match, word) {
+        return `<span class="flag flag-${word.toLowerCase()}">${word.toUpperCase()}</span>`;
+    });
+}
+
+function renderAnswer(markdownText) {
+    const answerEl = document.getElementById('answer');
+
+    if (typeof marked === 'undefined') {
+        answerEl.textContent = markdownText;
+        return;
+    }
+
+    let html = marked.parse(markdownText);
+    html = highlightFlags(html);
+
+    answerEl.innerHTML = typeof DOMPurify !== 'undefined'
+        ? DOMPurify.sanitize(html)
+        : html;
+
+    answerEl.querySelectorAll('table').forEach(function(table) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-scroll';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
+}
+
+
 function openModal() {
     modalOverlay.classList.add('open');
     document.getElementById('question').focus();
@@ -114,12 +145,14 @@ function closeModal() {
 openAskButton.addEventListener('click', openModal);
 closeModalButton.addEventListener('click', closeModal);
 
+// Close when clicking the dark backdrop, but not when clicking inside the modal itself
 modalOverlay.addEventListener('click', function(event) {
     if (event.target === modalOverlay) {
         closeModal();
     }
 });
 
+// Close on Escape
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape' && modalOverlay.classList.contains('open')) {
         closeModal();
@@ -149,7 +182,7 @@ askButton.addEventListener('click', async function() {
         });
 
         const result = await response.json();
-        document.getElementById('answer').textContent = result.answer;
+        renderAnswer(result.answer);
     } catch (error) {
         document.getElementById('answer').textContent = "Failed to get answer";
 
@@ -170,7 +203,7 @@ summariseDocument.addEventListener('click', async function() {
 
         const result = await response.json();
 
-        document.getElementById('answer').textContent = result.answer;
+        renderAnswer(result.answer);
 
     } catch (error) {
         console.error(error);

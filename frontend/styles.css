@@ -73,13 +73,136 @@ nav a:hover {
 }
 
 #answer {
-    white-space: pre-wrap;
     line-height: 1.6;
 }
 
 #answer.loading {
     opacity: 0.6;
     font-style: italic;
+}
+
+#answer h1,
+#answer h2,
+#answer h3 {
+    color: #ffffff;
+    margin: 1.25rem 0 0.6rem;
+    line-height: 1.3;
+}
+
+#answer h1:first-child,
+#answer h2:first-child,
+#answer h3:first-child {
+    margin-top: 0;
+}
+
+#answer h1 { font-size: 1.4rem; }
+#answer h2 { font-size: 1.2rem; }
+#answer h3 {
+    font-size: 1.05rem;
+    color: #8ed8f2;
+}
+
+#answer p {
+    margin: 0.6rem 0;
+}
+
+#answer strong {
+    color: #ffffff;
+}
+
+#answer ul,
+#answer ol {
+    margin: 0.5rem 0 1rem;
+    padding-left: 1.4rem;
+}
+
+#answer li {
+    margin: 0.35rem 0;
+}
+
+#answer li > ul,
+#answer li > ol {
+    margin: 0.35rem 0 0.35rem 0;
+}
+
+#answer hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 1.25rem 0;
+}
+
+
+.table-scroll {
+    overflow-x: auto;
+    margin: 0.75rem 0 1.25rem;
+}
+
+#answer table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.95rem;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#answer th,
+#answer td {
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+#answer th {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+#answer tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+#answer tbody tr:hover {
+    background: rgba(117, 200, 229, 0.08);
+}
+
+#answer tr:last-child td {
+    border-bottom: none;
+}
+
+/* Lab-result flag badges, e.g. "(LOW)" -> a small colored chip */
+
+#answer .flag {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-left: 0.35rem;
+    vertical-align: middle;
+}
+
+#answer .flag-low,
+#answer .flag-high,
+#answer .flag-critical {
+    background: rgba(230, 90, 90, 0.18);
+    color: #ff9f9f;
+    border: 1px solid rgba(230, 90, 90, 0.4);
+}
+
+#answer .flag-elevated {
+    background: rgba(230, 170, 60, 0.18);
+    color: #ffc978;
+    border: 1px solid rgba(230, 170, 60, 0.4);
+}
+
+#answer .flag-normal {
+    background: rgba(90, 200, 130, 0.18);
+    color: #8fe8ae;
+    border: 1px solid rgba(90, 200, 130, 0.4);
 }
 
 .secondary {
@@ -111,6 +234,7 @@ nav a:hover {
 }
 
 .upload-section:hover {
+    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(87, 86, 86, 0.45);
 }
 
@@ -238,7 +362,7 @@ nav a:hover {
 .modal {
     position: relative;
     width: 100%;
-    max-width: 640px;
+    max-width: 720px;
     max-height: 85vh;
     overflow-y: auto;
     background: radial-gradient(
