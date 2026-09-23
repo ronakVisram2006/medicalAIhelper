@@ -219,3 +219,25 @@ summariseDocument.addEventListener('click', async function() {
             "Failed to summarise document";
     }
 });
+
+uploadButton2.addEventListener('click', function() {
+    if (!confirm('Are you sure you want to upload another PDF? This will reset the current session.')) {
+        return;
+    }
+    pdfUpload.value = '';
+
+    uploadBox.querySelector('.upload-icon').textContent = '↑';
+    uploadBox.querySelector('.upload-text').textContent = 'Click to upload your PDF';
+    uploadBox.querySelector('.upload-subtext').textContent = 'PDF files only';
+
+    document.getElementsByClassName('upload-container')[0].style.display = "block";
+    uploadButton.style.display = "inline-block";
+
+    document.getElementById('upload-status').style.display = "none";
+    document.getElementById('pdf-summary').style.display = "none";
+    openAskButton.classList.remove('visible');
+    uploadButton2.style.display = "none";
+
+    document.getElementById('answer').textContent = 'Your answer will appear here.';
+    document.getElementById('question').value = '';
+});
