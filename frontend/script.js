@@ -4,6 +4,10 @@ const uploadBox = document.querySelector('.upload-box');
 
 const uploadButton = document.getElementById('upload-button');
 
+const openAskButton = document.getElementById('open-ask-button');
+const modalOverlay = document.getElementById('ask-modal-overlay');
+const closeModalButton = document.getElementById('close-modal-button');
+
 const askButton = document.getElementById('ask-button');
 
 const summariseDocument = document.getElementById('summarise-button');
@@ -87,6 +91,8 @@ uploadButton.addEventListener('click', async function() {
 
         document.getElementsByClassName('upload-container')[0].style.display = "none";
 
+        openAskButton.classList.add('visible');
+
 
     } catch (error) {
         statusIcon.classList.remove("loading");
@@ -94,6 +100,32 @@ uploadButton.addEventListener('click', async function() {
         statusText.textContent = "Failed to read PDF";
     }
 });
+
+
+function openModal() {
+    modalOverlay.classList.add('open');
+    document.getElementById('question').focus();
+}
+
+function closeModal() {
+    modalOverlay.classList.remove('open');
+}
+
+openAskButton.addEventListener('click', openModal);
+closeModalButton.addEventListener('click', closeModal);
+
+modalOverlay.addEventListener('click', function(event) {
+    if (event.target === modalOverlay) {
+        closeModal();
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && modalOverlay.classList.contains('open')) {
+        closeModal();
+    }
+});
+
 askButton.addEventListener('click', async function() {
 
     const questionInput = document.getElementById('question');

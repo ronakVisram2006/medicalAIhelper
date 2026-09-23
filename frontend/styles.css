@@ -45,9 +45,10 @@ nav a:hover {
 }
 
 .grid {
-    display: grid;
-    grid-template-rows: 1fr 0.6fr;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
     text-align: center;
 }
 
@@ -56,7 +57,6 @@ nav a:hover {
 }
 
 .answer-section {
-    
     background: radial-gradient(
         ellipse 141.42% 107.32% at 0% 0%,
         rgba(66, 66, 66, 0.603) 20%,
@@ -64,20 +64,17 @@ nav a:hover {
         rgba(0, 0, 0, 0.25) 100%
     );
     border: 1px solid rgba(255, 255, 255, 0.38);
-    border-radius: 0 0 1.25rem 1.25rem;
-    padding: 3rem 2rem 4rem;
-    margin-left: 15%;
-    margin-right: 15%;
-    text-align: center;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    text-align: left;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     overflow: hidden;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 #answer {
-    white-space: pre-wrap;   
+    white-space: pre-wrap;
+    line-height: 1.6;
 }
 
 #answer.loading {
@@ -102,17 +99,18 @@ nav a:hover {
     padding: 3rem 2rem 4rem;
     margin-left: 15%;
     margin-right: 15%;
-    margin-top: 2rem;
+    margin-top: 0;
     text-align: center;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     overflow: hidden;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    width: 70%;
+    box-sizing: border-box;
 }
 
 .upload-section:hover {
-    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(87, 86, 86, 0.45);
 }
 
@@ -192,38 +190,106 @@ nav a:hover {
     box-shadow: 0 7px 20px rgba(25, 125, 165, 0.4);
 }
 
-.chat-section {
+/* Trigger button shown once the PDF has been read.
+   Hidden by default; JS reveals it on upload success. */
+.ask-trigger {
+    display: none;
+    padding: 1rem 2.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(25, 125, 165, 0.85);
+    color: white;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(25, 125, 165, 0.3);
+    transition: 0.2s ease;
+}
+
+.ask-trigger.visible {
+    display: inline-block;
+}
+
+.ask-trigger:hover {
+    background: rgba(18, 107, 142, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(25, 125, 165, 0.4);
+}
+
+/* Modal overlay: hidden until the user opens it */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 12, 16, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    max-height: 85vh;
+    overflow-y: auto;
     background: radial-gradient(
         ellipse 141.42% 107.32% at 0% 0%,
-        rgba(66, 66, 66, 0.603) 20%,
-        rgba(65, 65, 65, 0.35) 55%,
-        rgba(0, 0, 0, 0.25) 100%
+        rgba(40, 46, 50, 0.92) 20%,
+        rgba(30, 34, 38, 0.92) 55%,
+        rgba(10, 14, 17, 0.95) 100%
     );
-    border: 1px solid rgba(180, 210, 255, 0.5);
-    border-radius: 0 0 1.25rem 1.25rem;
-    padding: 2rem;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 1.25rem;
+    padding: 2.5rem;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
     text-align: center;
-    box-shadow: 0 4px 24px rgba(100, 149, 200, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    overflow: hidden;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.chat-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 28px rgba(100, 149, 200, 0.45);
-}
-
-.chat-section h2 {
+.modal h2 {
     margin-top: 0;
     margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
     font-size: 1.5rem;
     color: #f0f7fa;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    background: transparent;
+    border: none;
+    color: #e8f4fa;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.modal-close:hover {
+    color: #8ed8f2;
+}
+
+.modal .secondary {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    color: #e8f4fa;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.modal .secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .question-box {
