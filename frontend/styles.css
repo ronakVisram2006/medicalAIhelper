@@ -313,9 +313,32 @@ nav a:hover {
     transform: translateY(-2px);
     box-shadow: 0 7px 20px rgba(25, 125, 165, 0.4);
 }
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
+}
 
-/* Trigger button shown once the PDF has been read.
-   Hidden by default; JS reveals it on upload success. */
+#upload-button2 {
+    padding: 1rem 2.25rem;
+    border: 1px solid rgba(128, 63, 63, 0.521);
+    border-radius: 10px;
+    background: rgb(250, 105, 105); 
+    color: white;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#upload-button2:hover {
+    background: rgba(255, 41, 41, 0.658);
+    transform: translateY(-2px);
+}
+
+
 .ask-trigger {
     display: none;
     padding: 1rem 2.25rem;

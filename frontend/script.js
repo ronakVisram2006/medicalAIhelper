@@ -12,6 +12,8 @@ const askButton = document.getElementById('ask-button');
 
 const summariseDocument = document.getElementById('summarise-button');
 
+const uploadButton2 = document.getElementById('upload-button2');
+
 pdfUpload.addEventListener('change', function() {
 
     const file = pdfUpload.files[0];
@@ -92,6 +94,12 @@ uploadButton.addEventListener('click', async function() {
         document.getElementsByClassName('upload-container')[0].style.display = "none";
 
         openAskButton.classList.add('visible');
+
+        uploadButton.style.display = "none";
+        uploadButton2.style.display = "inline-block";
+    
+        
+
 
 
     } catch (error) {
