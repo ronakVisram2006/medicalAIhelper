@@ -14,6 +14,10 @@ const summariseDocument = document.getElementById('summarise-button');
 
 const uploadButton2 = document.getElementById('upload-button2');
 
+const aboutOverlay = document.getElementById("about-modal-overlay");
+const aboutLink = document.getElementById("about-link");
+const closeAboutButton = document.getElementById("close-about-button");
+
 pdfUpload.addEventListener('change', function() {
 
     const file = pdfUpload.files[0];
@@ -300,4 +304,19 @@ uploadButton2.addEventListener('click', function() {
     document.getElementById('answer').textContent = 'Your answer will appear here.';
     renderSources([]);
     document.getElementById('question').value = '';
+});
+
+aboutLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    aboutOverlay.style.display = "flex";
+});
+
+closeAboutButton.addEventListener("click", () => {
+    aboutOverlay.style.display = "none";
+});
+
+aboutOverlay.addEventListener("click", (e) => {
+    if (e.target === aboutOverlay) {
+        aboutOverlay.style.display = "none";
+    }
 });

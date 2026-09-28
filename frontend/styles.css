@@ -566,3 +566,7 @@ button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+#about-modal-overlay {
+    display: none;
+}
