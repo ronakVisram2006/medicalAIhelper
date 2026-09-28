@@ -143,6 +143,20 @@ function renderAnswer(markdownText) {
         wrapper.appendChild(table);
     });
 }
+
+function showLoading(message) {
+    const answerEl = document.getElementById('answer');
+    answerEl.innerHTML =
+        '<div class="loading-box"><div class="spinner"></div><span></span></div>';
+    answerEl.querySelector('span').textContent = message;
+    renderSources([]);
+}
+
+function setBusy(busy) {
+    askButton.disabled = busy;
+    summariseDocument.disabled = busy;
+}
+
 function renderSources(sources) {
     const el = document.getElementById('sources');
     el.innerHTML = '';
@@ -211,6 +225,10 @@ askButton.addEventListener('click', async function() {
         alert('Please upload a PDF file before asking a question.');
         return;
     }
+
+    setBusy(true);
+    showLoading('Reading your document...');
+
     try {
         const response = await fetch("http://127.0.0.1:8000/ask", {
             method: 'POST',
@@ -228,6 +246,8 @@ askButton.addEventListener('click', async function() {
         document.getElementById('answer').textContent = "Failed to get answer";
         renderSources([]);
 
+    }finally {
+        setBusy(false);
     }
 });
 
@@ -238,23 +258,26 @@ summariseDocument.addEventListener('click', async function() {
         return;
     }
 
+    setBusy(true);
+    showLoading('Summarising your document. This can take a little longer...');
+
     try {
         const response = await fetch("http://127.0.0.1:8000/summarise", {
             method: 'POST'
         });
 
         const result = await response.json();
-
         renderAnswer(result.answer);
-        renderSources([]);
-
+        renderSources(result.sources);
     } catch (error) {
         console.error(error);
-        document.getElementById('answer').textContent =
-            "Failed to summarise document";
-    }
+        document.getElementById('answer').textContent = "Failed to summarise document";
         renderSources([]);
-});
+    } finally {
+        setBusy(false);
+    }
+});    renderSources([]);
+
 
 uploadButton2.addEventListener('click', function() {
     if (!confirm('Are you sure you want to upload another PDF? This will reset the current session.')) {
