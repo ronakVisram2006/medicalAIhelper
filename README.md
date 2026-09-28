@@ -2,7 +2,7 @@
 
 > An AI-assisted PDF reader that uses LLMs to generate responses to user queries.
 
-## 📖 Overview
+##  Overview
 
 medicalAIhelper is an AI-assisted PDF reader designed to make it easier to interact with and understand information contained within PDF documents.
 
@@ -10,19 +10,19 @@ Instead of manually searching through a document to find relevant information, u
 
 The project combines a PDF reading experience with Large Language Models (LLMs), using **OpenAI and Groq**, to create a more interactive way of working with documents.
 
-## ✨ Features
+##  Features
 
-* 📄 Read and interact with PDF documents
-* 🤖 Ask questions about PDF content
-* 💬 Receive AI-generated responses to user queries
-* 🔎 Find information without manually searching through the entire document
-* 🏥 Designed with medical and healthcare-related documents in mind
-* ⚡ Uses OpenAI and Groq for LLM-powered responses
+*  Read and interact with PDF documents
+*  Ask questions about PDF content
+* Receive AI-generated responses to user queries
+*  Find information without manually searching through the entire document
+*  Designed with medical and healthcare-related documents in mind
+*  Uses OpenAI and Groq for LLM-powered responses
 
 
 The application allows users to interact with their documents conversationally rather than relying solely on traditional PDF search.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### AI / LLMs
 
@@ -35,7 +35,7 @@ The application allows users to interact with their documents conversationally r
 * **Backend** — Application logic and communication with the AI services
 * **PDF processing** — Processing and working with PDF content
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -63,13 +63,13 @@ Do not commit your API keys to the repository.
 
 Install the project dependencies and start the frontend/backend services using the project's configured commands.
 
-## 💡 Why We Built It
+##  Why We Built It
 
 Medical documents can be lengthy and difficult to navigate. Finding a specific piece of information can require searching through multiple pages and interpreting complex terminology.
 
 medicalAIhelper aims to make this process more interactive by allowing users to ask questions directly about the document they are reading.
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 * Improve document understanding and context retrieval
 * Add conversation history
@@ -79,17 +79,17 @@ medicalAIhelper aims to make this process more interactive by allowing users to 
 * Improve PDF navigation alongside AI responses
 * Further optimise response speed
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 medicalAIhelper is an educational/hackathon project and is **not intended to provide medical diagnosis, treatment, or professional medical advice**.
 
 AI-generated responses may contain errors and should be independently verified against reliable medical sources and qualified professionals.
 
-## 🏆 Hackathon
+##  Hackathon
 
 Built for **Gateways 2026**.
 
-## 👤 Author
+##  Author
 
 **Ronak Visram**
 
