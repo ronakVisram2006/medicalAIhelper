@@ -112,9 +112,13 @@ uploadButton.addEventListener('click', async function() {
 
 
 function highlightFlags(html) {
-    return html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function(match, word) {
+    html = html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function(match, word) {
         return `<span class="flag flag-${word.toLowerCase()}">${word.toUpperCase()}</span>`;
     });
+    html = html.replace(/<td>\s*(LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\s*<\/td>/gi, function(match, word) {
+        return `<td><span class="flag flag-${word.toLowerCase()}">${word.toUpperCase()}</span></td>`;
+    });
+    return html;
 }
 
 function renderAnswer(markdownText) {

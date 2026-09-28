@@ -281,89 +281,112 @@ def guess_label(question: str):
 def retrieve_relevant_sentences(question: str, top_k: int = 15):
     sentences = DOCUMENT_STORE["sentences"]
     sentence_pages = DOCUMENT_STORE["sentence_pages"]
-    labeled = DOCUMENT_STORE["labeled_sentences"]
-    all_embeddings = DOCUMENT_STORE["sentence_embeddings"]
     sentence_lines = DOCUMENT_STORE["sentence_lines"]
+    all_embeddings = DOCUMENT_STORE["sentence_embeddings"]
 
     if not sentences or all_embeddings is None:
         return []
 
-    guessed_label = guess_label(question)
-
-    if guessed_label:
-        indices = [i for i, item in enumerate(labeled) if item["label"] == guessed_label]
-        if not indices:
-            indices = list(range(len(sentences)))
-    else:
-        indices = list(range(len(sentences)))
-
-    pool_embeddings = all_embeddings[indices]
-
     question_embedding = embedder.encode([question])[0]
-    similarities = np.dot(pool_embeddings, question_embedding) / (
-        np.linalg.norm(pool_embeddings, axis=1) * np.linalg.norm(question_embedding) + 1e-8
+    similarities = np.dot(all_embeddings, question_embedding) / (
+        np.linalg.norm(all_embeddings, axis=1) * np.linalg.norm(question_embedding) + 1e-8
     )
 
     top_indices = np.argsort(similarities)[::-1][:top_k]
 
     return [
         {
-            "sentence": sentences[indices[i]],
-            "page": sentence_pages[indices[i]],
-            "line_start": sentence_lines[indices[i]][0],
-            "line_end": sentence_lines[indices[i]][1],
+            "sentence": sentences[i],
+            "page": sentence_pages[i],
+            "line_start": sentence_lines[i][0],
+            "line_end": sentence_lines[i][1],
+            "score": float(similarities[i]),
         }
         for i in top_indices
     ]
 
 
+NOT_FOUND = "This information is not found in the document." 
+
+LIST_RE = re.compile(r"\b(all|list|which|what)\b.*\b(medications?|medicines?|drugs?|labs?|tests?|results?)\b")
+
 @app.post("/ask")
 def ask_question(payload: dict):
     if not DOCUMENT_STORE["sentences"]:
-        return {"answer": "No document has been uploaded yet. Please upload a PDF first."}
+        return {"answer": "No document has been uploaded yet. Please upload a PDF first.", "sources": []}
 
     question = payload["question"]
-    
-    if is_global_query(question):
-        return {"answer": summarise_document()}
 
-    hits = retrieve_relevant_sentences(question, top_k=15)
+    if is_global_query(question):
+        return summarise_document()        
+
+    top_k = 30 if LIST_RE.search(question.lower()) else 15
+    hits = retrieve_relevant_sentences(question, top_k=top_k)
+
+    if not hits or hits[0]["score"] < 0.2:   
+        return {"answer": NOT_FOUND, "sources": []}
 
     context = "\n".join(f"[{n}] {h['sentence']}" for n, h in enumerate(hits, start=1))
 
     response = client.chat.completions.create(
         model="openai/gpt-oss-20b",
-        max_tokens=1000, 
-        temperature=0.2,
+        max_tokens=4000,
+        temperature=0,
+        extra_body={"reasoning_effort": "low"}, 
         messages=[
             {
                 "role": "system",
                 "content": (
                     "You are a precise medical document assistant. Answer using ONLY "
                     "information explicitly stated in the provided excerpts. "
-                    "Be specific and complete — if multiple relevant facts exist, include all of them. "
+                    "Be specific and complete: if multiple relevant facts exist, include all of them, "
+                    "and when asked for a list, include every matching item in the excerpts. "
                     "If the answer is not in the excerpts, respond exactly: "
-                    "'This information is not found in the document.' "
+                    f"'{NOT_FOUND}' "
                     "Do not guess or use outside medical knowledge. "
-                    "The excerpts are numbered like [1], [2]. After each statement in your "
-                    "answer, cite the number(s) of the excerpt(s) it came from, each in its own "
-                    "brackets, like [1] or [2][5]. Only cite numbers that appear in the excerpts. "
-                    "Do not cite anything for the 'not found' response."
-                    "Always include citations at the end of each statement. If the document is empty, respond exactly: 'The document is empty.'"
+                    "The excerpts are numbered like [1], [2]. Every sentence or bullet in your "
+                    "answer MUST end with the number(s) of the excerpt(s) it came from, each in its own "
+                    "brackets, like [1] or [2][5]. An answer without citations is invalid. "
+                    "Only cite numbers that appear in the excerpts. "
+                    "Do not cite anything for the 'not found' response. "
+                    "Example: 'He takes carvedilol 12.5 mg twice daily [3]. He also takes apixaban 5 mg twice daily [7].'"
+                    "When the answer lists several items that share the same fields (medications, lab results, "
+                    "vital signs), format it as a markdown table with one row per item. Use the field names as "
+                    "column headers and put the excerpt number(s) in a final column named Source, like [3]. "
+                    "Otherwise answer in short sentences. "
+                    "MAKE ANSWERS AS SIMPLE AS POSSIBLE WHILST STILL BEING COMPLETE. "
                 ),
             },
             {
                 "role": "user",
-                "content": f"Document excerpts:\n{context}\n\nQuestion: {question}",
+                "content": (
+                    f"Document excerpts:\n{context}\n\nQuestion: {question}\n\n"
+                    "Remember: cite excerpt numbers after every statement."
+                ),
             },
         ],
     )
 
-    answer = response.choices[0].message.content
+    print("finish_reason:", response.choices[0].finish_reason)   # 'length' means max_tokens is still too low
+    answer = response.choices[0].message.content or ""
 
     answer, sources = extract_sources(answer, hits)
-    return {"answer": answer, "sources": sources}
 
+
+    if not sources and NOT_FOUND not in answer:
+        sources = [
+            {
+                "id": n,
+                "page": h["page"],
+                "line_start": h["line_start"],
+                "line_end": h["line_end"],
+                "quote": h["sentence"],
+                "score": round(h["score"], 2),
+            }
+            for n, h in enumerate(hits[:3], start=1)
+        ]
+
+    return {"answer": answer, "sources": sources}
 
 @app.get("/classify_document")
 def classify_document():
