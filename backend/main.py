@@ -354,7 +354,12 @@ def ask_question(payload: dict):
                     "vital signs), format it as a markdown table with one row per item. Use the field names as "
                     "column headers and put the excerpt number(s) in a final column named Source, like [3]. "
                     "Otherwise answer in short sentences. "
-                    "MAKE ANSWERS AS SIMPLE AS POSSIBLE WHILST STILL BEING COMPLETE. "
+                    "Use plain, simple wording, but never leave out required details such as status or dose changes. "
+                    "Never leave out items because of category or relevance unless the question asks for a category. "
+                    "For medications, include a Status column (Taking, Held, Stopped, Started, Dose changed) "
+                    "based only on the excerpts, and give both the old and new dose when a dose changed. "
+                    "Only include a Notes or Reason column if the excerpts explicitly state the reason; "
+                    "never add an indication from your own knowledge. "
                 ),
             },
             {
@@ -368,6 +373,15 @@ def ask_question(payload: dict):
     )
 
     print("finish_reason:", response.choices[0].finish_reason)   # 'length' means max_tokens is still too low
+    finish = response.choices[0].finish_reason
+    print("finish_reason:", finish)
+    answer = response.choices[0].message.content or ""
+
+    if finish == "length":
+        return {
+            "answer": "The answer was too long to generate completely. Try asking about one item at a time, for example a single medication or lab test.",
+            "sources": [],
+        }
     answer = response.choices[0].message.content or ""
 
     answer, sources = extract_sources(answer, hits)
