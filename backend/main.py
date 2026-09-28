@@ -9,7 +9,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import os
 from openai import OpenAI
-
+from bisect import bisect_right
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
@@ -62,6 +62,7 @@ DOCUMENT_STORE = {
     "labeled_sentences": [],
     "sentence_embeddings": None,
      "summary": None,
+     "sentence_lines": [],
 }
 
 SUMMARY_SYSTEM = (
@@ -72,6 +73,8 @@ SUMMARY_SYSTEM = (
     "The document is split into pages marked like [Page 2]. After every sentence or bullet, "
     "cite the page(s) the information came from, one marker per page, written like [p2] or "
     "[p2][p3]. Only cite pages that appear in the text."
+    "Everything in the summary must be supported by the text. If a category is not present, do not include it."
+    "Always include the page citations in the summary. If the document is empty, respond exactly: 'The document is empty.'"
 )
 
 
@@ -107,7 +110,13 @@ def extract_sources(answer: str, hits: list):
 
     cleaned = CITE_RE.sub(fix, answer)
     sources = [
-        {"id": n, "page": hits[i - 1]["page"], "quote": hits[i - 1]["sentence"]}
+        {
+            "id": n,
+            "page": hits[i - 1]["page"],
+            "line_start": hits[i - 1]["line_start"],
+            "line_end": hits[i - 1]["line_end"],
+            "quote": hits[i - 1]["sentence"],
+        }
         for i, n in order.items()
     ]
     return cleaned, sources
@@ -124,11 +133,10 @@ def extract_text_from_pdf(file_path):
     doc = fitz.open(file_path)
     pages = []
     for page_number, page in enumerate(doc):
-        text = page.get_text()
-        pages.append({"page_number": page_number + 1, "text": text})
+        lines = [l.strip() for l in page.get_text().split("\n") if l.strip()]
+        pages.append({"page_number": page_number + 1, "text": "\n".join(lines)})
     doc.close()
     return pages
-
 
 def classify_sentence(sentence: str) -> str:
     inputs = tokenizer(sentence, return_tensors="pt", truncation=True, padding="max_length", max_length=128)
@@ -193,15 +201,34 @@ async def upload_pdf(file: UploadFile = File(...)):
         DOCUMENT_STORE["summary"] = None
         DOCUMENT_STORE["pages"] = pages
 
-        sentences, sentence_pages = [], []
+        sentences, sentence_pages, sentence_lines = [], [], []
         for p in pages:
-            for s in nltk.sent_tokenize(p["text"]):
-                s = " ".join(s.split())  
-                if s:
-                    sentences.append(s)
+            text = p["text"]
+
+            starts, pos = [], 0
+            for line in text.split("\n"):
+                starts.append(pos)
+                pos += len(line) + 1
+
+            cursor = 0
+            for s in nltk.sent_tokenize(text):
+                found = text.find(s, cursor)
+                if found == -1:
+                    found = cursor
+                cursor = found + len(s)
+
+                start_line = bisect_right(starts, found)                      
+                end_line = bisect_right(starts, max(found, cursor - 1))
+
+                clean = " ".join(s.split())
+                if clean:
+                    sentences.append(clean)
                     sentence_pages.append(p["page_number"])
-        DOCUMENT_STORE["sentences"] = sentences
-        DOCUMENT_STORE["sentence_pages"] = sentence_pages
+                    sentence_lines.append((start_line, end_line))
+
+            DOCUMENT_STORE["sentences"] = sentences
+            DOCUMENT_STORE["sentence_pages"] = sentence_pages
+            DOCUMENT_STORE["sentence_lines"] = sentence_lines
 
         labeled = []
         for s in sentences:
@@ -256,6 +283,7 @@ def retrieve_relevant_sentences(question: str, top_k: int = 15):
     sentence_pages = DOCUMENT_STORE["sentence_pages"]
     labeled = DOCUMENT_STORE["labeled_sentences"]
     all_embeddings = DOCUMENT_STORE["sentence_embeddings"]
+    sentence_lines = DOCUMENT_STORE["sentence_lines"]
 
     if not sentences or all_embeddings is None:
         return []
@@ -279,7 +307,12 @@ def retrieve_relevant_sentences(question: str, top_k: int = 15):
     top_indices = np.argsort(similarities)[::-1][:top_k]
 
     return [
-        {"sentence": sentences[indices[i]], "page": sentence_pages[indices[i]]}
+        {
+            "sentence": sentences[indices[i]],
+            "page": sentence_pages[indices[i]],
+            "line_start": sentence_lines[indices[i]][0],
+            "line_end": sentence_lines[indices[i]][1],
+        }
         for i in top_indices
     ]
 
@@ -300,7 +333,7 @@ def ask_question(payload: dict):
 
     response = client.chat.completions.create(
         model="openai/gpt-oss-20b",
-        max_tokens=800, 
+        max_tokens=1000, 
         temperature=0.2,
         messages=[
             {
@@ -316,6 +349,7 @@ def ask_question(payload: dict):
                     "answer, cite the number(s) of the excerpt(s) it came from, each in its own "
                     "brackets, like [1] or [2][5]. Only cite numbers that appear in the excerpts. "
                     "Do not cite anything for the 'not found' response."
+                    "Always include citations at the end of each statement. If the document is empty, respond exactly: 'The document is empty.'"
                 ),
             },
             {

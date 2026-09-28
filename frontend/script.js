@@ -139,7 +139,34 @@ function renderAnswer(markdownText) {
         wrapper.appendChild(table);
     });
 }
+function renderSources(sources) {
+    const el = document.getElementById('sources');
+    el.innerHTML = '';
+    if (!sources || sources.length === 0) return;
 
+    const heading = document.createElement('h4');
+    heading.textContent = 'Sources';
+    el.appendChild(heading);
+
+    sources.forEach(function(s) {
+        const location = s.line_start === s.line_end
+            ? `Page ${s.page}, line ${s.line_start}`
+            : `Page ${s.page}, lines ${s.line_start}–${s.line_end}`;
+
+        const item = document.createElement('div');
+        item.className = 'source-item';
+
+        const label = document.createElement('strong');
+        label.textContent = `[${s.id}] ${location}`;
+
+        const quote = document.createElement('p');
+        quote.textContent = `"${s.quote}"`;
+
+        item.appendChild(label);
+        item.appendChild(quote);
+        el.appendChild(item);
+    });
+}
 
 function openModal() {
     modalOverlay.classList.add('open');
@@ -191,8 +218,11 @@ askButton.addEventListener('click', async function() {
 
         const result = await response.json();
         renderAnswer(result.answer);
+        renderSources(result.sources);
+
     } catch (error) {
         document.getElementById('answer').textContent = "Failed to get answer";
+        renderSources([]);
 
     }
 });
@@ -212,12 +242,14 @@ summariseDocument.addEventListener('click', async function() {
         const result = await response.json();
 
         renderAnswer(result.answer);
+        renderSources([]);
 
     } catch (error) {
         console.error(error);
         document.getElementById('answer').textContent =
             "Failed to summarise document";
     }
+        renderSources([]);
 });
 
 uploadButton2.addEventListener('click', function() {
@@ -239,5 +271,6 @@ uploadButton2.addEventListener('click', function() {
     uploadButton2.style.display = "none";
 
     document.getElementById('answer').textContent = 'Your answer will appear here.';
+    renderSources([]);
     document.getElementById('question').value = '';
 });

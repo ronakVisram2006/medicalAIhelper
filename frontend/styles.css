@@ -538,3 +538,6 @@ nav a:hover {
     height: 3rem;  
     object-fit: contain;
 }
+.sources { margin-top: 16px; font-size: 0.9rem; }
+.source-item { padding: 8px 0; border-top: 1px solid #ddd; }
+.source-item p { margin: 4px 0 0; color: #555; font-style: italic; }
