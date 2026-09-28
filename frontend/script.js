@@ -14,6 +14,10 @@ const summariseDocument = document.getElementById('summarise-button');
 
 const uploadButton2 = document.getElementById('upload-button2');
 
+const aboutOverlay = document.getElementById("about-modal-overlay");
+const aboutLink = document.getElementById("about-link");
+const closeAboutButton = document.getElementById("close-about-button");
+
 pdfUpload.addEventListener('change', function() {
 
     const file = pdfUpload.files[0];
@@ -112,9 +116,13 @@ uploadButton.addEventListener('click', async function() {
 
 
 function highlightFlags(html) {
-    return html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function(match, word) {
+    html = html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function(match, word) {
         return `<span class="flag flag-${word.toLowerCase()}">${word.toUpperCase()}</span>`;
     });
+    html = html.replace(/<td>\s*(LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\s*<\/td>/gi, function(match, word) {
+        return `<td><span class="flag flag-${word.toLowerCase()}">${word.toUpperCase()}</span></td>`;
+    });
+    return html;
 }
 
 function renderAnswer(markdownText) {
@@ -140,6 +148,47 @@ function renderAnswer(markdownText) {
     });
 }
 
+function showLoading(message) {
+    const answerEl = document.getElementById('answer');
+    answerEl.innerHTML =
+        '<div class="loading-box"><div class="spinner"></div><span></span></div>';
+    answerEl.querySelector('span').textContent = message;
+    renderSources([]);
+}
+
+function setBusy(busy) {
+    askButton.disabled = busy;
+    summariseDocument.disabled = busy;
+}
+
+function renderSources(sources) {
+    const el = document.getElementById('sources');
+    el.innerHTML = '';
+    if (!sources || sources.length === 0) return;
+
+    const heading = document.createElement('h4');
+    heading.textContent = 'Sources';
+    el.appendChild(heading);
+
+    sources.forEach(function(s) {
+        const location = s.line_start === s.line_end
+            ? `Page ${s.page}, line ${s.line_start}`
+            : `Page ${s.page}, lines ${s.line_start}–${s.line_end}`;
+
+        const item = document.createElement('div');
+        item.className = 'source-item';
+
+        const label = document.createElement('strong');
+        label.textContent = `[${s.id}] ${location}`;
+
+        const quote = document.createElement('p');
+        quote.textContent = `"${s.quote}"`;
+
+        item.appendChild(label);
+        item.appendChild(quote);
+        el.appendChild(item);
+    });
+}
 
 function openModal() {
     modalOverlay.classList.add('open');
@@ -180,6 +229,10 @@ askButton.addEventListener('click', async function() {
         alert('Please upload a PDF file before asking a question.');
         return;
     }
+
+    setBusy(true);
+    showLoading('Reading your document...');
+
     try {
         const response = await fetch("http://127.0.0.1:8000/ask", {
             method: 'POST',
@@ -191,9 +244,14 @@ askButton.addEventListener('click', async function() {
 
         const result = await response.json();
         renderAnswer(result.answer);
+        renderSources(result.sources);
+
     } catch (error) {
         document.getElementById('answer').textContent = "Failed to get answer";
+        renderSources([]);
 
+    }finally {
+        setBusy(false);
     }
 });
 
@@ -204,21 +262,26 @@ summariseDocument.addEventListener('click', async function() {
         return;
     }
 
+    setBusy(true);
+    showLoading('Summarising your document. This can take a little longer...');
+
     try {
         const response = await fetch("http://127.0.0.1:8000/summarise", {
             method: 'POST'
         });
 
         const result = await response.json();
-
         renderAnswer(result.answer);
-
+        renderSources(result.sources);
     } catch (error) {
         console.error(error);
-        document.getElementById('answer').textContent =
-            "Failed to summarise document";
+        document.getElementById('answer').textContent = "Failed to summarise document";
+        renderSources([]);
+    } finally {
+        setBusy(false);
     }
-});
+});    renderSources([]);
+
 
 uploadButton2.addEventListener('click', function() {
     if (!confirm('Are you sure you want to upload another PDF? This will reset the current session.')) {
@@ -239,5 +302,21 @@ uploadButton2.addEventListener('click', function() {
     uploadButton2.style.display = "none";
 
     document.getElementById('answer').textContent = 'Your answer will appear here.';
+    renderSources([]);
     document.getElementById('question').value = '';
+});
+
+aboutLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    aboutOverlay.style.display = "flex";
+});
+
+closeAboutButton.addEventListener("click", () => {
+    aboutOverlay.style.display = "none";
+});
+
+aboutOverlay.addEventListener("click", (e) => {
+    if (e.target === aboutOverlay) {
+        aboutOverlay.style.display = "none";
+    }
 });

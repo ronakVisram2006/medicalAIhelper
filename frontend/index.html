@@ -18,9 +18,11 @@
 
     <header class="navbar">
         <div class="logo">Medical AI</div>
-            <nav class="nav-links">
-                <a href="#">About</a>
-            </nav>
+        <nav>
+            <ul>
+                <li><a href="#" id="about-link">About</a></li>
+            </ul>
+        </nav>
     </header>
 
 
@@ -101,9 +103,36 @@
                 <div id="answer">
                     Your answer will appear here.
                 </div>
+                <div id="sources" class="sources"></div>
+
             </div>
         </div>
     </div>
+
+
+    <div id="about-modal-overlay" class="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="about-title">
+        <button id="close-about-button" class="modal-close" aria-label="Close">&times;</button>
+
+        <h2 id="about-title">About Medical AI</h2>
+
+        <p>
+            Medical AI Helper is a tool that allows you to upload medical documents 
+            and ask questions about them in simple, understandable language.
+        </p>
+
+        <p>
+            It extracts key information such as diagnoses, symptoms, medications, 
+            lab results, and follow‑up instructions — always with page citations 
+            so you can verify the source.
+        </p>
+
+        <p>
+            This tool is not a medical device and does not provide medical advice. 
+            Always consult a qualified healthcare professional.
+        </p>
+    </div>
+</div>
 
     <script src="script.js"></script>
 
