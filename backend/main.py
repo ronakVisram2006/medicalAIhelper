@@ -26,6 +26,9 @@ GLOBAL_PATTERNS = [
     r"\bhighlights\b",
 ]
 
+CITE_RE = re.compile(r"\[(\d+(?:\s*,\s*\d+)*)\]")
+PAGE_CITE_RE = re.compile(r"\[p(\d+)\]")
+
 def is_global_query(q: str) -> bool:
     q = q.lower()
     return any(re.search(p, q) for p in GLOBAL_PATTERNS)
@@ -55,6 +58,7 @@ DOCUMENT_STORE = {
     "full_text": "",
     "pages": [],
     "sentences": [],
+    "sentence_pages": [],   
     "labeled_sentences": [],
     "sentence_embeddings": None,
      "summary": None,
@@ -64,20 +68,57 @@ SUMMARY_SYSTEM = (
     "You are a precise medical document assistant. Summarise using ONLY information "
     "explicitly stated in the text. Do not add outside medical knowledge or interpretation. "
     "Start with a 2-3 sentence overview, then list the key points as bullets "
-    "(diagnoses, medications and doses, lab results, follow-up instructions) where present."
+    "(diagnoses, medications and doses, lab results, follow-up instructions) where present. "
+    "The document is split into pages marked like [Page 2]. After every sentence or bullet, "
+    "cite the page(s) the information came from, one marker per page, written like [p2] or "
+    "[p2][p3]. Only cite pages that appear in the text."
 )
 
-def chunk_sentences(sentences, max_chars=12000):
+
+def labeled_page_text(pages):
+    return "\n\n".join(f"[Page {p['page_number']}]\n{p['text']}" for p in pages)
+
+
+def chunk_pages(pages, max_chars=12000):
     chunks, current, size = [], [], 0
-    for s in sentences:
-        if size + len(s) > max_chars and current:
-            chunks.append(" ".join(current)) 
-            current, size = [], 0   
-        current.append(s)
-        size += len(s)
+    for p in pages:
+        block = f"[Page {p['page_number']}]\n{p['text']}"
+        if size + len(block) > max_chars and current:
+            chunks.append("\n\n".join(current))
+            current, size = [], 0
+        current.append(block)
+        size += len(block)
     if current:
-        chunks.append(" ".join(current)) 
+        chunks.append("\n\n".join(current))
     return chunks
+
+
+def extract_sources(answer: str, hits: list):
+    order = {}  
+
+    def fix(match):
+        out = ""
+        for raw in match.group(1).split(","):
+            i = int(raw)
+            if 1 <= i <= len(hits):   
+                n = order.setdefault(i, len(order) + 1)
+                out += f"[{n}]"
+        return out
+
+    cleaned = CITE_RE.sub(fix, answer)
+    sources = [
+        {"id": n, "page": hits[i - 1]["page"], "quote": hits[i - 1]["sentence"]}
+        for i, n in order.items()
+    ]
+    return cleaned, sources
+
+
+def strip_invalid_page_cites(text: str, num_pages: int) -> str:
+    return PAGE_CITE_RE.sub(
+        lambda m: m.group(0) if 1 <= int(m.group(1)) <= num_pages else "",
+        text,
+    )
+
 
 def extract_text_from_pdf(file_path):
     doc = fitz.open(file_path)
@@ -113,25 +154,27 @@ def summarise_document() -> str:
     if DOCUMENT_STORE.get("summary"):
         return DOCUMENT_STORE["summary"]
 
+    pages = DOCUMENT_STORE["pages"]
     full_text = DOCUMENT_STORE["full_text"]
 
     #Short document 
     if len(full_text) < 40000:
-        summary = call_llm(SUMMARY_SYSTEM, f"Document:\n{full_text}\n\nSummarise this document.")
+        summary = call_llm(SUMMARY_SYSTEM, f"Document:\n{labeled_page_text(pages)}\n\nSummarise this document.")
     #Longer document, chunk and summarise
     else:
-        chunks = chunk_sentences(DOCUMENT_STORE["sentences"])
+        chunks = chunk_pages(pages)
         partials = [
-            call_llm(SUMMARY_SYSTEM, f"Document section:\n{c}\n\nList the key facts in this section.")
+            call_llm(SUMMARY_SYSTEM, f"Document section:\n{c}\n\nList the key facts in this section, keeping the page citations.")
             for c in chunks
         ]
         summary = call_llm(
             SUMMARY_SYSTEM,
             "Notes from each section:\n\n" + "\n\n".join(partials)
-            + "\n\nCombine these into one overview plus key points.",
+            + "\n\nCombine these into one overview plus key points, keeping the page citations.",
         )
 
-    #Save and return
+    summary = strip_invalid_page_cites(summary, len(pages))
+
     DOCUMENT_STORE["summary"] = summary
     return summary
 
@@ -149,8 +192,16 @@ async def upload_pdf(file: UploadFile = File(...)):
         DOCUMENT_STORE["full_text"] = full_text
         DOCUMENT_STORE["summary"] = None
         DOCUMENT_STORE["pages"] = pages
-        sentences = nltk.sent_tokenize(full_text)
+
+        sentences, sentence_pages = [], []
+        for p in pages:
+            for s in nltk.sent_tokenize(p["text"]):
+                s = " ".join(s.split())  
+                if s:
+                    sentences.append(s)
+                    sentence_pages.append(p["page_number"])
         DOCUMENT_STORE["sentences"] = sentences
+        DOCUMENT_STORE["sentence_pages"] = sentence_pages
 
         labeled = []
         for s in sentences:
@@ -202,6 +253,7 @@ def guess_label(question: str):
 
 def retrieve_relevant_sentences(question: str, top_k: int = 15):
     sentences = DOCUMENT_STORE["sentences"]
+    sentence_pages = DOCUMENT_STORE["sentence_pages"]
     labeled = DOCUMENT_STORE["labeled_sentences"]
     all_embeddings = DOCUMENT_STORE["sentence_embeddings"]
 
@@ -217,7 +269,6 @@ def retrieve_relevant_sentences(question: str, top_k: int = 15):
     else:
         indices = list(range(len(sentences)))
 
-    pool_sentences = [sentences[i] for i in indices]
     pool_embeddings = all_embeddings[indices]
 
     question_embedding = embedder.encode([question])[0]
@@ -225,8 +276,12 @@ def retrieve_relevant_sentences(question: str, top_k: int = 15):
         np.linalg.norm(pool_embeddings, axis=1) * np.linalg.norm(question_embedding) + 1e-8
     )
 
-    top_indices = np.argsort(similarities)[::-1][:top_k] 
-    return [pool_sentences[i] for i in top_indices]
+    top_indices = np.argsort(similarities)[::-1][:top_k]
+
+    return [
+        {"sentence": sentences[indices[i]], "page": sentence_pages[indices[i]]}
+        for i in top_indices
+    ]
 
 
 @app.post("/ask")
@@ -239,12 +294,13 @@ def ask_question(payload: dict):
     if is_global_query(question):
         return {"answer": summarise_document()}
 
-    relevant_sentences = retrieve_relevant_sentences(question, top_k=15)
-    context = "\n".join(relevant_sentences)
+    hits = retrieve_relevant_sentences(question, top_k=15)
+
+    context = "\n".join(f"[{n}] {h['sentence']}" for n, h in enumerate(hits, start=1))
 
     response = client.chat.completions.create(
         model="openai/gpt-oss-20b",
-        max_tokens=500,
+        max_tokens=800, 
         temperature=0.2,
         messages=[
             {
@@ -255,7 +311,11 @@ def ask_question(payload: dict):
                     "Be specific and complete — if multiple relevant facts exist, include all of them. "
                     "If the answer is not in the excerpts, respond exactly: "
                     "'This information is not found in the document.' "
-                    "Do not guess or use outside medical knowledge."
+                    "Do not guess or use outside medical knowledge. "
+                    "The excerpts are numbered like [1], [2]. After each statement in your "
+                    "answer, cite the number(s) of the excerpt(s) it came from, each in its own "
+                    "brackets, like [1] or [2][5]. Only cite numbers that appear in the excerpts. "
+                    "Do not cite anything for the 'not found' response."
                 ),
             },
             {
@@ -266,7 +326,9 @@ def ask_question(payload: dict):
     )
 
     answer = response.choices[0].message.content
-    return {"answer": answer}
+
+    answer, sources = extract_sources(answer, hits)
+    return {"answer": answer, "sources": sources}
 
 
 @app.get("/classify_document")
