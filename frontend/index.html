@@ -9,6 +9,9 @@
     <title>Medical AI Helper</title>
 
     <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 </head>
 
 <body>
@@ -53,6 +56,7 @@
                 Upload PDF
             </button>
         </div> 
+
         <div class="gridUpload">
             <div id="upload-status" class="upload-status">
                 <span id="status-icon" class="loading">⏳</span>
@@ -68,39 +72,38 @@
 
         </section>
 
-        <section class="chat-section">
+        <div class="action-buttons">
+            <button id="open-ask-button" class="ask-trigger">
+                Ask about your document
+            </button>
+            <button id="upload-button2" style="display:none;">
+                Upload another PDF
+            </button>
+        </div>
 
-            <h2>Ask about your document</h2>
-
-            <div class="question-box">
-
-                <input 
-                    type="text" 
-                    id="question"
-                    placeholder="What would you like to know?"
-                >
-
-                <button id="ask-button">
-                    Ask
-                </button>
-
-            </div>
-
-        </section>
     </div>
-
-        <section class="answer-section">
-
-            <h2>AI Answer</h2>
-
-            <div id="answer">
-                Your answer will appear here.
-            </div>
-
-        </section>
-
     </main>
 
+    <div id="ask-modal-overlay" class="modal-overlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button id="close-modal-button" class="modal-close" aria-label="Close">&times;</button>
+
+            <h2 id="modal-title">Ask about your document</h2>
+
+            <div class="question-box">
+                <input type="text" id="question" placeholder="What would you like to know?">
+                <button id="ask-button">Ask</button>
+            </div>
+
+            <button id="summarise-button" class="secondary">Summarise document</button>
+
+            <div class="answer-section">
+                <div id="answer">
+                    Your answer will appear here.
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 
