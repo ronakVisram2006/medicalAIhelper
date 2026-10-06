@@ -17,6 +17,7 @@ const uploadButton2 = document.getElementById('upload-button2');
 const aboutOverlay = document.getElementById("about-modal-overlay");
 const aboutLink = document.getElementById("about-link");
 const closeAboutButton = document.getElementById("close-about-button");
+const questionInput = document.getElementById('question');
 
 pdfUpload.addEventListener('change', function() {
 
@@ -49,6 +50,14 @@ pdfUpload.addEventListener('change', function() {
 
     
 });
+
+questionInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.isComposing) {
+    e.preventDefault();
+    if (!askButton.disabled) askButton.click();
+  }
+});
+
 uploadButton.addEventListener('click', async function() {
     if (!pdfUpload.files[0]) {
         alert('Please select a PDF file before uploading.');
@@ -320,3 +329,4 @@ aboutOverlay.addEventListener("click", (e) => {
         aboutOverlay.style.display = "none";
     }
 });
+
