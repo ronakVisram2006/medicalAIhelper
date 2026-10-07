@@ -55,9 +55,8 @@
             >
 
             <label for="pdf-upload" class="upload-box">
-                <span class="upload-icon">↑</span>
-                <span class="upload-text">Click to upload your PDF</span>
-                <span class="upload-subtext">PDF files only</span>
+                <canvas id="pdf-preview"></canvas>
+                <span id="pdf-placeholder">Select a PDF to preview it</span>
             </label>
 
             <button id="upload-button">
@@ -143,7 +142,7 @@
 <footer>
     <p>© 2026 Medical AI Helper. Project submission for Gateway hackathon.All rights reserved.</p>
 </footer>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
 
 

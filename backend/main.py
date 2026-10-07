@@ -331,7 +331,7 @@ def ask_question(payload: dict):
 
     response = client.chat.completions.create(
         model="openai/gpt-oss-20b",
-        max_tokens=4000,
+        max_tokens=5000,
         temperature=0,
         extra_body={"reasoning_effort": "low"}, 
         messages=[
@@ -344,6 +344,7 @@ def ask_question(payload: dict):
                     "and when asked for a list, include every matching item in the excerpts. "
                     "If the answer is not in the excerpts, respond exactly: "
                     f"'{NOT_FOUND}' "
+                    "The user may ask in first person, third person, or as a general question. "
                     "Do not guess or use outside medical knowledge. "
                     "The excerpts are numbered like [1], [2]. Every sentence or bullet in your "
                     "answer MUST end with the number(s) of the excerpt(s) it came from, each in its own "

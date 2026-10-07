@@ -1,8 +1,14 @@
+import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
+
 const pdfUpload = document.getElementById('pdf-upload');
-
 const uploadBox = document.querySelector('.upload-box');
-
 const uploadButton = document.getElementById('upload-button');
+
+const previewCanvas = document.getElementById('pdf-preview');
+const previewPlaceholder = document.getElementById('pdf-placeholder');
 
 const openAskButton = document.getElementById('open-ask-button');
 const modalOverlay = document.getElementById('ask-modal-overlay');
@@ -19,8 +25,7 @@ const aboutLink = document.getElementById("about-link");
 const closeAboutButton = document.getElementById("close-about-button");
 const questionInput = document.getElementById('question');
 
-pdfUpload.addEventListener('change', function() {
-
+pdfUpload.addEventListener('change', async function() {
     const file = pdfUpload.files[0];
 
     if (!file) {
@@ -33,22 +38,36 @@ pdfUpload.addEventListener('change', function() {
         return;
     }
 
-        const icon = uploadBox.querySelector('.upload-icon');
+    try {
+        const arrayBuffer = await file.arrayBuffer();
 
-        const image = document.createElement('img');
+        const pdf = await pdfjsLib.getDocument({
+            data: arrayBuffer
+        }).promise;
 
-        image.src = 'images/pdf.png';
-        image.alt = 'PDF';
+        const page = await pdf.getPage(1);
 
-        icon.textContent = '';
-        icon.appendChild(image);
+        const containerWidth = uploadBox.clientWidth - 40;
+        const originalViewport = page.getViewport({ scale: 1 });
 
-        uploadBox.querySelector('.upload-text').textContent = file.name;
+        const scale = containerWidth / originalViewport.width;
+        const viewport = page.getViewport({ scale });
 
-        uploadBox.querySelector('.upload-subtext').textContent =
-            'PDF file selected';
+        previewCanvas.width = viewport.width;
+        previewCanvas.height = viewport.height;
 
-    
+        await page.render({
+            canvasContext: previewCanvas.getContext('2d'),
+            viewport: viewport
+        }).promise;
+
+        previewCanvas.style.display = 'block';
+        previewPlaceholder.style.display = 'none';
+
+    } catch (error) {
+        console.error('Failed to preview PDF:', error);
+        alert('Failed to preview PDF.');
+    }
 });
 
 questionInput.addEventListener('keydown', (e) => {
@@ -298,9 +317,9 @@ uploadButton2.addEventListener('click', function() {
     }
     pdfUpload.value = '';
 
-    uploadBox.querySelector('.upload-icon').textContent = '↑';
-    uploadBox.querySelector('.upload-text').textContent = 'Click to upload your PDF';
-    uploadBox.querySelector('.upload-subtext').textContent = 'PDF files only';
+    previewCanvas.style.display = 'none';
+    previewPlaceholder.style.display = 'block';
+    previewPlaceholder.textContent = 'Select a PDF to preview it';
 
     document.getElementsByClassName('upload-container')[0].style.display = "block";
     uploadButton.style.display = "inline-block";
