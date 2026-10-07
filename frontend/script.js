@@ -49,7 +49,6 @@ pdfUpload.addEventListener('change', async function() {
 
         const containerWidth = uploadBox.clientWidth - 40;
         const originalViewport = page.getViewport({ scale: 1 });
-
         const scale = containerWidth / originalViewport.width;
         const viewport = page.getViewport({ scale });
 

@@ -1,12 +1,4 @@
-/* ==========================================================
-   styles.css — shared by the welcome page and the app page
 
-   Welcome page:  <body class="welcome">
-   App page:      <body class="app">
-   ========================================================== */
-
-
-/* ---------- Theme variables (used by the welcome page) ---------- */
 
 :root {
     --bg: #eef5f6;
@@ -353,14 +345,48 @@ footer p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 180px;
+    justify-content: flex-start;   /* always start at the top */
+
     width: 100%;
+    height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
     border: 2px dashed var(--line);
     border-radius: 10px;
     background: var(--bg);
     cursor: pointer;
     transition: 0.25s ease;
+}
+
+.upload-box > * {
+    flex-shrink: 0;
+}
+
+.upload-box .upload-placeholder {
+    margin: auto;
+}
+.upload-box {
+    scrollbar-width: thin;                       
+    scrollbar-color: var(--line) transparent;   
+}
+
+.upload-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.upload-box::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 0;               
+}
+
+.upload-box::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 999px;
+}
+
+.upload-box::-webkit-scrollbar-thumb:hover {
+    background: #999;            
 }
 
 .upload-box:hover {
