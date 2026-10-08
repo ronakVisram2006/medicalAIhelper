@@ -3,10 +3,18 @@ import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168
 pdfjsLib.GlobalWorkerOptions.workerSrc =
     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
 
+const API = 'http://127.0.0.1:8000';
+
 const pdfUpload = document.getElementById('pdf-upload');
 const uploadBox = document.querySelector('.upload-box');
 const uploadButton = document.getElementById('upload-button');
 const uploadButton2 = document.getElementById('upload-button2');
+const uploadContainer = document.getElementsByClassName('upload-container')[0];
+
+const uploadStatus = document.getElementById('upload-status');
+const statusIcon = document.getElementById('status-icon');
+const statusText = document.getElementById('status-text');
+const pdfSummary = document.getElementById('pdf-summary');
 
 const previewCanvas = document.getElementById('pdf-preview');
 const previewPlaceholder = document.getElementById('pdf-placeholder');
@@ -18,12 +26,18 @@ const closeModalButton = document.getElementById('close-modal-button');
 const askButton = document.getElementById('ask-button');
 const summariseDocument = document.getElementById('summarise-button');
 const questionInput = document.getElementById('question');
+const answerEl = document.getElementById('answer');
 
 const aboutOverlay = document.getElementById('about-modal-overlay');
 const aboutLink = document.getElementById('about-link');
 const closeAboutButton = document.getElementById('close-about-button');
 
 const historyList = document.getElementById('history-list');
+
+let isUploading = false;
+let isReusing = false;
+let documentReady = false;
+let sessionId = 0;
 
 const DB_NAME = 'pdfStore';
 
@@ -100,6 +114,43 @@ async function saveIfNew(file) {
     if (!exists) await saveFile(file);
 }
 
+function setStatus(icon, text, loading = false) {
+    uploadStatus.style.display = 'block';
+    statusIcon.classList.toggle('loading', loading);
+    statusIcon.textContent = icon;
+    statusText.textContent = text;
+}
+
+function setBusy(busy) {
+    askButton.disabled = busy;
+    summariseDocument.disabled = busy;
+}
+
+function showLoading(message) {
+    answerEl.innerHTML =
+        '<div class="loading-box"><div class="spinner"></div><span></span></div>';
+    answerEl.querySelector('span').textContent = message;
+    renderSources([]);
+}
+
+function resetSession() {
+    sessionId++;
+    documentReady = false;
+
+    closeModal();
+    openAskButton.classList.remove('visible');
+    pdfSummary.style.display = 'none';
+    answerEl.textContent = 'Your answer will appear here.';
+    renderSources([]);
+    questionInput.value = '';
+}
+
+function showUploadForm() {
+    uploadContainer.style.display = 'block';
+    uploadButton.style.display = 'inline-block';
+    uploadButton2.style.display = 'none';
+}
+
 async function renderHistory() {
     let files = [];
     try {
@@ -137,42 +188,52 @@ async function renderHistory() {
 }
 
 async function reuseFile(id) {
-    const rec = await getFile(id);
-    if (!rec || !rec.blob) return;
+    if (isUploading || isReusing) return;
+    isReusing = true;
+    resetSession();
 
-    const file = new File([rec.blob], rec.name, { type: rec.type });
+    try {
+        const rec = await getFile(id);
+        if (!rec || !rec.blob) {
+            showUploadForm();
+            setStatus('❌', 'Could not load that file from history');
+            return;
+        }
 
-    const dt = new DataTransfer();
-    dt.items.add(file);
-    pdfUpload.files = dt.files;
+        const file = new File([rec.blob], rec.name, { type: rec.type || 'application/pdf' });
 
-    pdfUpload.dispatchEvent(new Event('change'));
-    uploadButton.click();
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        pdfUpload.files = dt.files;
+
+        if (!(await showPreview(file))) {
+            showUploadForm();
+            return;
+        }
+
+        await uploadCurrentFile();
+    } catch (e) {
+        console.error(e);
+        showUploadForm();
+        setStatus('❌', 'Could not load that file from history');
+    } finally {
+        isReusing = false;
+    }
 }
 
-pdfUpload.addEventListener('change', async function () {
-    const file = pdfUpload.files[0];
-
-    if (!file) {
-        return;
-    }
-
+async function showPreview(file) {
     if (file.type !== 'application/pdf') {
         alert('Please select a PDF file.');
         pdfUpload.value = '';
-        return;
+        return false;
     }
 
     try {
         const arrayBuffer = await file.arrayBuffer();
-
-        const pdf = await pdfjsLib.getDocument({
-            data: arrayBuffer
-        }).promise;
-
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
         const page = await pdf.getPage(1);
 
-        const containerWidth = uploadBox.clientWidth - 40;
+        const containerWidth = Math.max(uploadBox.clientWidth - 40, 200);
         const originalViewport = page.getViewport({ scale: 1 });
         const scale = containerWidth / originalViewport.width;
         const viewport = page.getViewport({ scale });
@@ -187,14 +248,21 @@ pdfUpload.addEventListener('change', async function () {
 
         previewCanvas.style.display = 'block';
         previewPlaceholder.style.display = 'none';
+        return true;
 
     } catch (error) {
         console.error('Failed to preview PDF:', error);
         alert('Failed to preview PDF.');
+        return false;
     }
+}
+
+pdfUpload.addEventListener('change', function () {
+    const file = pdfUpload.files[0];
+    if (file) showPreview(file);
 });
 
-uploadButton.addEventListener('click', async function () {
+async function uploadCurrentFile() {
     const file = pdfUpload.files[0];
 
     if (!file) {
@@ -202,20 +270,19 @@ uploadButton.addEventListener('click', async function () {
         return;
     }
 
-    const uploadStatus = document.getElementById('upload-status');
-    const statusIcon = document.getElementById('status-icon');
-    const statusText = document.getElementById('status-text');
+    if (isUploading) return;
+    isUploading = true;
+    resetSession();
+    setBusy(true);
 
-    uploadStatus.style.display = 'block';
-    statusIcon.textContent = '⏳';
-    statusIcon.classList.add('loading');
-    statusText.textContent = 'Uploading and reading PDF...';
+    const mySession = sessionId;
+    setStatus('⏳', 'Uploading and reading PDF...', true);
 
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/upload', {
+        const response = await fetch(`${API}/upload`, {
             method: 'POST',
             body: formData
         });
@@ -226,32 +293,31 @@ uploadButton.addEventListener('click', async function () {
 
         const result = await response.json();
 
+        if (mySession !== sessionId) return;
+
+        const pages = Array.isArray(result.pages) ? result.pages : [];
+        let totalWords = 0;
+        pages.forEach(page => {
+            const text = (page.text || '').trim();
+            if (text) totalWords += text.split(/\s+/).length;
+        });
+
         statusIcon.classList.remove('loading');
         statusIcon.innerHTML = '<img src="images/pdf.png" alt="Success">';
         statusText.textContent = `Successfully Uploaded and Read PDF: ${result.filename}`;
 
-        const pdfSummary = document.getElementById('pdf-summary');
-        pdfSummary.style.display = 'block';
-
-        const pages = result.pages;
-        let totalWords = 0;
-
-        pages.forEach(page => {
-            totalWords += page.text.trim().split(/\s+/).length;
-        });
-
         document.getElementById('summary-pages').textContent =
             `Number of pages: ${pages.length}`;
-
         document.getElementById('summary-words').textContent =
             `Total words: ${totalWords}`;
+        pdfSummary.style.display = 'block';
 
-        document.getElementsByClassName('upload-container')[0].style.display = 'none';
-
-        openAskButton.classList.add('visible');
-
+        uploadContainer.style.display = 'none';
         uploadButton.style.display = 'none';
         uploadButton2.style.display = 'inline-block';
+
+        documentReady = true;
+        openAskButton.classList.add('visible');
 
         saveIfNew(file)
             .then(renderHistory)
@@ -259,11 +325,17 @@ uploadButton.addEventListener('click', async function () {
 
     } catch (error) {
         console.error(error);
-        statusIcon.classList.remove('loading');
-        statusIcon.textContent = '❌';
-        statusText.textContent = 'Failed to read PDF';
+        if (mySession === sessionId) {
+            setStatus('❌', 'Failed to read PDF');
+            showUploadForm();
+        }
+    } finally {
+        isUploading = false;
+        setBusy(false);
     }
-});
+}
+
+uploadButton.addEventListener('click', uploadCurrentFile);
 
 function highlightFlags(html) {
     html = html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function (match, word) {
@@ -276,7 +348,10 @@ function highlightFlags(html) {
 }
 
 function renderAnswer(markdownText) {
-    const answerEl = document.getElementById('answer');
+    if (!markdownText || !String(markdownText).trim()) {
+        answerEl.textContent = 'No answer was returned. Please try again.';
+        return;
+    }
 
     if (typeof marked === 'undefined') {
         answerEl.textContent = markdownText;
@@ -296,19 +371,6 @@ function renderAnswer(markdownText) {
         table.parentNode.insertBefore(wrapper, table);
         wrapper.appendChild(table);
     });
-}
-
-function showLoading(message) {
-    const answerEl = document.getElementById('answer');
-    answerEl.innerHTML =
-        '<div class="loading-box"><div class="spinner"></div><span></span></div>';
-    answerEl.querySelector('span').textContent = message;
-    renderSources([]);
-}
-
-function setBusy(busy) {
-    askButton.disabled = busy;
-    summariseDocument.disabled = busy;
 }
 
 function renderSources(sources) {
@@ -340,6 +402,70 @@ function renderSources(sources) {
     });
 }
 
+async function runRequest({ path, options, loadingMessage, errorMessage }) {
+    if (!documentReady || isUploading) {
+        alert('Please upload a PDF file first.');
+        return;
+    }
+
+    const mySession = sessionId;
+    setBusy(true);
+    showLoading(loadingMessage);
+
+    try {
+        const response = await fetch(`${API}${path}`, options);
+
+        if (!response.ok) {
+            throw new Error(`${path} failed with status ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (mySession !== sessionId) return;
+
+        renderAnswer(result.answer);
+        renderSources(result.sources);
+
+    } catch (error) {
+        console.error(error);
+        if (mySession === sessionId) {
+            answerEl.textContent = errorMessage;
+            renderSources([]);
+        }
+    } finally {
+        setBusy(isUploading);
+    }
+}
+
+askButton.addEventListener('click', function () {
+    const question = questionInput.value.trim();
+
+    if (!question) {
+        alert('Please enter a question.');
+        return;
+    }
+
+    runRequest({
+        path: '/ask',
+        options: {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question })
+        },
+        loadingMessage: 'Reading your document...',
+        errorMessage: 'Failed to get answer'
+    });
+});
+
+summariseDocument.addEventListener('click', function () {
+    runRequest({
+        path: '/summarise',
+        options: { method: 'POST' },
+        loadingMessage: 'Summarising your document. This can take a little longer...',
+        errorMessage: 'Failed to summarise document'
+    });
+});
+
 function openModal() {
     modalOverlay.classList.add('open');
     questionInput.focus();
@@ -353,9 +479,7 @@ openAskButton.addEventListener('click', openModal);
 closeModalButton.addEventListener('click', closeModal);
 
 modalOverlay.addEventListener('click', function (event) {
-    if (event.target === modalOverlay) {
-        closeModal();
-    }
+    if (event.target === modalOverlay) closeModal();
 });
 
 document.addEventListener('keydown', function (event) {
@@ -371,103 +495,6 @@ questionInput.addEventListener('keydown', (e) => {
     }
 });
 
-askButton.addEventListener('click', async function () {
-    const question = questionInput.value;
-
-    if (!question) {
-        alert('Please enter a question.');
-        return;
-    }
-    if (!pdfUpload.files[0]) {
-        alert('Please upload a PDF file before asking a question.');
-        return;
-    }
-
-    setBusy(true);
-    showLoading('Reading your document...');
-
-    try {
-        const response = await fetch('http://127.0.0.1:8000/ask', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ question })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Ask failed with status ${response.status}`);
-        }
-
-        const result = await response.json();
-        renderAnswer(result.answer);
-        renderSources(result.sources);
-
-    } catch (error) {
-        console.error(error);
-        document.getElementById('answer').textContent = 'Failed to get answer';
-        renderSources([]);
-
-    } finally {
-        setBusy(false);
-    }
-});
-
-summariseDocument.addEventListener('click', async function () {
-    if (!pdfUpload.files[0]) {
-        alert('Please upload a PDF file before summarising.');
-        return;
-    }
-
-    setBusy(true);
-    showLoading('Summarising your document. This can take a little longer...');
-
-    try {
-        const response = await fetch('http://127.0.0.1:8000/summarise', {
-            method: 'POST'
-        });
-
-        if (!response.ok) {
-            throw new Error(`Summarise failed with status ${response.status}`);
-        }
-
-        const result = await response.json();
-        renderAnswer(result.answer);
-        renderSources(result.sources);
-
-    } catch (error) {
-        console.error(error);
-        document.getElementById('answer').textContent = 'Failed to summarise document';
-        renderSources([]);
-
-    } finally {
-        setBusy(false);
-    }
-});
-
-uploadButton2.addEventListener('click', function () {
-    if (!confirm('Are you sure you want to upload another PDF? This will reset the current session.')) {
-        return;
-    }
-    pdfUpload.value = '';
-
-    previewCanvas.style.display = 'none';
-    previewPlaceholder.style.display = 'block';
-    previewPlaceholder.textContent = 'Select a PDF to preview it';
-
-    document.getElementsByClassName('upload-container')[0].style.display = 'block';
-    uploadButton.style.display = 'inline-block';
-
-    document.getElementById('upload-status').style.display = 'none';
-    document.getElementById('pdf-summary').style.display = 'none';
-    openAskButton.classList.remove('visible');
-    uploadButton2.style.display = 'none';
-
-    document.getElementById('answer').textContent = 'Your answer will appear here.';
-    renderSources([]);
-    questionInput.value = '';
-});
-
 aboutLink.addEventListener('click', (e) => {
     e.preventDefault();
     aboutOverlay.style.display = 'flex';
@@ -478,9 +505,25 @@ closeAboutButton.addEventListener('click', () => {
 });
 
 aboutOverlay.addEventListener('click', (e) => {
-    if (e.target === aboutOverlay) {
-        aboutOverlay.style.display = 'none';
+    if (e.target === aboutOverlay) aboutOverlay.style.display = 'none';
+});
+
+uploadButton2.addEventListener('click', function () {
+    if (isUploading) return;
+
+    if (!confirm('Are you sure you want to upload another PDF? This will reset the current session.')) {
+        return;
     }
+
+    resetSession();
+    pdfUpload.value = '';
+
+    previewCanvas.style.display = 'none';
+    previewPlaceholder.style.display = 'block';
+    previewPlaceholder.textContent = 'Select a PDF to preview it';
+
+    uploadStatus.style.display = 'none';
+    showUploadForm();
 });
 
 renderHistory();
