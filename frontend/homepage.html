@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medical AI Helper</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+</head>
+
+<body class="app">
+
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a href="index.html" id="homepage-link">Homepage</a></li>
+            </ul>
+        </nav>
+        <div class="logo">Medical AI</div>
+        <nav>
+            <ul>
+                <li><a href="#" id="about-link">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section class="hero">
+            <h1>Understand your medical documents.</h1>
+
+            <p>
+                Upload a medical document and ask questions
+                about it in simple, understandable language.
+            </p>
+        </section>
+
+   <div class="grid">
+
+        <section class="upload-section">
+        <div class="upload-container">
+            <h2>Upload your document</h2>
+
+            <input 
+                type="file" 
+                id="pdf-upload" 
+                accept=".pdf"
+            >
+
+            <label for="pdf-upload" class="upload-box">
+                <canvas id="pdf-preview"></canvas>
+                <span id="pdf-placeholder" class="pdf-placeholder">Click to Upload</span>
+            </label>
+
+            <button id="upload-button">
+                Upload PDF
+            </button>
+        </div> 
+
+        <div class="gridUpload">
+            <div id="upload-status" class="upload-status">
+                <span id="status-icon" class="loading">⏳</span>
+                <span id="status-text" style="margin-left: 10px;"></span>
+            </div>
+
+            <div id="pdf-summary" class = "pdf-summary">
+                <h3>PDF Summary</h3>
+                <p id="summary-pages"></p>
+                <p id="summary-words"></p>
+            </div>
+        </div>
+        <aside class="history-panel">
+            <h4>Recent PDFs</h4>
+            <div id="history-list"></div>
+        </aside>
+        </section>
+
+        <div class="action-buttons">
+            <button id="open-ask-button" class="ask-trigger">
+                Ask about your document
+            </button>
+            <button id="upload-button2" style="display:none;">
+                Upload another PDF
+            </button>
+        </div>
+
+    </div>
+    </main>
+
+    <div id="ask-modal-overlay" class="modal-overlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button id="close-modal-button" class="modal-close" aria-label="Close">&times;</button>
+
+            <h2 id="modal-title">Ask about your document</h2>
+
+            <div class="question-box">
+                <input type="text" id="question" placeholder="What would you like to know?">
+                <button id="ask-button">Ask</button>
+            </div>
+
+            <button id="summarise-button" class="secondary">Summarise document</button>
+
+            <div class="answer-section">
+                <div id="answer">
+                    Your answer will appear here.
+                </div>
+                <div id="sources" class="sources"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="about-modal-overlay" class="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="about-title">
+        <button id="close-about-button" class="modal-close" aria-label="Close">&times;</button>
+
+        <h2 id="about-title">About Medical AI</h2>
+
+        <p>
+            Medical AI Helper is a tool that allows you to upload medical documents 
+            and ask questions about them in simple, understandable language.
+        </p>
+
+        <p>
+            It extracts key information such as diagnoses, symptoms, medications, 
+            lab results, and follow‑up instructions — always with page citations 
+            so you can verify the source.
+        </p>
+
+        <p>
+            This tool is not a medical device and does not provide medical advice. 
+            Always consult a qualified healthcare professional.
+        </p>
+    </div>
+</div>
+</body>
+<footer>
+    <p>© 2026 Medical AI Helper. Project submission for Gateway hackathon.All rights reserved.</p>
+</footer>
+    <script type="module" src="script.js"></script>
+
+
+
+</html>

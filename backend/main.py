@@ -29,9 +29,11 @@ GLOBAL_PATTERNS = [
 CITE_RE = re.compile(r"\[(\d+(?:\s*,\s*\d+)*)\]")
 PAGE_CITE_RE = re.compile(r"\[p(\d+)\]")
 
+
 def is_global_query(q: str) -> bool:
     q = q.lower()
     return any(re.search(p, q) for p in GLOBAL_PATTERNS)
+
 
 embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
@@ -54,27 +56,33 @@ model_path = "OXRON2/medical-note-classifier"
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(model_path)
 
+LLM_MODEL = "openai/gpt-oss-20b"
+NO_DOCUMENT = "No document has been uploaded yet. Please upload a PDF first."
+NOT_FOUND = "This information is not found in the document."
+SUMMARY_FAILED = "Could not generate a summary. Please try again."
+
 DOCUMENT_STORE = {
     "full_text": "",
     "pages": [],
     "sentences": [],
-    "sentence_pages": [],   
+    "sentence_pages": [],
     "labeled_sentences": [],
     "sentence_embeddings": None,
-     "summary": None,
-     "sentence_lines": [],
+    "summary": None,
+    "sentence_lines": [],
 }
 
 SUMMARY_SYSTEM = (
-    "You are a precise medical document assistant. Summarise using ONLY information "
-    "explicitly stated in the text. Do not add outside medical knowledge or interpretation. "
-    "Start with a 2-3 sentence overview, then list the key points as bullets "
-    "(diagnoses, medications and doses, lab results, follow-up instructions) where present. "
-    "The document is split into pages marked like [Page 2]. After every sentence or bullet, "
-    "cite the page(s) the information came from, one marker per page, written like [p2] or "
-    "[p2][p3]. Only cite pages that appear in the text."
-    "Everything in the summary must be supported by the text. If a category is not present, do not include it."
-    "Always include the page citations in the summary. If the document is empty, respond exactly: 'The document is empty.'"
+    "Summarise my document in clear, easy language."
+    "Start with 2–3 short sentences explaining what the document is mainly about.  "
+    "Then give me bullet points of the important details that appear in the document.  "
+    "Only include things that are actually written in the document.  "
+    "Use bullet points for diagnoses, medications and doses, lab results, and follow‑up instructions — but only if they are present.  "
+    "After every sentence or bullet point, show the page number where you found the information, written like [p1], [p2], etc.  "
+    "Only cite pages that appear in the document.  "
+    "Do not add any medical knowledge or opinions.  "
+    "Do not guess or interpret anything.  "
+    "If the document is empty, write exactly: “The document is empty.”"
 )
 
 
@@ -97,13 +105,13 @@ def chunk_pages(pages, max_chars=12000):
 
 
 def extract_sources(answer: str, hits: list):
-    order = {}  
+    order = {}
 
     def fix(match):
         out = ""
         for raw in match.group(1).split(","):
             i = int(raw)
-            if 1 <= i <= len(hits):   
+            if 1 <= i <= len(hits):
                 n = order.setdefault(i, len(order) + 1)
                 out += f"[{n}]"
         return out
@@ -138,24 +146,37 @@ def extract_text_from_pdf(file_path):
     doc.close()
     return pages
 
-def classify_sentence(sentence: str) -> str:
-    inputs = tokenizer(sentence, return_tensors="pt", truncation=True, padding="max_length", max_length=128)
-    with torch.no_grad():
-        outputs = model(**inputs)
-    predicted_class_id = torch.argmax(outputs.logits, dim=1).item()
-    return model.config.id2label[predicted_class_id]
 
-def call_llm(system: str, user: str, max_tokens: int = 1500) -> str:
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-20b",
-        max_tokens=max_tokens,
-        temperature=0.2,
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
-    )
-    return response.choices[0].message.content
+def classify_batch(sentences, batch_size=32):
+    labels = []
+    for start in range(0, len(sentences), batch_size):
+        batch = sentences[start:start + batch_size]
+        inputs = tokenizer(batch, return_tensors="pt", truncation=True, padding=True, max_length=128)
+        with torch.no_grad():
+            logits = model(**inputs).logits
+        labels.extend(model.config.id2label[i] for i in torch.argmax(logits, dim=1).tolist())
+    return labels
+
+
+def call_llm(system: str, user: str, max_tokens: int = 4000, retries: int = 3) -> str:
+    text = ""
+    for _ in range(retries):
+        response = client.chat.completions.create(
+            model=LLM_MODEL,
+            max_tokens=max_tokens,
+            temperature=0.2,
+            extra_body={"reasoning_effort": "low"},
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+        )
+        choice = response.choices[0]
+        text = (choice.message.content or "").strip()
+        if text and choice.finish_reason != "length":
+            return text
+        max_tokens = min(max_tokens * 2, 8000)
+    return text
 
 
 def summarise_document() -> str:
@@ -165,10 +186,8 @@ def summarise_document() -> str:
     pages = DOCUMENT_STORE["pages"]
     full_text = DOCUMENT_STORE["full_text"]
 
-    #Short document 
     if len(full_text) < 40000:
         summary = call_llm(SUMMARY_SYSTEM, f"Document:\n{labeled_page_text(pages)}\n\nSummarise this document.")
-    #Longer document, chunk and summarise
     else:
         chunks = chunk_pages(pages)
         partials = [
@@ -183,23 +202,23 @@ def summarise_document() -> str:
 
     summary = strip_invalid_page_cites(summary, len(pages))
 
+    if not summary.strip():
+        return SUMMARY_FAILED
+
     DOCUMENT_STORE["summary"] = summary
     return summary
 
 
 @app.post("/upload")
-async def upload_pdf(file: UploadFile = File(...)):
+def upload_pdf(file: UploadFile = File(...)):
     tmp_path = None
     try:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-            tmp.write(await file.read())
+            tmp.write(file.file.read())
             tmp_path = tmp.name
 
         pages = extract_text_from_pdf(tmp_path)
         full_text = "\n".join([p["text"] for p in pages])
-        DOCUMENT_STORE["full_text"] = full_text
-        DOCUMENT_STORE["summary"] = None
-        DOCUMENT_STORE["pages"] = pages
 
         sentences, sentence_pages, sentence_lines = [], [], []
         for p in pages:
@@ -217,7 +236,7 @@ async def upload_pdf(file: UploadFile = File(...)):
                     found = cursor
                 cursor = found + len(s)
 
-                start_line = bisect_right(starts, found)                      
+                start_line = bisect_right(starts, found)
                 end_line = bisect_right(starts, max(found, cursor - 1))
 
                 clean = " ".join(s.split())
@@ -226,20 +245,25 @@ async def upload_pdf(file: UploadFile = File(...)):
                     sentence_pages.append(p["page_number"])
                     sentence_lines.append((start_line, end_line))
 
-            DOCUMENT_STORE["sentences"] = sentences
-            DOCUMENT_STORE["sentence_pages"] = sentence_pages
-            DOCUMENT_STORE["sentence_lines"] = sentence_lines
-
-        labeled = []
-        for s in sentences:
-            label = classify_sentence(s)
-            labeled.append({"sentence": s, "label": label})
-        DOCUMENT_STORE["labeled_sentences"] = labeled
+        labels = classify_batch(sentences) if sentences else []
 
         if sentences:
-            DOCUMENT_STORE["sentence_embeddings"] = embedder.encode(sentences)
+            embeddings = embedder.encode(
+                sentences, batch_size=64, normalize_embeddings=True
+            )
         else:
-            DOCUMENT_STORE["sentence_embeddings"] = None
+            embeddings = None
+
+        DOCUMENT_STORE["full_text"] = full_text
+        DOCUMENT_STORE["pages"] = pages
+        DOCUMENT_STORE["summary"] = None
+        DOCUMENT_STORE["sentences"] = sentences
+        DOCUMENT_STORE["sentence_pages"] = sentence_pages
+        DOCUMENT_STORE["sentence_lines"] = sentence_lines
+        DOCUMENT_STORE["labeled_sentences"] = [
+            {"sentence": s, "label": l} for s, l in zip(sentences, labels)
+        ]
+        DOCUMENT_STORE["sentence_embeddings"] = embeddings
 
         return {"filename": file.filename, "pages": pages}
     finally:
@@ -250,14 +274,15 @@ async def upload_pdf(file: UploadFile = File(...)):
 @app.post("/classify")
 def classify_text(payload: dict):
     sentence = payload["sentence"]
-    label = classify_sentence(sentence)
+    label = classify_batch([sentence])[0]
     return {"label": label}
+
 
 @app.post("/summarise")
 def summarise_endpoint():
     if not DOCUMENT_STORE["sentences"]:
-        return {"answer": "No document has been uploaded yet. Please upload a PDF first."}
-    return {"answer": summarise_document()}
+        return {"answer": NO_DOCUMENT, "sources": []}
+    return {"answer": summarise_document(), "sources": []}
 
 
 LABEL_KEYWORDS = {
@@ -287,10 +312,8 @@ def retrieve_relevant_sentences(question: str, top_k: int = 15):
     if not sentences or all_embeddings is None:
         return []
 
-    question_embedding = embedder.encode([question])[0]
-    similarities = np.dot(all_embeddings, question_embedding) / (
-        np.linalg.norm(all_embeddings, axis=1) * np.linalg.norm(question_embedding) + 1e-8
-    )
+    question_embedding = embedder.encode([question], normalize_embeddings=True)[0]
+    similarities = all_embeddings @ question_embedding
 
     top_indices = np.argsort(similarities)[::-1][:top_k]
 
@@ -306,86 +329,91 @@ def retrieve_relevant_sentences(question: str, top_k: int = 15):
     ]
 
 
-NOT_FOUND = "This information is not found in the document." 
-
 LIST_RE = re.compile(r"\b(all|list|which|what)\b.*\b(medications?|medicines?|drugs?|labs?|tests?|results?)\b")
+
+ASK_SYSTEM = (
+    "You are a precise medical document assistant. Answer using ONLY "
+    "information explicitly stated in the provided excerpts. "
+    "Be specific and complete: if multiple relevant facts exist, include all of them, "
+    "and when asked for a list, include every matching item in the excerpts. "
+    "If the answer is not in the excerpts, respond exactly: "
+    f"'{NOT_FOUND}' "
+    "The user may ask in first person, third person, or as a general question. "
+    "Do not guess or use outside medical knowledge. "
+    "The excerpts are numbered like [1], [2]. Every sentence or bullet in your "
+    "answer MUST end with the number(s) of the excerpt(s) it came from, each in its own "
+    "brackets, like [1] or [2][5]. An answer without citations is invalid. "
+    "Only cite numbers that appear in the excerpts. "
+    "Do not cite anything for the 'not found' response. "
+    "Example: 'He takes carvedilol 12.5 mg twice daily [3]. He also takes apixaban 5 mg twice daily [7].'"
+    "When the answer lists several items that share the same fields (medications, lab results, "
+    "vital signs), format it as a markdown table with one row per item. Use the field names as "
+    "column headers and put the excerpt number(s) in a final column named Source, like [3]. "
+    "Otherwise answer in short sentences. "
+    "Use plain, simple wording, but never leave out required details such as status or dose changes. "
+    "Never leave out items because of category or relevance unless the question asks for a category. "
+    "For medications, include a Status column (Taking, Held, Stopped, Started, Dose changed) "
+    "based only on the excerpts, and give both the old and new dose when a dose changed. "
+    "Only include a Notes or Reason column if the excerpts explicitly state the reason; "
+    "never add an indication from your own knowledge. "
+)
+
 
 @app.post("/ask")
 def ask_question(payload: dict):
     if not DOCUMENT_STORE["sentences"]:
-        return {"answer": "No document has been uploaded yet. Please upload a PDF first.", "sources": []}
+        return {"answer": NO_DOCUMENT, "sources": []}
 
     question = payload["question"]
 
     if is_global_query(question):
-        return summarise_document()        
+        return {"answer": summarise_document(), "sources": []}
 
     top_k = 30 if LIST_RE.search(question.lower()) else 15
     hits = retrieve_relevant_sentences(question, top_k=top_k)
 
-    if not hits or hits[0]["score"] < 0.2:   
+    if not hits or hits[0]["score"] < 0.2:
         return {"answer": NOT_FOUND, "sources": []}
 
     context = "\n".join(f"[{n}] {h['sentence']}" for n, h in enumerate(hits, start=1))
 
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-20b",
-        max_tokens=4000,
-        temperature=0,
-        extra_body={"reasoning_effort": "low"}, 
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a precise medical document assistant. Answer using ONLY "
-                    "information explicitly stated in the provided excerpts. "
-                    "Be specific and complete: if multiple relevant facts exist, include all of them, "
-                    "and when asked for a list, include every matching item in the excerpts. "
-                    "If the answer is not in the excerpts, respond exactly: "
-                    f"'{NOT_FOUND}' "
-                    "Do not guess or use outside medical knowledge. "
-                    "The excerpts are numbered like [1], [2]. Every sentence or bullet in your "
-                    "answer MUST end with the number(s) of the excerpt(s) it came from, each in its own "
-                    "brackets, like [1] or [2][5]. An answer without citations is invalid. "
-                    "Only cite numbers that appear in the excerpts. "
-                    "Do not cite anything for the 'not found' response. "
-                    "Example: 'He takes carvedilol 12.5 mg twice daily [3]. He also takes apixaban 5 mg twice daily [7].'"
-                    "When the answer lists several items that share the same fields (medications, lab results, "
-                    "vital signs), format it as a markdown table with one row per item. Use the field names as "
-                    "column headers and put the excerpt number(s) in a final column named Source, like [3]. "
-                    "Otherwise answer in short sentences. "
-                    "Use plain, simple wording, but never leave out required details such as status or dose changes. "
-                    "Never leave out items because of category or relevance unless the question asks for a category. "
-                    "For medications, include a Status column (Taking, Held, Stopped, Started, Dose changed) "
-                    "based only on the excerpts, and give both the old and new dose when a dose changed. "
-                    "Only include a Notes or Reason column if the excerpts explicitly state the reason; "
-                    "never add an indication from your own knowledge. "
-                ),
-            },
-            {
-                "role": "user",
-                "content": (
-                    f"Document excerpts:\n{context}\n\nQuestion: {question}\n\n"
-                    "Remember: cite excerpt numbers after every statement."
-                ),
-            },
-        ],
+    user_message = (
+        f"Document excerpts:\n{context}\n\nQuestion: {question}\n\n"
+        "Remember: cite excerpt numbers after every statement."
     )
 
-    print("finish_reason:", response.choices[0].finish_reason)   # 'length' means max_tokens is still too low
-    finish = response.choices[0].finish_reason
-    print("finish_reason:", finish)
-    answer = response.choices[0].message.content or ""
+    max_tokens = 5000
+    answer = ""
+    finish = None
+    for _ in range(3):
+        response = client.chat.completions.create(
+            model=LLM_MODEL,
+            max_tokens=max_tokens,
+            temperature=0,
+            extra_body={"reasoning_effort": "low"},
+            messages=[
+                {"role": "system", "content": ASK_SYSTEM},
+                {"role": "user", "content": user_message},
+            ],
+        )
+        choice = response.choices[0]
+        finish = choice.finish_reason
+        answer = (choice.message.content or "").strip()
+        print("finish_reason:", finish)
+        if answer and finish != "length":
+            break
+        max_tokens = min(max_tokens * 2, 8000)
 
     if finish == "length":
         return {
             "answer": "The answer was too long to generate completely. Try asking about one item at a time, for example a single medication or lab test.",
             "sources": [],
         }
-    answer = response.choices[0].message.content or ""
+
+    if not answer:
+        return {"answer": "Could not generate an answer. Please try again.", "sources": []}
 
     answer, sources = extract_sources(answer, hits)
-
 
     if not sources and NOT_FOUND not in answer:
         sources = [
@@ -401,6 +429,7 @@ def ask_question(payload: dict):
         ]
 
     return {"answer": answer, "sources": sources}
+
 
 @app.get("/classify_document")
 def classify_document():
