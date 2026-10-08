@@ -28,9 +28,20 @@
 }
 
 
-/* ==========================================================
-   WELCOME PAGE  (body.welcome)
-   ========================================================== */
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-top: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.history-item:hover { background: var(--bg); }
+.history-item button { background: none; border: none; cursor: pointer; }
+
 
 html { height: 100%; }
 
@@ -348,7 +359,7 @@ footer p {
     justify-content: flex-start;   /* always start at the top */
 
     width: 100%;
-    height: 180px;
+    height: 280px;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -535,6 +546,12 @@ button:disabled {
 .pdf-summary p {
     margin: 0.3rem 0;
     color: var(--muted);
+}
+.pdf-placeholder {
+    margin-top:5rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+    text-align: center;
 }
 
 #status-icon img {

@@ -6,6 +6,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 const pdfUpload = document.getElementById('pdf-upload');
 const uploadBox = document.querySelector('.upload-box');
 const uploadButton = document.getElementById('upload-button');
+const uploadButton2 = document.getElementById('upload-button2');
 
 const previewCanvas = document.getElementById('pdf-preview');
 const previewPlaceholder = document.getElementById('pdf-placeholder');
@@ -15,17 +16,141 @@ const modalOverlay = document.getElementById('ask-modal-overlay');
 const closeModalButton = document.getElementById('close-modal-button');
 
 const askButton = document.getElementById('ask-button');
-
 const summariseDocument = document.getElementById('summarise-button');
-
-const uploadButton2 = document.getElementById('upload-button2');
-
-const aboutOverlay = document.getElementById("about-modal-overlay");
-const aboutLink = document.getElementById("about-link");
-const closeAboutButton = document.getElementById("close-about-button");
 const questionInput = document.getElementById('question');
 
-pdfUpload.addEventListener('change', async function() {
+const aboutOverlay = document.getElementById('about-modal-overlay');
+const aboutLink = document.getElementById('about-link');
+const closeAboutButton = document.getElementById('close-about-button');
+
+const historyList = document.getElementById('history-list');
+
+const DB_NAME = 'pdfStore';
+
+let dbPromise;
+function openDB() {
+    if (!dbPromise) {
+        dbPromise = new Promise((resolve, reject) => {
+            const req = indexedDB.open(DB_NAME, 2);
+            req.onupgradeneeded = () => {
+                const db = req.result;
+                if (db.objectStoreNames.contains('files')) db.deleteObjectStore('files');
+                if (db.objectStoreNames.contains('blobs')) db.deleteObjectStore('blobs');
+                db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
+                db.createObjectStore('blobs');
+            };
+            req.onsuccess = () => resolve(req.result);
+            req.onerror = () => reject(req.error);
+        });
+    }
+    return dbPromise;
+}
+
+async function saveFile(file) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(['files', 'blobs'], 'readwrite');
+        const req = tx.objectStore('files').add({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            savedAt: Date.now()
+        });
+        req.onsuccess = () => tx.objectStore('blobs').put(file, req.result);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+    });
+}
+
+async function getAllFiles() {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+        const req = db.transaction('files').objectStore('files').getAll();
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function getFile(id) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(['files', 'blobs']);
+        const metaReq = tx.objectStore('files').get(id);
+        const blobReq = tx.objectStore('blobs').get(id);
+        tx.oncomplete = () =>
+            resolve(metaReq.result && { ...metaReq.result, blob: blobReq.result });
+        tx.onerror = () => reject(tx.error);
+    });
+}
+
+async function deleteFile(id) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(['files', 'blobs'], 'readwrite');
+        tx.objectStore('files').delete(id);
+        tx.objectStore('blobs').delete(id);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+    });
+}
+
+async function saveIfNew(file) {
+    const files = await getAllFiles();
+    const exists = files.some(f => f.name === file.name && f.size === file.size);
+    if (!exists) await saveFile(file);
+}
+
+async function renderHistory() {
+    let files = [];
+    try {
+        files = (await getAllFiles()).sort((a, b) => b.savedAt - a.savedAt);
+    } catch (e) {
+        console.warn('Could not load history', e);
+    }
+
+    historyList.innerHTML = '';
+
+    if (historyList.parentElement) {
+        historyList.parentElement.style.display = files.length ? '' : 'none';
+    }
+
+    files.forEach(rec => {
+        const row = document.createElement('div');
+        row.className = 'history-item';
+
+        const name = document.createElement('span');
+        name.textContent = rec.name;
+
+        const del = document.createElement('button');
+        del.textContent = '✕';
+        del.title = 'Remove from history';
+        del.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            await deleteFile(rec.id);
+            renderHistory();
+        });
+
+        row.addEventListener('click', () => reuseFile(rec.id));
+        row.append(name, del);
+        historyList.appendChild(row);
+    });
+}
+
+async function reuseFile(id) {
+    const rec = await getFile(id);
+    if (!rec || !rec.blob) return;
+
+    const file = new File([rec.blob], rec.name, { type: rec.type });
+
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    pdfUpload.files = dt.files;
+
+    pdfUpload.dispatchEvent(new Event('change'));
+    uploadButton.click();
+}
+
+pdfUpload.addEventListener('change', async function () {
     const file = pdfUpload.files[0];
 
     if (!file) {
@@ -69,15 +194,10 @@ pdfUpload.addEventListener('change', async function() {
     }
 });
 
-questionInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.isComposing) {
-    e.preventDefault();
-    if (!askButton.disabled) askButton.click();
-  }
-});
+uploadButton.addEventListener('click', async function () {
+    const file = pdfUpload.files[0];
 
-uploadButton.addEventListener('click', async function() {
-    if (!pdfUpload.files[0]) {
+    if (!file) {
         alert('Please select a PDF file before uploading.');
         return;
     }
@@ -86,28 +206,32 @@ uploadButton.addEventListener('click', async function() {
     const statusIcon = document.getElementById('status-icon');
     const statusText = document.getElementById('status-text');
 
-    uploadStatus.style.display = "block";
-    statusIcon.textContent = "⏳";
-    statusIcon.classList.add("loading");
-    statusText.textContent = "Uploading and reading PDF...";
+    uploadStatus.style.display = 'block';
+    statusIcon.textContent = '⏳';
+    statusIcon.classList.add('loading');
+    statusText.textContent = 'Uploading and reading PDF...';
 
     const formData = new FormData();
+    formData.append('file', file);
 
-    formData.append('file', pdfUpload.files[0]);
+    try {
+        const response = await fetch('http://127.0.0.1:8000/upload', {
+            method: 'POST',
+            body: formData
+        });
 
-    try{
-        const response = await fetch("http://127.0.0.1:8000/upload", {
-        method: 'POST',
-        body: formData
-    });
+        if (!response.ok) {
+            throw new Error(`Upload failed with status ${response.status}`);
+        }
 
-    const result = await response.json();
-        statusIcon.classList.remove("loading");
+        const result = await response.json();
+
+        statusIcon.classList.remove('loading');
         statusIcon.innerHTML = '<img src="images/pdf.png" alt="Success">';
-        statusText.textContent = `Succesfully Uploaded and Read PDF: ${result.filename}`;
+        statusText.textContent = `Successfully Uploaded and Read PDF: ${result.filename}`;
 
         const pdfSummary = document.getElementById('pdf-summary');
-        pdfSummary.style.display = "block";
+        pdfSummary.style.display = 'block';
 
         const pages = result.pages;
         let totalWords = 0;
@@ -122,31 +246,30 @@ uploadButton.addEventListener('click', async function() {
         document.getElementById('summary-words').textContent =
             `Total words: ${totalWords}`;
 
-        document.getElementsByClassName('upload-container')[0].style.display = "none";
+        document.getElementsByClassName('upload-container')[0].style.display = 'none';
 
         openAskButton.classList.add('visible');
 
-        uploadButton.style.display = "none";
-        uploadButton2.style.display = "inline-block";
-    
-        
+        uploadButton.style.display = 'none';
+        uploadButton2.style.display = 'inline-block';
 
-
+        saveIfNew(file)
+            .then(renderHistory)
+            .catch(e => console.warn('Could not save to history', e));
 
     } catch (error) {
-        statusIcon.classList.remove("loading");
-        statusIcon.textContent = "❌";
-        statusText.textContent = "Failed to read PDF";
+        console.error(error);
+        statusIcon.classList.remove('loading');
+        statusIcon.textContent = '❌';
+        statusText.textContent = 'Failed to read PDF';
     }
 });
 
-
-
 function highlightFlags(html) {
-    html = html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function(match, word) {
+    html = html.replace(/\((LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\)/gi, function (match, word) {
         return `<span class="flag flag-${word.toLowerCase()}">${word.toUpperCase()}</span>`;
     });
-    html = html.replace(/<td>\s*(LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\s*<\/td>/gi, function(match, word) {
+    html = html.replace(/<td>\s*(LOW|HIGH|ELEVATED|CRITICAL|NORMAL)\s*<\/td>/gi, function (match, word) {
         return `<td><span class="flag flag-${word.toLowerCase()}">${word.toUpperCase()}</span></td>`;
     });
     return html;
@@ -167,7 +290,7 @@ function renderAnswer(markdownText) {
         ? DOMPurify.sanitize(html)
         : html;
 
-    answerEl.querySelectorAll('table').forEach(function(table) {
+    answerEl.querySelectorAll('table').forEach(function (table) {
         const wrapper = document.createElement('div');
         wrapper.className = 'table-scroll';
         table.parentNode.insertBefore(wrapper, table);
@@ -197,7 +320,7 @@ function renderSources(sources) {
     heading.textContent = 'Sources';
     el.appendChild(heading);
 
-    sources.forEach(function(s) {
+    sources.forEach(function (s) {
         const location = s.line_start === s.line_end
             ? `Page ${s.page}, line ${s.line_start}`
             : `Page ${s.page}, lines ${s.line_start}–${s.line_end}`;
@@ -219,7 +342,7 @@ function renderSources(sources) {
 
 function openModal() {
     modalOverlay.classList.add('open');
-    document.getElementById('question').focus();
+    questionInput.focus();
 }
 
 function closeModal() {
@@ -229,23 +352,26 @@ function closeModal() {
 openAskButton.addEventListener('click', openModal);
 closeModalButton.addEventListener('click', closeModal);
 
-// Close when clicking the dark backdrop, but not when clicking inside the modal itself
-modalOverlay.addEventListener('click', function(event) {
+modalOverlay.addEventListener('click', function (event) {
     if (event.target === modalOverlay) {
         closeModal();
     }
 });
 
-// Close on Escape
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && modalOverlay.classList.contains('open')) {
         closeModal();
     }
 });
 
-askButton.addEventListener('click', async function() {
+questionInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.isComposing) {
+        e.preventDefault();
+        if (!askButton.disabled) askButton.click();
+    }
+});
 
-    const questionInput = document.getElementById('question');
+askButton.addEventListener('click', async function () {
     const question = questionInput.value;
 
     if (!question) {
@@ -261,7 +387,7 @@ askButton.addEventListener('click', async function() {
     showLoading('Reading your document...');
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/ask", {
+        const response = await fetch('http://127.0.0.1:8000/ask', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -269,21 +395,25 @@ askButton.addEventListener('click', async function() {
             body: JSON.stringify({ question })
         });
 
+        if (!response.ok) {
+            throw new Error(`Ask failed with status ${response.status}`);
+        }
+
         const result = await response.json();
         renderAnswer(result.answer);
         renderSources(result.sources);
 
     } catch (error) {
-        document.getElementById('answer').textContent = "Failed to get answer";
+        console.error(error);
+        document.getElementById('answer').textContent = 'Failed to get answer';
         renderSources([]);
 
-    }finally {
+    } finally {
         setBusy(false);
     }
 });
 
-
-summariseDocument.addEventListener('click', async function() {
+summariseDocument.addEventListener('click', async function () {
     if (!pdfUpload.files[0]) {
         alert('Please upload a PDF file before summarising.');
         return;
@@ -293,24 +423,29 @@ summariseDocument.addEventListener('click', async function() {
     showLoading('Summarising your document. This can take a little longer...');
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/summarise", {
+        const response = await fetch('http://127.0.0.1:8000/summarise', {
             method: 'POST'
         });
+
+        if (!response.ok) {
+            throw new Error(`Summarise failed with status ${response.status}`);
+        }
 
         const result = await response.json();
         renderAnswer(result.answer);
         renderSources(result.sources);
+
     } catch (error) {
         console.error(error);
-        document.getElementById('answer').textContent = "Failed to summarise document";
+        document.getElementById('answer').textContent = 'Failed to summarise document';
         renderSources([]);
+
     } finally {
         setBusy(false);
     }
-});    renderSources([]);
+});
 
-
-uploadButton2.addEventListener('click', function() {
+uploadButton2.addEventListener('click', function () {
     if (!confirm('Are you sure you want to upload another PDF? This will reset the current session.')) {
         return;
     }
@@ -320,31 +455,32 @@ uploadButton2.addEventListener('click', function() {
     previewPlaceholder.style.display = 'block';
     previewPlaceholder.textContent = 'Select a PDF to preview it';
 
-    document.getElementsByClassName('upload-container')[0].style.display = "block";
-    uploadButton.style.display = "inline-block";
+    document.getElementsByClassName('upload-container')[0].style.display = 'block';
+    uploadButton.style.display = 'inline-block';
 
-    document.getElementById('upload-status').style.display = "none";
-    document.getElementById('pdf-summary').style.display = "none";
+    document.getElementById('upload-status').style.display = 'none';
+    document.getElementById('pdf-summary').style.display = 'none';
     openAskButton.classList.remove('visible');
-    uploadButton2.style.display = "none";
+    uploadButton2.style.display = 'none';
 
     document.getElementById('answer').textContent = 'Your answer will appear here.';
     renderSources([]);
-    document.getElementById('question').value = '';
+    questionInput.value = '';
 });
 
-aboutLink.addEventListener("click", (e) => {
+aboutLink.addEventListener('click', (e) => {
     e.preventDefault();
-    aboutOverlay.style.display = "flex";
+    aboutOverlay.style.display = 'flex';
 });
 
-closeAboutButton.addEventListener("click", () => {
-    aboutOverlay.style.display = "none";
+closeAboutButton.addEventListener('click', () => {
+    aboutOverlay.style.display = 'none';
 });
 
-aboutOverlay.addEventListener("click", (e) => {
+aboutOverlay.addEventListener('click', (e) => {
     if (e.target === aboutOverlay) {
-        aboutOverlay.style.display = "none";
+        aboutOverlay.style.display = 'none';
     }
 });
 
+renderHistory();
